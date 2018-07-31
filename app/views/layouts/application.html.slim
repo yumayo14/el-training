@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title
+      | ElTraining
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    header.application_header
+      .logo
+        h3 TaskApp
+      .header_content
+        span = link_to "タスク一覧", tasks_path
+        span = link_to "タスクの投稿", new_task_path
+    - flash.each do |key, value|
+      .alert.alert-#{key}
+        = value
+    = yield

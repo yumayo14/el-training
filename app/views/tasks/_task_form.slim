@@ -1,0 +1,8 @@
+= form_for task do |f|
+  = f.text_field :title, placeholder: "タイトル"
+  = f.select :importance, Task.importances.keys.to_a, {}
+  = f.date_select :dead_line_on
+  = f.select :status, Task.statuses.keys.to_a, {}
+  = f.text_area :detail, placeholder: "説明文"
+
+  = f.submit "新しいタスクを追加"
