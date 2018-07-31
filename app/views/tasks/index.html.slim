@@ -1,7 +1,8 @@
 h1 id="title_log"
   | タスク一覧
-
-- @tasks.each do |task|
-  p #{task.title} #{task.importance} #{task.status} #{task.dead_line_on}
-  p #{task.detail}
-  = link_to "タスクの詳細", task_path(task.id)
+.all_tasks
+  - @tasks.each do |task|
+    .each_task
+      p #{task.title} #{task.importance} #{task.status} #{task.dead_line_on}
+      p #{task.detail}
+      = link_to "タスクの詳細", task_path(task.id)
