@@ -54,7 +54,6 @@ group :development do
 end
 
 gem 'slim-rails', '~> 3.1', '>= 3.1.1'
-gem 'html2slim'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
