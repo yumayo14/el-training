@@ -28,9 +28,8 @@ Things you may want to cover:
 |:-----------|------------:|:------------:|
 | title      | string      | null: false  |
 | importance | integer     |              |
-| dead_line  | date        | null: false  |
+|dead_line_on| date        | null: false  |
 | status     | integer     | default: 0   |
-| explanation| string      | maxlength: 40|
 | detail     | text        |              |
 | user       | references  |              |
 
