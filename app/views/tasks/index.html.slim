@@ -2,17 +2,19 @@ h1 id="title_log" タスク一覧
 
 table.all_tasks
   tr
-    th タイトル
-    th 優先順位
-    th 状態
-    th 期限
-    th 説明文
-    th 個別リンク
+    th = t("actionview.task.index.title")
+    th = t("actionview.task.index.importance")
+    th = t("actionview.task.index.status")
+    th = t("actionview.task.index.dead_line_on")
+    th = t("actionview.task.index.detail")
+    th = t("actionview.task.index.created_at_day")
+    th = t("actionview.task.index.link")
   -@tasks.each do |task|
     tr.task
-      th #{task.title}
-      th #{task.importance}
-      th #{task.status}
-      th #{task.dead_line_on}
-      th #{task.detail}
+      th.title = task.title
+      th.importance = task.importance
+      th.status = task.status
+      th.dead_line_on = task.dead_line_on
+      th.detail = task.detail
+      th.created_day = task.created_at_day
       th = link_to "タスクの詳細", task_path(task.id)
