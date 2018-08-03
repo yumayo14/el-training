@@ -8,7 +8,17 @@ ja:
         importance: 優先順位
         dead_line_on: 期限
         status: 状態
-        detail: 詳細
+        detail: 説明文
+  actionview:
+    task:
+      index:
+        title: タイトル
+        importance: 優先順位
+        dead_line_on: 期限
+        status: 状態
+        detail: 説明文
+        created_at_day: 作成日
+        link: 個別リンク
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
