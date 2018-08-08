@@ -6,7 +6,8 @@
     "postcss-preset-env": "^5.3.0",
     "vue": "^2.5.17",
     "vue-loader": "^15.2.6",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "hoek": "4.2.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.1.5"
