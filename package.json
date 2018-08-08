@@ -3,11 +3,11 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^3.5.5",
+    "hoek": "5.0.3",
     "postcss-preset-env": "^5.3.0",
     "vue": "^2.5.17",
-    "vue-loader": "^15.2.6",
-    "vue-template-compiler": "^2.5.17",
-    "hoek": "5.0.3"
+    "vue-loader": "^15.3.0",
+    "vue-template-compiler": "^2.5.17"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.1.5"
