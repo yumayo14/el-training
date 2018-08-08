@@ -7,12 +7,16 @@ Things you may want to cover:
 
 * Ruby version
  2.5.1
+
+* Rails version
+ 5.2.0
 * System dependencies
 
 * Configuration
 
 * Database creation
- Mysql2  
+ Mysql2  (heroku上でもMysql2を用いる)
+ version 0.5.2
 * Database initialization
 
 * How to run the test suite
@@ -57,3 +61,17 @@ datetime型  _atで
 |:-----------|------------:|:------------:|
 | task       | references  |              |
 | label      | references  |              |
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+herokuへのデプロイ
+0. herokuアカウントでherokuにログイン
+ - heroku login
+
+1. heroku上のアプリにローカルの変更を反映
+ - git push heroku master
+ - DBに変更がある場合は、heroku run rake db:migrate
+
+2. herokuアプリを開く方法
+ - heroku open
