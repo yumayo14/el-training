@@ -1,20 +1,26 @@
 h1 id="title_log" タスク一覧
 
-table.all_tasks
-  tr
-    th = t("actionview.task.index.title")
-    th = t("actionview.task.index.importance")
-    th = t("actionview.task.index.status")
-    th = t("actionview.task.index.dead_line_on")
-    th = t("actionview.task.index.detail")
-    th = t("actionview.task.index.created_at_day")
-    th = t("actionview.task.index.link")
-  -@tasks.each do |task|
-    tr.task
-      th.title = task.title
-      th.importance = task.importance
-      th.status = task.status
-      th.dead_line_on = task.dead_line_on
-      th.detail = task.detail
-      th.created_day = task.created_at_day
-      th = link_to "タスクの詳細", task_path(task.id)
+#all_tasks
+  button v-on:click="orderdByCreatedDay" 投稿日時順
+  button v-on:click="orderdByDeadLine" 期限順
+  table
+    tr
+      th = t("actionview.task.index.title")
+      th = t("actionview.task.index.importance")
+      th = t("actionview.task.index.status")
+      th = t("actionview.task.index.dead_line_on")
+      th = t("actionview.task.index.detail")
+      th = t("actionview.task.index.created_at_day")
+      th = t("actionview.task.index.link")
+    tr.tasks v-for="task in tasks"
+      th.title = "{{task.title}}"
+      th.importance = "{{task.importance}}"
+      th.status = "{{task.status}}"
+      th.dead_line_on = "{{task.dead_line_on}}"
+      th.detail = "{{task.detail}}"
+      th.created_day = "{{task.created_at}}"
+      th
+        a v-bind:href='"/tasks/" + task.id' 詳細
+
+
+= javascript_pack_tag 'tasks/index_vue'

@@ -24,11 +24,35 @@ RSpec.feature"Tasks",type: :feature do
           expect(page).to have_content "infinity_task..."
         end
       end
-      it "タスクの一覧は作成日が新しい順に並んでいる" do
-        within all('table tr.task')[0] do
+      it "タスクの一覧は作成日が新しい順に並んでいる", js: true do
+        within all('table tr.tasks')[0] do
+          # スクリーンショットをとって確認する方法、やって見る
           expect(find('th.created_day')).to have_content "2020/08/09"
         end
-        within all('table tr.task')[1] do
+        within all('table tr.tasks')[1] do
+          expect(find('th.created_day')).to have_content  "2020/07/24"
+        end
+      end
+    end
+
+    describe "一覧表示されたタスクの並び替え" do
+      it "期限順に並び替える", js: true do
+        click_button '期限順'
+        sleep 0.5
+        within all('table tr.tasks')[0] do
+          expect(find('th.dead_line_on')).to have_content "2020-07-24"
+        end
+        within all('table tr.tasks')[1] do
+          expect(find('th.dead_line_on')).to have_content  "2020-08-09"
+        end
+      end
+      it "作成日が新しい順に並び替える", js: true do
+        click_button '投稿日時順'
+        sleep 0.5
+        within all('table tr.tasks')[0] do
+          expect(find('th.created_day')).to have_content "2020/08/09"
+        end
+        within all('table tr.tasks')[1] do
           expect(find('th.created_day')).to have_content  "2020/07/24"
         end
       end

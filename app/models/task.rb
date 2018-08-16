@@ -7,10 +7,6 @@ class Task < ApplicationRecord
   validates :status, inclusion: { in: %w(未着手 着手 完了) }
   validate :dead_line_on_cannot_be_in_the_past
 
-  def created_at_day
-    self.created_at.strftime('%Y/%m/%d')
-  end
-
   def dead_line_on_cannot_be_in_the_past
     if dead_line_on.present? && dead_line_on < Date.today
       errors.add(:dead_line_on, "に過去の日付は使用できません")
