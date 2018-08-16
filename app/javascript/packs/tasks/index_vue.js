@@ -1,14 +1,18 @@
 import Vue from 'vue';
 import axios from 'axios';
+import lodash from 'lodash';
 
-const Tasks = new Vue ({
+new Vue ({
   el: '#all_tasks',
   data: {
     tasks: []
   },
   methods: {
-    handleClick: function() {
-      alert('クリックしたよ')
+    orderdByCreatedDay: function() {
+      this.tasks = _.orderBy(this.tasks, 'created_at', 'desc')
+    },
+    orderdByDeadLine: function() {
+        this.tasks = _.orderBy(this.tasks, 'dead_line_on')
     }
   },
   created: function() {
