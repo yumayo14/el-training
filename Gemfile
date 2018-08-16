@@ -59,6 +59,7 @@ group :development do
 end
 
 gem 'slim-rails', '~> 3.1', '>= 3.1.1'
+gem 'ransack'
 
 gem 'webpacker', github: 'rails/webpacker'
 

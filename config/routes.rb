@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   root to: "tasks#index"
 
   namespace :api do
-    resources :tasks
+    resources :tasks do
+      collection do
+        get 'search'
+      end
+    end
   end
 end
