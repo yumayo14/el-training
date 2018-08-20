@@ -9,34 +9,46 @@ new Vue ({
         searchQuery: '',
         selected: '',
         createdOrder: true,
-        deadLineOrder: true
+        deadLineOrder: false,
+        importanceOrder: true
     },
     methods: {
-        orderCreatedDayByDesc: function () {
-            this.tasks = _.orderBy(this.tasks, 'created_at', 'desc')
-            this.createdOrder = true
+        orderByCreatedDay: function () {
+            (this.createdOrder) ? (
+                this.tasks = _.orderBy(this.tasks, 'created_at', 'desc'),
+                this.createdOrder = !this.createdOrder
+            ) : (
+                this.tasks = _.orderBy(this.tasks, 'created_at'),
+                this.createdOrder = !this.createdOrder
+            )
         },
-        orderCreatedDayByAsc: function () {
-            this.tasks = _.orderBy(this.tasks, 'created_at')
-            this.createdOrder = false
+        orderByDeadLine: function () {
+            (this.deadLineOrder) ? (
+                this.tasks = _.orderBy(this.tasks, 'dead_line_on', 'desc'),
+                this.deadLineOrder = !this.deadLineOrder
+            ) : (
+                this.tasks = _.orderBy(this.tasks, 'dead_line_on'),
+                this.deadLineOrder = !this.deadLineOrder
+            )
         },
-        orderDeadLineByDesc: function () {
-            this.tasks = _.orderBy(this.tasks, 'dead_line_on', 'desc')
-            this.deadLineOrder = true
-        },
-        orderDeadLineByAsc: function () {
-            this.tasks = _.orderBy(this.tasks, 'dead_line_on')
-            this.deadLineOrder = false
+        orderByImportance: function () {
+            (this.importanceOrder) ? (
+                this.tasks = _.orderBy(this.tasks, 'importance.rank', 'desc'),
+                this.importanceOrder = !this.importanceOrder
+            ) : (
+                this.tasks = _.orderBy(this.tasks, 'importance.rank'),
+                this.importanceOrder = !this.importanceOrder
+            )
         },
         search: function () {
-            this.searchTitle()
-            this.searchSelected()
+            this.searchByTitle()
+            this.searchBySelected()
         },
-        searchTitle: function() {
+        searchByTitle: function() {
             this.tasks = this.tasks.filter(task => task.title.match(this.searchQuery) )
         },
-        searchSelected: function () {
-            this.tasks = (this.selected != '') ? this.tasks.filter( task => task.status.match(new RegExp('^' + this.selected + '$')) ) : this.tasks
+        searchBySelected: function () {
+            this.tasks = (this.selected != '') ? this.tasks.filter( task => task.status.num == this.selected ) : this.tasks
         },
         getTasks: function(){
             axios.get('api/tasks.json').then(function (response) {
