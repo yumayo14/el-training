@@ -4,8 +4,8 @@ RSpec.feature"Tasks",type: :feature do
   given(:task) { FactoryBot.create(:task) }
   describe "タスクの一覧に対する操作" do
     before do
-      FactoryBot.create(:task, title: "2番目", dead_line_on: "2020-07-24", created_at: "2020/07/24 16:00::55")
-      FactoryBot.create(:task, title: "1番目", dead_line_on: "2020-08-09", created_at: "2020/08/09 09:00:00")
+      FactoryBot.create(:task, title: "2番目", dead_line_on: "2020-07-24", status: 0, created_at: "2020/07/24 16:00::55")
+      FactoryBot.create(:task, title: "1番目", dead_line_on: "2020-08-09", status: 1, created_at: "2020/08/09 09:00:00")
       visit tasks_path
     end
 
@@ -19,12 +19,12 @@ RSpec.feature"Tasks",type: :feature do
           expect(page).to have_content "infinity_task..."
           expect(page).to have_content "1番目"
           expect(page).to have_content "低"
-          expect(page).to have_content "未着手"
+          expect(page).to have_content "着手"
           expect(page).to have_content "2020-08-09"
           expect(page).to have_content "infinity_task..."
         end
       end
-      it "タスクの一覧は作成日が新しい順に並んでいる", js: true do
+      it "タスクの一覧は投稿日が新しい順に並んでいる", js: true do
         within all('table tr.tasks')[0] do
           # スクリーンショットをとって確認する方法、やって見る
           expect(find('th.created_day')).to have_content "2020/08/09"
@@ -35,9 +35,9 @@ RSpec.feature"Tasks",type: :feature do
       end
     end
 
-    describe "一覧表示されたタスクの並び替え" do
-      it "期限順に並び替える", js: true do
-        click_button '期限順'
+    describe "タスクの並び替え", js: true do
+      it "期限が近い順に並び替える" do
+        click_button '期限が近い順'
         sleep 0.5
         within all('table tr.tasks')[0] do
           expect(find('th.dead_line_on')).to have_content "2020-07-24"
@@ -46,14 +46,67 @@ RSpec.feature"Tasks",type: :feature do
           expect(find('th.dead_line_on')).to have_content  "2020-08-09"
         end
       end
-      it "作成日が新しい順に並び替える", js: true do
-        click_button '投稿日時順'
+      it "期限が遠い順に並べる" do
+        click_button '期限が近い順'
+        click_button '期限が遠い順'
+        within all('table tr.tasks')[0] do
+          expect(find('th.dead_line_on')).to have_content "2020-08-09"
+        end
+        within all('table tr.tasks')[1] do
+          expect(find('th.dead_line_on')).to have_content "2020-07-24"
+        end
+      end
+      it "投稿日が昔順に並び替える" do
+        click_button '投稿日が古い順'
+        sleep 0.5
+        within all('table tr.tasks')[0] do
+          expect(find('th.created_day')).to have_content "2020/07/24"
+        end
+        within all('table tr.tasks')[1] do
+          expect(find('th.created_day')).to have_content  "2020/08/09"
+        end
+      end
+      it "投稿日が昔順に並べた後、新しい順に並び替える" do
+        click_button '投稿日が古い順'
+        click_button '投稿日が新しい順'
         sleep 0.5
         within all('table tr.tasks')[0] do
           expect(find('th.created_day')).to have_content "2020/08/09"
         end
         within all('table tr.tasks')[1] do
           expect(find('th.created_day')).to have_content  "2020/07/24"
+        end
+      end
+    end
+
+    describe "タスクの絞り込み検索", js: true do
+      before do
+        click_button '検索条件をリセット'
+      end
+      it "フォーム検索" do
+        fill_in 'search_form', with: '2番'
+        click_button "検索"
+        expect(page).to have_selector('tr.tasks', count: 1)
+        within all('table tr.tasks')[0] do
+          expect(find('th.title')).to have_content "2番目"
+        end
+      end
+      it "ステータス検索" do
+        select '着手', from: 'search_status'
+        click_button "検索"
+        expect(page).to have_selector('tr.tasks', count: 1)
+        within all('table tr.tasks')[0] do
+          expect(find('th.status')).to have_content "着手"
+        end
+      end
+      it "フォームとステータスで検索" do
+        fill_in 'search_form', with: '1番目'
+        select '着手', from: 'search_status'
+        click_button "検索"
+        expect(page).to have_selector('tr.tasks', count: 1)
+        within all('table tr.tasks')[0] do
+          expect(find('th.title')).to have_content "1番目"
+          expect(find('th.status')).to have_content "着手"
         end
       end
     end

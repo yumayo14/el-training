@@ -8,7 +8,7 @@ new Vue ({
         tasks: [],
         searchQuery: '',
         selected: '',
-        createdOrder: false,
+        createdOrder: true,
         deadLineOrder: true
     },
     methods: {
@@ -36,9 +36,7 @@ new Vue ({
             this.tasks = this.tasks.filter(task => task.title.match(this.searchQuery) )
         },
         searchSelected: function () {
-            console.log(typeof this.tasks[0].status)
-            console.log(typeof this.selected)
-            this.tasks = this.tasks.filter(task => task.status.match(this.selected) )
+            this.tasks = (this.selected != '') ? this.tasks.filter( task => task.status.match(new RegExp('^' + this.selected + '$')) ) : this.tasks
         },
         getTasks: function(){
             axios.get('api/tasks.json').then(function (response) {
@@ -49,6 +47,8 @@ new Vue ({
         },
         reset: function(){
             this.getTasks();
+            this.searchQuery = ''
+            this.selected = ''
         }
     },
     created: function () {
