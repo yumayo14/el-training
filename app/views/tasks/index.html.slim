@@ -1,8 +1,23 @@
 h1 id="title_log" タスク一覧
 
 #all_tasks
-  button v-on:click="orderdByCreatedDay" 投稿日時順
-  button v-on:click="orderdByDeadLine" 期限順
+  .order_sort v-if="createdOrder"
+    button v-on:click="orderCreatedDayByAsc" 投稿日が古い順
+  .order_sort [v-else]
+    button v-on:click="orderCreatedDayByDesc" 投稿日が新しい順
+  .order_dead_line v-if="deadLineOrder"
+    button v-on:click="orderDeadLineByAsc" 期限が近い順
+  .order_dead_line [v-else]
+    button v-on:click="orderDeadLineByDesc" 期限が遠い順
+
+  input v-model="searchQuery" id="search_form"
+  select v-model="selected" name="search_status" id="search_status"
+    option = ''
+    option = "未着手"
+    option = "着手"
+    option = "完了"
+  button v-on:click="search" 検索
+  button v-on:click="reset" 検索条件をリセット
   table
     tr
       th = t("actionview.task.index.title")

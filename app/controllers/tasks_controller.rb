@@ -1,10 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
-  # def index
-  #   @tasks = Task.order(created_at: 'DESC')
-  # end
-
   def new
     @task = Task.new
   end
@@ -16,9 +12,6 @@ class TasksController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
   end
 
   def edit
