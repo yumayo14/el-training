@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :task do
-    title "東京オリンピック開会日"
+    sequence(:title) { |n| "#{n}番目" }
     importance 0
-    dead_line_on "2020-07-24"
+    sequence(:dead_line_on) { |n| "2020-07-#{n}"}
     status 0
     detail "infinity_task..."
     

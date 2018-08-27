@@ -1,6 +1,14 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+  # def index
+  #   @tasks = Task.order(created_at: 'DESC')
+  #   respond_to do |format|
+  #     format.html
+  #     format.json
+  #   end
+  # end
+
   def new
     @task = Task.new
   end
