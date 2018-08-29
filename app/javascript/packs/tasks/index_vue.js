@@ -1,16 +1,33 @@
 import Vue from 'vue';
 import axios from 'axios';
+import VuePaginator from 'vuejs-paginator';
 import lodash from 'lodash';
 
-new Vue ({
+Vue.prototype.$http = axios
+
+window.vm = new Vue ({
     el: '#all_tasks',
     data: {
         tasks: [],
+        resort_url: 'tasks.json',
+        resource_url: '/api/tasks.json',
+        options: {
+            remote_data: 'nested.data',
+            remote_current_page: 'nested.current_page',
+            remote_last_page: 'nested.last_page',
+            remote_next_page_url: 'nested.next_page_url',
+            remote_prev_page_url: 'nested.prev_page_url',
+            next_button_text: 'Go Next',
+            previous_button_text: 'Go Back'
+        },
         searchQuery: '',
         selected: '',
         createdOrder: true,
         deadLineOrder: false,
         importanceOrder: true
+    },
+    components: {
+        VPaginator: VuePaginator
     },
     methods: {
         orderByCreatedDay: function () {
@@ -51,8 +68,9 @@ new Vue ({
             this.tasks = (this.selected != '') ? this.tasks.filter( task => task.status.num == this.selected ) : this.tasks
         },
         getTasks: function(){
-            axios.get('api/tasks.json').then(function (response) {
-                this.tasks = response.data
+            axios.get(this.resource_url).then(function (response) {
+                console.log(response);
+                this.tasks = response.data.nested.data
             }.bind(this)).catch(function (e) {
                 console.error(e)
             })
@@ -61,10 +79,13 @@ new Vue ({
             this.getTasks();
             this.searchQuery = ''
             this.selected = ''
+        },
+        updateResource: function(data) {
+            this.tasks = data
         }
     },
     created: function () {
         this.getTasks();
     }
 })
-
+console.log(vm)

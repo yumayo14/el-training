@@ -1,3 +1,5 @@
+
+
 h1 id="title_log" タスク一覧
 
 #all_tasks
@@ -34,6 +36,5 @@ h1 id="title_log" タスク一覧
       th.created_day = "{{task.created_at}}"
       th
         a v-bind:href='"/tasks/" + task.id' 詳細
-
-
+  v-paginator :options="options" :resource_url="resource_url" @update="updateResource"
 = javascript_pack_tag 'tasks/index_vue'
