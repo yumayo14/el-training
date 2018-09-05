@@ -1,41 +1,46 @@
-h1 id="title_log" タスク一覧
+/ .sky
+/   = image_tag("summer_top.jpg", class: "summer")
 
-.sky
-  = image_tag("summer_top.jpg", class: "summer")
-
-#all_tasks
-  .order_sort
-    button v-on:click="orderByCreatedDay" 投稿日順
-  .order_dead_line
-    button v-on:click="orderByDeadLine" 期限日順
-  .order_importance
-    button v-on:click="orderByImportance" 優先順位順
-
-  input v-model="searchQuery" id="search_form"
-  select v-model="selected" name="search_status" id="search_status"
-    option value='' 選択しない
-    option value="0" 未着手
-    option value="1" 着手
-    option value="2" 完了
-  button v-on:click="search" 検索
-  button v-on:click="reset" 検索条件をリセット
-  table
-    tr
-      th = t("actionview.task.index.title")
-      th = t("actionview.task.index.importance")
-      th = t("actionview.task.index.status")
-      th = t("actionview.task.index.dead_line_on")
-      th = t("actionview.task.index.detail")
-      th = t("actionview.task.index.created_at_day")
-      th = t("actionview.task.index.link")
-    tr.tasks v-for="task in tasks"
-      th.title = "{{task.title}}"
-      th.importance = "{{task.importance.text}}"
-      th.status = "{{task.status.text}}"
-      th.dead_line_on = "{{task.dead_line_on}}"
-      th.detail = "{{task.detail}}"
-      th.created_day = "{{task.created_at}}"
-      th
-        a v-bind:href='"/tasks/" + task.id' 詳細
-  v-paginator :options="options" :resource_url="resource_url" @update="updateResource"
+section.spring#sakura
+  = render partial: "flask"
+  .container#all_tasks
+    h1 id="title_log" タスク一覧
+    .tasks_search
+      .tasks_sort
+        .order_sort
+          button v-on:click="orderByCreatedDay" 投稿日順
+        .order_dead_line
+          button v-on:click="orderByDeadLine" 期限日順
+        .order_importance
+          button v-on:click="orderByImportance" 優先順位順
+      .search_box
+        .search_form
+          input v-model="searchQuery" id="search_query"
+          select v-model="selected" name="search_status" id="search_status"
+            option value='' 選択しない
+            option value="0" 未着手
+            option value="1" 着手
+            option value="2" 完了
+        .submit
+          button v-on:click="search" 検索
+          button v-on:click="reset" 検索条件をリセット
+    table#paginated_tasks.table
+      tr
+        th scope="col" = t("actionview.task.index.title")
+        th scope="col" = t("actionview.task.index.importance")
+        th scope="col" = t("actionview.task.index.status")
+        th scope="col" = t("actionview.task.index.dead_line_on")
+        th scope="col" = t("actionview.task.index.detail")
+        th scope="col" = t("actionview.task.index.created_at_day")
+        th scope="col" = t("actionview.task.index.link")
+      tr.tasks v-for="task in tasks"
+        th.title scope="row" = "{{task.title}}"
+        th.importance scope="row" = "{{task.importance.text}}"
+        th.status scope="row" = "{{task.status.text}}"
+        th.dead_line_on scope="row" = "{{task.dead_line_on}}"
+        th.detail scope="row" = "{{task.detail}}"
+        th.created_day scope="row" = "{{task.created_at}}"
+        th
+          a v-bind:href='"/tasks/" + task.id' 詳細
+    v-paginator#paginator :options="options" :resource_url="resource_url" @update="updateResource"
 = javascript_pack_tag 'tasks/index_vue'

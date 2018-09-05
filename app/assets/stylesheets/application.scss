@@ -1,0 +1,26 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "tasks";
+@import "new";
+@import "form";
+@import "sakura";
+@import "flake";
+@import "delayed_flake";
+
+body {
+    height: 100vh;
+}
+
+.logo {
+    color: rgb(146,64,93);
+}
+
+.application_header {
+    display: flex;
+    background-color: rgba(60,120,230,0.2)
+}
+
+.header_content {
+    margin-left: 10px;
+    line-height: 4;
+}
