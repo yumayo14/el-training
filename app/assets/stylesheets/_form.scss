@@ -15,3 +15,10 @@ label {
 select {
   background-color: rgba(146,64,93, 0.2);
 }
+
+.submit_button {
+  padding: 2px !important;
+  background-color: rgba(255, 102, 204, 0.2) !important;
+  color: rgb(146,64,93) !important;
+  border-radius: 6px !important;
+}

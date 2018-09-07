@@ -4,23 +4,27 @@
 @import "new";
 @import "form";
 @import "sakura";
-@import "flake";
-@import "delayed_flake";
+@import "animation/flake";
+@import "animation/delayed_flake";
 
-body {
-    height: 100vh;
-}
-
-.logo {
-    color: rgb(146,64,93);
+html, body {
+  //重要じゃないやつで高さを調整する
+  font-family: SF Pro JP, SF Pro Text, Apple TP, Myriad Set Pro, SF Pro Icons, Hiragino Kaku Gothic Pro, ヒラギノ角ゴ Pro W3, メイリオ, Meiryo, ＭＳ, Ｐゴシック, Helvetica Neue, Helvetica, Arial;
 }
 
 .application_header {
-    display: flex;
-    background-color: rgba(60,120,230,0.2)
+  width: 100vw;
+  height: 9vh;
+  display: flex;
+  background-color: rgba(60,120,230,0.2);
+  .logo { color: rgb(146,64,93); }
+  .header_contents {
+    margin-left: 10px;
+    line-height: 5;
+    span {
+      color: rgb(146,64,93);
+      margin-left: 15px;
+    }
+  }
 }
 
-.header_content {
-    margin-left: 10px;
-    line-height: 4;
-}

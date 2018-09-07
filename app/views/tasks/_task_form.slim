@@ -3,20 +3,20 @@
     .error_announce
       - task.errors.full_messages.each do |error_message|
         p = error_message
-  .title_block
+  .title_block.form-group
     = f.label :title
-    = f.text_field :title, placeholder: "タイトル"
-  .importance_block
+    = f.text_field :title, class: "form-control", placeholder: "タイトル"
+  .importance_block.form-group
     = f.label :importance
     = f.select :importance, Task.importances.keys.to_a, {}
-  .dead_line_on_block
+  .dead_line_on_block.form-group
     = f.label :dead_line_on
     = f.date_select :dead_line_on
-  .status_block
+  .status_block.form-group
     = f.label :status
     = f.select :status, Task.statuses.keys.to_a, {}
-  .detail_block
+  .detail_block.form-group
     = f.label :detail
-    = f.text_area :detail, placeholder: "説明文"
-  .submit_block
-    = f.submit "新しいタスクを追加"
+    = f.text_area :detail, class: "form-control", placeholder: "説明文"
+  .submit_block.form-group
+    = f.submit "新しいタスクを追加", class: "submit_button"
