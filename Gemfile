@@ -63,6 +63,7 @@ gem 'webpacker', github: 'rails/webpacker'
 gem 'kaminari'
 gem 'bootstrap-sass'
 gem 'sass-rails', '~> 5.0'
+gem 'faker'
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
