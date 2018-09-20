@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2018_07_31_003228) do
     t.text "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_tasks_on_status"
+    t.index ["title"], name: "index_tasks_on_title"
   end
 
 end
