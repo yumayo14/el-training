@@ -8,12 +8,14 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application'
   body
-    header.application_header
-      .logo
-        h3 TaskApp
-      .header_contents
-        span = link_to "タスク一覧", tasks_path
-        span = link_to "タスクの投稿", new_task_path
+    nav.application_header
+      .navbar-header
+        = link_to "TaskApp", tasks_path, class: "navbar-brand logo"
+      ul.nav.navbar-nav.navbar-nav_extend
+        li.nav-item
+          = link_to "タスク一覧", tasks_path, class: "nav-link"
+        li.nav-item
+          = link_to "タスクの投稿", new_task_path, class: "nav-link"
     - flash.each do |key, value|
       .alert.alert-#{key}
         p = value

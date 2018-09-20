@@ -14,16 +14,20 @@ html, body {
 
 .application_header {
   width: 100vw;
-  height: 9vh;
   display: flex;
   background-color: rgba(60,120,230,0.2);
   .logo { color: rgb(146,64,93); }
-  .header_contents {
+  ul.navbar-nav_extend {
     margin-left: 10px;
-    line-height: 5;
-    span {
+    li {
       color: rgb(146,64,93);
-      margin-left: 15px;
+      a  {
+        color: rgb(146,64,93);
+        &:hover {
+          color: rgb(146,64,93);
+          background-color: rgba(255, 102, 204, 0.2) !important;
+        }
+      }
     }
   }
 }
