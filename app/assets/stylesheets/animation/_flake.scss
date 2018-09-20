@@ -1,0 +1,135 @@
+@mixin flake($left: 0%, $duration: 1s, $delay: 0s, $size: 10px 15px) {
+  left: $left;
+  animation-duration: $duration;
+  animation-delay: $delay;
+  background-size: $size;
+}
+
+.flake1 {
+  @include flake($left: 2%, $duration:3.5s)
+}
+
+.flake2 {
+  @include flake($left: 4%, $duration:4.4s, $delay: 0.2s, $size: 5px 6px !important)
+}
+
+.flake3 {
+  @include flake($left: 6%, $duration:4.9s, $delay: 0.4s)
+}
+
+.flake4 {
+  @include flake($left: 8%, $duration:4.4s, $size: 5px 6px !important)
+}
+
+.flake5 {
+  @include flake($left: 10%, $duration:4.7s, $delay: 0.7s)
+}
+
+.flake6 {
+  @include flake($left: 14%, $duration:4.2s, $delay: 1.2s)
+}
+
+.flake7 {
+  @include flake($left: 17%, $duration:4.7s, $delay: 0.3s, $size: 5px 6px !important)
+}
+
+.flake8 {
+  @include flake($left: 19%, $duration:5s, $delay: 1.4s)
+}
+
+.flake9 {
+  @include flake($left: 24%, $duration:4.5s)
+}
+
+.flake10 {
+  @include flake($left: 29%, $duration: 4.7s, $delay: 0.2s)
+}
+
+.flake11 {
+  @include flake($left: 32%, $duration: 4.9s, $delay: 1.4s)
+}
+
+.flake12 {
+  @include flake($left: 35%, $duration: 4.4s, $size: 5px 6px !important)
+}
+
+.flake13 {
+  @include flake($left: 38%, $duration: 4.5s)
+}
+
+.flake14 {
+  @include flake($left: 42%, $duration: 4.7s, $delay: 0.4s)
+}
+
+.flake15 {
+  @include flake($left: 45%, $duration: 4.9s, $delay: 0s, $size: 5px 6px !important)
+}
+
+.flake16 {
+  @include flake($left: 47%, $duration: 4.4, $delay: 0s)
+}
+
+.flake17 {
+  @include flake($left: 50%, $duration: 4.4s, $delay: 1s)
+}
+
+.flake18 {
+  @include flake($left: 53%, $duration: 4.2s, $delay: 1.2s, $size: 5px 6px !important)
+}
+
+.flake19 {
+  @include flake($left: 60%, $duration: 4.7s, $delay: 0.7s)
+}
+
+.flake20 {
+  @include flake($left: 61%, $duration: 5s, $delay: 1.4s, $size: 5px 6px !important)
+}
+
+.flake21 {
+  @include flake($left: 65%, $duration: 4.5s, $size: 5px 6px !important)
+}
+
+.flake22 {
+  @include flake($left: 69%, $duration: 4.9s, $delay: 0.2s)
+}
+
+.flake23 {
+  @include flake($left: 72%, $duration: 4.6s, $delay: 0.4s)
+}
+
+.flake24 {
+  @include flake( $left: 75%, $duration: 4.4s, $delay: 0s, $size: 5px 6px !important)
+}
+
+.flake25 {
+  @include flake($left: 78%, $duration: 4.9s, $delay: 0.4s, $size: 5px 6px !important)
+}
+
+.flake26 {
+  @include flake($left: 81%, $duration: 4.4s , $delay: 0s)
+}
+
+.flake27 {
+  @include flake($left: 83% , $duration: 4.4s, $delay: 1s)
+}
+
+.flake28 {
+  @include flake($left: 88%, $duration: 4.2s, $delay: 1.2s, $size: 5px 6px !important)
+}
+
+.flake29 {
+  @include flake($left: 90%, $duration: 4.7s, $delay: 0.7s)
+}
+
+.flake30 {
+  @include flake($left: 94%, $duration: 5s, $delay: 1.4s)
+}
+
+.flake31 {
+  @include flake($left: 96%, $duration: 4.5s, $size: 5px 6px !important)
+}
+
+.flake32 {
+  @include flake($left: 98%, $duration: 4.7s, $delay: 0.2s)
+}
+

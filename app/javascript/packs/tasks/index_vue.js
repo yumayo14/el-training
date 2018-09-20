@@ -5,7 +5,7 @@ import lodash from 'lodash';
 
 Vue.prototype.$http = axios
 
-window.vm = new Vue ({
+window.tasks = new Vue ({
     el: '#all_tasks',
     data: {
         tasks: [],
@@ -88,4 +88,4 @@ window.vm = new Vue ({
         this.getTasks();
     }
 })
-console.log(vm)
+console.log(tasks)

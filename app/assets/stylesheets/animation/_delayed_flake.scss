@@ -1,0 +1,134 @@
+@mixin delayed_flake($left: 0%, $duration: 1s, $delay: 2s, $size: 10px 15px) {
+  left: $left;
+  animation-duration: $duration;
+  animation-delay: $delay;
+  background-size: $size;
+}
+
+.delayed_flake1 {
+  @include delayed_flake($left: 2%, $duration: 4.5s, $delay: 2.2s, $size: 5px 6px !important)
+}
+
+.delayed_flake2 {
+  @include delayed_flake($left: 4%, $duration: 3.7s, $delay: 2.2s)
+}
+
+.delayed_flake3 {
+  @include delayed_flake($left: 6%, $duration: 2.9s, $delay: 2.4s, $size: 5px 6px)
+}
+
+.delayed_flake4 {
+  @include delayed_flake($left: 8%, $duration: 4.4s)
+}
+
+.delayed_flake5 {
+  @include delayed_flake($left: 10%, $duration: 3.4s, $delay: 3s)
+}
+
+.delayed_flake6 {
+  @include delayed_flake($left: 15%, $duration: 4.2s, $delay: 1.6s, $size: 5px 6px !important)
+}
+
+.delayed_flake7 {
+  @include delayed_flake($left: 17%, $duration: 4.7s, $delay: 3.2s, $size: 5px 6px !important)
+}
+
+.delayed_flake8 {
+  @include delayed_flake($left: 23%, $duration: 3.4s, $delay: 1.9s)
+}
+
+.delayed_flake9 {
+  @include delayed_flake($left: 25%, $duration: 4.5s, $delay: 2.6s)
+}
+
+.delayed_flake10 {
+  @include delayed_flake($left: 29%, $duration: 4.7s, $delay: 2.2s)
+}
+
+.delayed_flake11 {
+  @include delayed_flake($left: 32%, $duration: 4.9s, $delay: 2.4s, $size: 5px 6px !important)
+}
+
+.delayed_flake12 {
+  @include delayed_flake($left: 35%, $duration: 4.4s, $delay: 2s)
+}
+
+.delayed_flake13 {
+  @include delayed_flake($left: 38%, $duration: 4.5s, $delay: 3.5s, $size: 5px 6px !important)
+}
+
+.delayed_flake14 {
+  @include delayed_flake($left: 42%, $duration: 4.7s, $delay: 2.2s)
+}
+
+.delayed_flake15 {
+  @include delayed_flake($left: 45%, $duration: 4.9s, $delay: 2.4s, $size: 5px 6px !important)
+}
+
+.delayed_flake16 {
+  @include delayed_flake($left: 47%, $duration: 4.4s, $delay: 2s)
+}
+
+.delayed_flake17 {
+  @include delayed_flake($left: 50%, $duration: 4.4s, $delay: 3s)
+}
+
+.delayed_flake18 {
+  @include delayed_flake($left: 53%, $duration: 4.2s, $delay: 2.2s, $size: 5px 6px !important)
+}
+
+.delayed_flake19 {
+  @include delayed_flake($left: 57%, $duration: 4.7s, $delay: 0.9s, $size: 5px 6px !important)
+}
+
+.delayed_flake20 {
+  @include delayed_flake($left: 61%, $duration: 5s, $delay: 1.8s)
+}
+
+.delayed_flake21 {
+  @include delayed_flake($left: 66%, $duration: 4.5s, $delay: 2s)
+}
+
+.delayed_flake22 {
+  @include delayed_flake($left: 69%, $duration: 4.7s, $delay: 2.7s, $size: 5px 6px !important)
+}
+
+.delayed_flake23 {
+  @include delayed_flake($left: 72%, $duration: 4.9s, $delay: 2.4s)
+}
+
+.delayed_flake24 {
+  @include delayed_flake($left: 75%, $duration: 4.4s, $delay: 2.2s, $size: 5px 6px !important)
+}
+
+.delayed_flake25 {
+  @include delayed_flake($left: 78%, $duration: 3.9s, $delay: 2.4s)
+}
+
+.delayed_flake26 {
+  @include delayed_flake($left: 83%, $duration: 4.4s, $delay: 2s)
+}
+
+.delayed_flake27 {
+  @include delayed_flake($left: 85%, $duration: 4.4s, $delay: 3s, $size: 5px 6px !important)
+}
+
+.delayed_flake28 {
+  @include delayed_flake($left: 88%, $duration: 4.2s, $delay: 1.2s, $size: 5px 6px !important)
+}
+
+.delayed_flake29 {
+  @include delayed_flake($left: 91%, $duration: 4.7s, $delay: 2.9s,)
+}
+
+.delayed_flake30 {
+  @include delayed_flake($left: 93%, $duration: 4.5s)
+}
+
+.delayed_flake31 {
+  @include delayed_flake($left: 96%, $duration: 3.7s, $delay: 2.2s, $size: 5px 6px !important)
+}
+
+.delayed_flake32 {
+  @include delayed_flake($left: 99%, $duration: 2.9s, $delay: 2.4s)
+}
