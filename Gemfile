@@ -62,7 +62,6 @@ gem 'slim-rails', '~> 3.1', '>= 3.1.1'
 gem 'webpacker', github: 'rails/webpacker'
 gem 'kaminari'
 gem 'bootstrap-sass'
-gem 'sass-rails', '~> 5.0'
 gem 'faker'
 
 
