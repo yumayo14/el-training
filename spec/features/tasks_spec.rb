@@ -128,27 +128,27 @@ RSpec.feature"Tasks",type: :feature do
         click_button '検索条件をリセット'
       end
       it "フォーム検索" do
-        fill_in 'search_form', with: '2番'
+        fill_in 'query', with: '2番'
         click_button "検索"
         expect(page).to have_selector('tr.tasks', count: 1)
-        within all('table tr.tasks')[0] do
+        within all('tr.tasks')[0] do
           expect(find('th.title')).to have_content "2番目"
         end
       end
       it "ステータス検索" do
-        select '着手', from: 'search_status'
+        select '着手', from: 'status'
         click_button "検索"
         expect(page).to have_selector('tr.tasks', count: 1)
-        within all('table tr.tasks')[0] do
+        within all('tr.tasks')[0] do
           expect(find('th.status')).to have_content "着手"
         end
       end
       it "フォームとステータスで検索" do
-        fill_in 'search_form', with: '1番目'
-        select '着手', from: 'search_status'
+        fill_in 'query', with: '1番目'
+        select '着手', from: 'status'
         click_button "検索"
         expect(page).to have_selector('tr.tasks', count: 1)
-        within all('table tr.tasks')[0] do
+        within all('tr.tasks')[0] do
           expect(find('th.title')).to have_content "1番目"
           expect(find('th.status')).to have_content "着手"
         end
