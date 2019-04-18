@@ -44,7 +44,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'selenium-webdriver', '>= 3.1.0'
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'database_rewinder'
