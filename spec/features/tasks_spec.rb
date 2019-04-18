@@ -11,7 +11,7 @@ RSpec.feature"Tasks",type: :feature do
 
     describe "最初の並び順", js: true do
       it "indexページに投稿されたタスクの一覧が表示される" do
-        within all('table tr.tasks')[0] do
+        within all('tr.tasks')[0] do
           expect(find('th.title')).to have_content("Test1")
           expect(find('th.importance')).to have_content("中")
           expect(find('th.status')).to have_content("着手")
@@ -27,11 +27,11 @@ RSpec.feature"Tasks",type: :feature do
         end
       end
       it "ページ遷移後、投稿日が新しい順に並んでいる", js: true do
-        within all('table tr.tasks')[0] do
+        within all('tr.tasks')[0] do
           # スクリーンショットをとって確認する方法、やって見る
           expect(find('th.created_day')).to have_content "2020/08/09"
         end
-        within all('table tr.tasks')[1] do
+        within all('tr.tasks')[1] do
           expect(find('th.created_day')).to have_content  "2020/07/24"
         end
       end
@@ -43,10 +43,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '投稿日順'
         end
         it "投稿日が新しい順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.created_day')).to have_content "2020/08/09"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.created_day')).to have_content  "2020/07/24"
           end
         end
@@ -58,10 +58,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '投稿日順'
         end
         it "投稿日が古い順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.created_day')).to have_content "2020/07/24"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.created_day')).to have_content  "2020/08/09"
           end
         end
@@ -72,10 +72,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '期限日順'
         end
         it "期限が近い順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.dead_line_on')).to have_content "2020-07-24"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.dead_line_on')).to have_content  "2020-08-09"
           end
         end
@@ -86,10 +86,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '期限日順'
         end
         it "期限が遠い順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.dead_line_on')).to have_content "2020-08-09"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.dead_line_on')).to have_content "2020-07-24"
           end
         end
@@ -100,10 +100,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '優先順位順'
         end
         it "優先度が高い順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.importance')).to have_content "高"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.importance')).to have_content  "中"
           end
         end
@@ -115,10 +115,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '優先順位順'
         end
         it "優先度が低い順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.importance')).to have_content "中"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.importance')).to have_content  "高"
           end
         end
@@ -237,7 +237,7 @@ RSpec.feature"Tasks",type: :feature do
         visit current_path
       end
       it "10個まで表示される" do
-        expect(all('table tr.tasks').size).to eq 10
+        expect(all('tr.tasks').size).to eq 10
       end
       it "ページネーションできない" do
         expect(page).to have_button 'Go Next', disabled: true
@@ -253,7 +253,7 @@ RSpec.feature"Tasks",type: :feature do
       end
       it "2ページ目に11個目から20個目までが表示される" do
         click_button "Go Next"
-        expect(all('table tr.tasks').size).to eq 10
+        expect(all('tr.tasks').size).to eq 10
       end
     end
   end
