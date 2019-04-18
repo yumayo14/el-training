@@ -47,6 +47,7 @@ group :development, :test do
   gem 'chromedriver-helper'
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'database_rewinder'
 end
 
 group :development do
