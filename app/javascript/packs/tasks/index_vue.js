@@ -21,7 +21,7 @@ window.tasks = new Vue ({
             previous_button_text: 'Go Back'
         },
         searchQuery: '',
-        selected: '',
+        selectedStatus: '',
         createdOrder: true,
         deadLineOrder: false,
         importanceOrder: true
