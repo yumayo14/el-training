@@ -250,11 +250,7 @@ RSpec.feature"Tasks",type: :feature do
         visit current_path
       end
       it "2ページ目に11個目から20個目までが表示される" do
-        click_button 'Go Next'
-        within all('table tr.tasks')[0] do
-          expect(find('th.title')).to have_content "31番目"
-        #   beforeで作成したTaskが引き継がれてしまい、タスクが１０こ余計にできてしまっている
-        end
+        click_button "Go Next"
         expect(all('table tr.tasks').size).to eq 10
       end
     end
