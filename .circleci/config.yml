@@ -1,0 +1,56 @@
+version: 2
+jobs:
+  build:
+    parallelism: 3
+    docker:
+      - image: circleci/ruby:2.5-stretch-node-browsers
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          DB_HOST: 127.0.0.1
+          DB_USERNAME: root
+          DB_PASSWORD: ""
+          RAILS_ENV: test
+      - image: circleci/mysql:5.7
+    steps:
+      - checkout
+      - run: mv config/database.yml.ci config/database.yml
+      - restore_cache:
+          keys:
+            - el-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - el-bundle-v2-
+      - run: # Install Ruby dependencies
+         name: Bundle Install
+         command: bundle check || bundle install
+      - save_cache:
+          key: el-bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - restore_cache:
+          keys:
+            - el-yarn-{{ checksum "yarn.lock" }}
+            - el-demo-yarn-
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
+      - save_cache:
+          key: el-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+      - run:
+          name: Create DB
+          command: RAILS_ENV=test bin/rails db:create
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+      - run:
+          name: Run rspec in parallel
+          command: |
+            bundle exec rspec --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
