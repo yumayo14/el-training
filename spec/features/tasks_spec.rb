@@ -4,8 +4,8 @@ RSpec.feature"Tasks",type: :feature do
   given(:task) { FactoryBot.create(:task) }
   describe "タスクの一覧表示" do
     before do
-      FactoryBot.create(:task, title: "2番目", importance: 2, status: 0, dead_line_on: "2020-07-24", created_at: "2020/07/24 16:00::55")
-      FactoryBot.create(:task, title: "1番目", importance: 1, status: 1, dead_line_on: "2020-08-09", created_at: "2020/08/09 09:00:00")
+      FactoryBot.create(:task, title: "Test2", importance: 2, status: 0, dead_line_on: "2020-07-24", created_at: "2020/07/24 16:00::55")
+      FactoryBot.create(:task, title: "Test1", importance: 1, status: 1, dead_line_on: "2020-08-09", created_at: "2020/08/09 09:00:00")
       visit tasks_path
     end
 
@@ -130,11 +130,11 @@ RSpec.feature"Tasks",type: :feature do
         click_button '検索条件をリセット'
       end
       it "フォーム検索" do
-        fill_in 'query', with: '2番'
+        fill_in 'query', with: 'Test2'
         click_button "検索"
         expect(page).to have_selector('tr.tasks', count: 1)
         within all('tr.tasks')[0] do
-          expect(find('th.title')).to have_content "2番目"
+          expect(find('th.title')).to have_content "Test2"
         end
       end
       it "ステータス検索" do
@@ -146,12 +146,12 @@ RSpec.feature"Tasks",type: :feature do
         end
       end
       it "フォームとステータスで検索" do
-        fill_in 'query', with: '1番目'
+        fill_in 'query', with: 'Test1'
         select '着手', from: 'status'
         click_button "検索"
         expect(page).to have_selector('tr.tasks', count: 1)
         within all('tr.tasks')[0] do
-          expect(find('th.title')).to have_content "1番目"
+          expect(find('th.title')).to have_content "Test1"
           expect(find('th.status')).to have_content "着手"
         end
       end
