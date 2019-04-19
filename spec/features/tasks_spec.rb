@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature"Tasks",type: :feature do
-  given(:task) { FactoryBot.create(:task) }
+  given(:task) { create(:task) }
   describe "タスクの一覧表示" do
     before do
-      FactoryBot.create(:task, title: "Test2", importance: 2, status: 0, dead_line_on: "2020-07-24", created_at: "2020/07/24 16:00::55")
-      FactoryBot.create(:task, title: "Test1", importance: 1, status: 1, dead_line_on: "2020-08-09", created_at: "2020/08/09 09:00:00")
+      create(:task, title: "Test2", importance: 2, status: 0, dead_line_on: "2020-07-24", created_at: "2020/07/24 16:00::55")
+      create(:task, title: "Test1", importance: 1, status: 1, dead_line_on: "2020-08-09", created_at: "2020/08/09 09:00:00")
       visit tasks_path
     end
 
@@ -231,7 +231,7 @@ RSpec.feature"Tasks",type: :feature do
     context "10個以下の場合" , js: true do
       before do
         10.times do
-          FactoryBot.create(:task)
+          create(:task)
         end
         visit current_path
       end
@@ -246,7 +246,7 @@ RSpec.feature"Tasks",type: :feature do
     context "タスクが11個以上から20個の場合", js: true do
       before do
         20.times do
-          FactoryBot.create(:task)
+          create(:task)
         end
         visit current_path
       end
