@@ -9,19 +9,21 @@ RSpec.feature"Tasks",type: :feature do
       visit tasks_path
     end
 
-    describe "最初の並び順" do
+    describe "最初の並び順", js: true do
       it "indexページに投稿されたタスクの一覧が表示される" do
-        all('table tr.task').each do
-          expect(page).to have_content "2番目"
-          expect(page).to have_content "高"
-          expect(page).to have_content "未着手"
-          expect(page).to have_content "2020-07-24"
-          expect(page).to have_content "infinity_task..."
-          expect(page).to have_content "1番目"
-          expect(page).to have_content "中"
-          expect(page).to have_content "着手"
-          expect(page).to have_content "2020-08-09"
-          expect(page).to have_content "infinity_task..."
+        within all('table tr.tasks')[0] do
+          expect(find('th.title')).to have_content("Test1")
+          expect(find('th.importance')).to have_content("中")
+          expect(find('th.status')).to have_content("着手")
+          expect(find('th.dead_line_on')).to have_content("2020-08-09")
+          expect(find('th.created_day')).to have_content("2020/08/09")
+        end
+        within all('tr.tasks')[1] do
+          expect(find('th.title')).to have_content("Test2")
+          expect(find('th.importance')).to have_content("高")
+          expect(find('th.status')).to have_content("未着手")
+          expect(find('th.dead_line_on')).to have_content("2020-07-24")
+          expect(find('th.created_day')).to have_content("2020/07/24")
         end
       end
       it "ページ遷移後、投稿日が新しい順に並んでいる", js: true do

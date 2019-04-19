@@ -43,7 +43,7 @@
           th.dead_line_on scope="row" = "{{task.dead_line_on}}"
           th.detail scope="row" = "{{task.detail}}"
           th.created_day scope="row" = "{{task.created_at}}"
-          th
+          th.each_task_link
             a v-bind:href='"/tasks/" + task.id' 詳細
       v-paginator#paginator :options="options" :resource_url="resource_url" @update="updateResource"
 = javascript_pack_tag 'tasks/index_vue'
