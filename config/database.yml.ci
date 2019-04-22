@@ -10,5 +10,5 @@ test:
   <<: *default
   database: el-training_test
   host: <%= ENV['DB_HOST'] %>
-  username: root
-  password: ""
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
