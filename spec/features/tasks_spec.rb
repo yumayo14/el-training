@@ -28,7 +28,6 @@ RSpec.feature"Tasks",type: :feature do
       end
       it "ページ遷移後、投稿日が新しい順に並んでいる", js: true do
         within all('tr.tasks')[0] do
-          # スクリーンショットをとって確認する方法、やって見る
           expect(find('th.created_day')).to have_content "2020/08/09"
         end
         within all('tr.tasks')[1] do
