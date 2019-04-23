@@ -48,6 +48,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rubocop', '~> 0.67.2', require: false
+  gem 'rubocop-performance'
   gem 'database_rewinder'
 end
 
