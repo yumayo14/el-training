@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/yumayo14/el-training/tree/master.svg?style=svg)](https://circleci.com/gh/yumayo14/el-training/tree/master)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
