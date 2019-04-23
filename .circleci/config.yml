@@ -48,6 +48,9 @@ jobs:
           name: Database setup
           command: bin/rails db:schema:load --trace
       - run:
+          name: Run rubocop
+          command: bundle exec rubocop
+      - run:
           name: Run rspec in parallel
           command: |
             bundle exec rspec --out test_results/rspec.xml \

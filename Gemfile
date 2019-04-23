@@ -47,6 +47,7 @@ group :development, :test do
   gem 'webdrivers'
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'rubocop', '~> 0.67.2', require: false
   gem 'database_rewinder'
 end
 
