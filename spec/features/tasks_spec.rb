@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature"Tasks",type: :feature do
-  given(:task) { create(:task) }
+  let(:task) { create(:task) }
   describe "タスクの一覧表示" do
     before do
       create(:task, title: "Test2", importance: 2, status: 0, dead_line_on: "2020-07-24", created_at: "2020/07/24 16:00::55")
