@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature"Tasks",type: :feature do
-  given(:task) { FactoryBot.create(:task) }
+  let(:task) { create(:task) }
   describe "タスクの一覧表示" do
     before do
-      FactoryBot.create(:task, title: "Test2", importance: 2, status: 0, dead_line_on: "2020-07-24", created_at: "2020/07/24 16:00::55")
-      FactoryBot.create(:task, title: "Test1", importance: 1, status: 1, dead_line_on: "2020-08-09", created_at: "2020/08/09 09:00:00")
+      create(:task, title: "Test2", importance: 2, status: 0, dead_line_on: "2020-07-24", created_at: "2020/07/24 16:00::55")
+      create(:task, title: "Test1", importance: 1, status: 1, dead_line_on: "2020-08-09", created_at: "2020/08/09 09:00:00")
       visit tasks_path
     end
 
@@ -38,9 +38,7 @@ RSpec.feature"Tasks",type: :feature do
 
     describe "並び替え", js: true do
       context "投稿日が新しい順" do
-        before do
-          click_button '投稿日順'
-        end
+        before { click_button '投稿日順' }
         it "投稿日が新しい順に並び替える" do
           within all('tr.tasks')[0] do
             expect(find('th.created_day')).to have_content "2020/08/09"
@@ -67,9 +65,7 @@ RSpec.feature"Tasks",type: :feature do
       end
 
       context "期限日が近い順" do
-        before do
-          click_button '期限日順'
-        end
+        before { click_button '期限日順' }
         it "期限が近い順に並び替える" do
           within all('tr.tasks')[0] do
             expect(find('th.dead_line_on')).to have_content "2020-07-24"
@@ -95,9 +91,7 @@ RSpec.feature"Tasks",type: :feature do
       end
 
       context "優先度が高い順" do
-        before do
-          click_button '優先順位順'
-        end
+        before { click_button '優先順位順' }
         it "優先度が高い順に並び替える" do
           within all('tr.tasks')[0] do
             expect(find('th.importance')).to have_content "高"
@@ -125,9 +119,7 @@ RSpec.feature"Tasks",type: :feature do
     end
 
     describe "絞り込み検索", js: true do
-      before do
-        click_button '検索条件をリセット'
-      end
+      before { click_button '検索条件をリセット' }
       it "フォーム検索" do
         fill_in 'query', with: 'Test2'
         click_button "検索"
@@ -158,9 +150,7 @@ RSpec.feature"Tasks",type: :feature do
   end
 
   describe "タスクの投稿" do
-    before do
-      visit tasks_path
-    end
+    before { visit tasks_path }
     context "必要な値を入力している場合" do
       before do
         click_link "タスクの投稿"
@@ -230,9 +220,7 @@ RSpec.feature"Tasks",type: :feature do
   describe "タスクを表示しているページの切り替え" do
     context "10個以下の場合" , js: true do
       before do
-        10.times do
-          FactoryBot.create(:task)
-        end
+        10.times { create(:task) }
         visit current_path
       end
       it "10個まで表示される" do
@@ -245,9 +233,7 @@ RSpec.feature"Tasks",type: :feature do
     end
     context "タスクが11個以上から20個の場合", js: true do
       before do
-        20.times do
-          FactoryBot.create(:task)
-        end
+        20.times { create(:task) }
         visit current_path
       end
       it "2ページ目に11個目から20個目までが表示される" do
@@ -277,9 +263,7 @@ RSpec.feature"Tasks",type: :feature do
     end
 
     describe "削除" do
-      before do
-        click_link "削除"
-      end
+      before { click_link "削除" }
       it "作成したタスクを削除" do
         expect(page).to have_content "タスクを削除しました"
       end
