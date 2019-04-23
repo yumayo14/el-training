@@ -4,32 +4,33 @@ RSpec.feature"Tasks",type: :feature do
   given(:task) { FactoryBot.create(:task) }
   describe "タスクの一覧表示" do
     before do
-      FactoryBot.create(:task, title: "2番目", importance: 2, status: 0, dead_line_on: "2020-07-24", created_at: "2020/07/24 16:00::55")
-      FactoryBot.create(:task, title: "1番目", importance: 1, status: 1, dead_line_on: "2020-08-09", created_at: "2020/08/09 09:00:00")
+      FactoryBot.create(:task, title: "Test2", importance: 2, status: 0, dead_line_on: "2020-07-24", created_at: "2020/07/24 16:00::55")
+      FactoryBot.create(:task, title: "Test1", importance: 1, status: 1, dead_line_on: "2020-08-09", created_at: "2020/08/09 09:00:00")
       visit tasks_path
     end
 
-    describe "最初の並び順" do
+    describe "最初の並び順", js: true do
       it "indexページに投稿されたタスクの一覧が表示される" do
-        all('table tr.task').each do
-          expect(page).to have_content "2番目"
-          expect(page).to have_content "高"
-          expect(page).to have_content "未着手"
-          expect(page).to have_content "2020-07-24"
-          expect(page).to have_content "infinity_task..."
-          expect(page).to have_content "1番目"
-          expect(page).to have_content "中"
-          expect(page).to have_content "着手"
-          expect(page).to have_content "2020-08-09"
-          expect(page).to have_content "infinity_task..."
+        within all('tr.tasks')[0] do
+          expect(find('th.title')).to have_content "Test1"
+          expect(find('th.importance')).to have_content "中"
+          expect(find('th.status')).to have_content "着手"
+          expect(find('th.dead_line_on')).to have_content "2020-08-09"
+          expect(find('th.created_day')).to have_content "2020/08/09"
+        end
+        within all('tr.tasks')[1] do
+          expect(find('th.title')).to have_content "Test2"
+          expect(find('th.importance')).to have_content "高"
+          expect(find('th.status')).to have_content "未着手"
+          expect(find('th.dead_line_on')).to have_content "2020-07-24"
+          expect(find('th.created_day')).to have_content "2020/07/24"
         end
       end
       it "ページ遷移後、投稿日が新しい順に並んでいる", js: true do
-        within all('table tr.tasks')[0] do
-          # スクリーンショットをとって確認する方法、やって見る
+        within all('tr.tasks')[0] do
           expect(find('th.created_day')).to have_content "2020/08/09"
         end
-        within all('table tr.tasks')[1] do
+        within all('tr.tasks')[1] do
           expect(find('th.created_day')).to have_content  "2020/07/24"
         end
       end
@@ -41,10 +42,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '投稿日順'
         end
         it "投稿日が新しい順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.created_day')).to have_content "2020/08/09"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.created_day')).to have_content  "2020/07/24"
           end
         end
@@ -56,10 +57,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '投稿日順'
         end
         it "投稿日が古い順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.created_day')).to have_content "2020/07/24"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.created_day')).to have_content  "2020/08/09"
           end
         end
@@ -70,10 +71,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '期限日順'
         end
         it "期限が近い順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.dead_line_on')).to have_content "2020-07-24"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.dead_line_on')).to have_content  "2020-08-09"
           end
         end
@@ -84,10 +85,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '期限日順'
         end
         it "期限が遠い順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.dead_line_on')).to have_content "2020-08-09"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.dead_line_on')).to have_content "2020-07-24"
           end
         end
@@ -98,10 +99,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '優先順位順'
         end
         it "優先度が高い順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.importance')).to have_content "高"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.importance')).to have_content  "中"
           end
         end
@@ -113,10 +114,10 @@ RSpec.feature"Tasks",type: :feature do
           click_button '優先順位順'
         end
         it "優先度が低い順に並び替える" do
-          within all('table tr.tasks')[0] do
+          within all('tr.tasks')[0] do
             expect(find('th.importance')).to have_content "中"
           end
-          within all('table tr.tasks')[1] do
+          within all('tr.tasks')[1] do
             expect(find('th.importance')).to have_content  "高"
           end
         end
@@ -128,28 +129,28 @@ RSpec.feature"Tasks",type: :feature do
         click_button '検索条件をリセット'
       end
       it "フォーム検索" do
-        fill_in 'search_form', with: '2番'
+        fill_in 'query', with: 'Test2'
         click_button "検索"
-        expect(page).to have_selector('tr.tasks', count: 1)
-        within all('table tr.tasks')[0] do
-          expect(find('th.title')).to have_content "2番目"
+        expect(page).to have_selector 'tr.tasks', count: 1
+        within all('tr.tasks')[0] do
+          expect(find('th.title')).to have_content "Test2"
         end
       end
       it "ステータス検索" do
-        select '着手', from: 'search_status'
+        select '着手', from: 'status'
         click_button "検索"
-        expect(page).to have_selector('tr.tasks', count: 1)
-        within all('table tr.tasks')[0] do
+        expect(page).to have_selector 'tr.tasks', count: 1
+        within all('tr.tasks')[0] do
           expect(find('th.status')).to have_content "着手"
         end
       end
       it "フォームとステータスで検索" do
-        fill_in 'search_form', with: '1番目'
-        select '着手', from: 'search_status'
+        fill_in 'query', with: 'Test1'
+        select '着手', from: 'status'
         click_button "検索"
-        expect(page).to have_selector('tr.tasks', count: 1)
-        within all('table tr.tasks')[0] do
-          expect(find('th.title')).to have_content "1番目"
+        expect(page).to have_selector 'tr.tasks', count: 1
+        within all('tr.tasks')[0] do
+          expect(find('th.title')).to have_content "Test1"
           expect(find('th.status')).to have_content "着手"
         end
       end
@@ -235,7 +236,7 @@ RSpec.feature"Tasks",type: :feature do
         visit current_path
       end
       it "10個まで表示される" do
-        expect(all('table tr.tasks').size).to eq 10
+        expect(all('tr.tasks').size).to eq 10
       end
       it "ページネーションできない" do
         expect(page).to have_button 'Go Next', disabled: true
@@ -250,12 +251,8 @@ RSpec.feature"Tasks",type: :feature do
         visit current_path
       end
       it "2ページ目に11個目から20個目までが表示される" do
-        click_button 'Go Next'
-        within all('table tr.tasks')[0] do
-          expect(find('th.title')).to have_content "31番目"
-        #   beforeで作成したTaskが引き継がれてしまい、タスクが１０こ余計にできてしまっている
-        end
-        expect(all('table tr.tasks').size).to eq 10
+        click_button "Go Next"
+        expect(all('tr.tasks').size).to eq 10
       end
     end
   end

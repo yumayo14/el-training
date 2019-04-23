@@ -17,9 +17,9 @@
         .tasks_search
           .search_form
             .query
-              input v-model="searchQuery" id="search_query"
+              input v-model="searchQuery" name="query" id="search_query"
             .status
-              select v-model="selected" name="search_status" id="search_status"
+              select v-model="selected" name="status" id="search_status"
                 option value='' 選択しない
                 option value="0" 未着手
                 option value="1" 着手
@@ -43,7 +43,7 @@
           th.dead_line_on scope="row" = "{{task.dead_line_on}}"
           th.detail scope="row" = "{{task.detail}}"
           th.created_day scope="row" = "{{task.created_at}}"
-          th
+          th.each_task_link
             a v-bind:href='"/tasks/" + task.id' 詳細
       v-paginator#paginator :options="options" :resource_url="resource_url" @update="updateResource"
 = javascript_pack_tag 'tasks/index_vue'
