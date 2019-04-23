@@ -12,18 +12,18 @@ RSpec.feature"Tasks",type: :feature do
     describe "最初の並び順", js: true do
       it "indexページに投稿されたタスクの一覧が表示される" do
         within all('tr.tasks')[0] do
-          expect(find('th.title')).to have_content("Test1")
-          expect(find('th.importance')).to have_content("中")
-          expect(find('th.status')).to have_content("着手")
-          expect(find('th.dead_line_on')).to have_content("2020-08-09")
-          expect(find('th.created_day')).to have_content("2020/08/09")
+          expect(find('th.title')).to have_content "Test1"
+          expect(find('th.importance')).to have_content "中"
+          expect(find('th.status')).to have_content "着手"
+          expect(find('th.dead_line_on')).to have_content "2020-08-09"
+          expect(find('th.created_day')).to have_content "2020/08/09"
         end
         within all('tr.tasks')[1] do
-          expect(find('th.title')).to have_content("Test2")
-          expect(find('th.importance')).to have_content("高")
-          expect(find('th.status')).to have_content("未着手")
-          expect(find('th.dead_line_on')).to have_content("2020-07-24")
-          expect(find('th.created_day')).to have_content("2020/07/24")
+          expect(find('th.title')).to have_content "Test2"
+          expect(find('th.importance')).to have_content "高"
+          expect(find('th.status')).to have_content "未着手"
+          expect(find('th.dead_line_on')).to have_content "2020-07-24"
+          expect(find('th.created_day')).to have_content "2020/07/24"
         end
       end
       it "ページ遷移後、投稿日が新しい順に並んでいる", js: true do
@@ -132,7 +132,7 @@ RSpec.feature"Tasks",type: :feature do
       it "フォーム検索" do
         fill_in 'query', with: 'Test2'
         click_button "検索"
-        expect(page).to have_selector('tr.tasks', count: 1)
+        expect(page).to have_selector 'tr.tasks', count: 1
         within all('tr.tasks')[0] do
           expect(find('th.title')).to have_content "Test2"
         end
@@ -140,7 +140,7 @@ RSpec.feature"Tasks",type: :feature do
       it "ステータス検索" do
         select '着手', from: 'status'
         click_button "検索"
-        expect(page).to have_selector('tr.tasks', count: 1)
+        expect(page).to have_selector 'tr.tasks', count: 1
         within all('tr.tasks')[0] do
           expect(find('th.status')).to have_content "着手"
         end
@@ -149,7 +149,7 @@ RSpec.feature"Tasks",type: :feature do
         fill_in 'query', with: 'Test1'
         select '着手', from: 'status'
         click_button "検索"
-        expect(page).to have_selector('tr.tasks', count: 1)
+        expect(page).to have_selector 'tr.tasks', count: 1
         within all('tr.tasks')[0] do
           expect(find('th.title')).to have_content "Test1"
           expect(find('th.status')).to have_content "着手"
