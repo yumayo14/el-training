@@ -21,7 +21,7 @@ window.tasks = new Vue ({
             previous_button_text: 'Go Back'
         },
         searchQuery: '',
-        selected: '',
+        selectedStatus: '',
         createdOrder: true,
         deadLineOrder: false,
         importanceOrder: true
@@ -59,13 +59,13 @@ window.tasks = new Vue ({
         },
         search: function () {
             this.searchByTitle()
-            this.searchBySelected()
+            this.searchByStatus()
         },
         searchByTitle: function() {
             this.tasks = this.tasks.filter(task => task.title.match(this.searchQuery) )
         },
-        searchBySelected: function () {
-            this.tasks = (this.selected != '') ? this.tasks.filter( task => task.status.num == this.selected ) : this.tasks
+        searchByStatus: function () {
+            this.tasks = (this.selectedStatus != '') ? this.tasks.filter( task => task.status.num == this.selectedStatus ) : this.tasks
         },
         getTasks: function(){
             axios.get(this.resource_url).then(function (response) {
@@ -78,7 +78,7 @@ window.tasks = new Vue ({
         reset: function(){
             this.getTasks();
             this.searchQuery = ''
-            this.selected = ''
+            this.selectedStatus = ''
         },
         updateResource: function(data) {
             this.tasks = data
