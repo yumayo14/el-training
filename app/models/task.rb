@@ -11,7 +11,7 @@ class Task < ApplicationRecord
 
   def dead_line_on_cannot_be_in_the_past
     if dead_line_on.present? && dead_line_on < Date.today
-      errors.add(:dead_line_on, "に過去の日付は使用できません")
+      errors.add(:dead_line_on, 'に過去の日付は使用できません')
     end
   end
 end

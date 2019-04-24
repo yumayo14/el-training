@@ -4,14 +4,14 @@ json.nested do
   json.current_page @tasks.current_page
   json.last_page @tasks.total_pages
   unless @tasks.last_page?
-    json.next_page_url "/api/tasks.json?page=" + @tasks.next_page.to_s
+    json.next_page_url '/api/tasks.json?page=' + @tasks.next_page.to_s
   else
-    json.next_page_url ""
+    json.next_page_url ''
   end
   unless @tasks.first_page?
-    json.prev_page_url "/api/tasks.json?page=" + @tasks.prev_page.to_s
+    json.prev_page_url '/api/tasks.json?page=' + @tasks.prev_page.to_s
   else
-    json.prev_page_url ""
+    json.prev_page_url ''
   end
   json.data do
     json.array! @tasks do |task|

@@ -14,16 +14,16 @@
 
 ActiveRecord::Schema.define(version: 2018_07_31_003228) do
 
-  create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title", null: false
-    t.integer "importance", default: 0
-    t.date "dead_line_on"
-    t.integer "status", default: 0
-    t.text "detail"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["status"], name: "index_tasks_on_status"
-    t.index ["title"], name: "index_tasks_on_title"
+  create_table 'tasks', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.string 'title', null: false
+    t.integer 'importance', default: 0
+    t.date 'dead_line_on'
+    t.integer 'status', default: 0
+    t.text 'detail'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['status'], name: 'index_tasks_on_status'
+    t.index ['title'], name: 'index_tasks_on_title'
   end
 
 end
