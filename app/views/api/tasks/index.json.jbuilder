@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.nested do
   json.current_page @tasks.current_page
   json.last_page @tasks.total_pages
