@@ -25,7 +25,3 @@ json.nested do
     end
   end
 end
-
-
-
-
