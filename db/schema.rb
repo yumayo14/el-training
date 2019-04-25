@@ -13,7 +13,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2018_07_31_003228) do
-
   create_table 'tasks', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'title', null: false
     t.integer 'importance', default: 0
@@ -25,5 +24,4 @@ ActiveRecord::Schema.define(version: 2018_07_31_003228) do
     t.index ['status'], name: 'index_tasks_on_status'
     t.index ['title'], name: 'index_tasks_on_title'
   end
-
 end
