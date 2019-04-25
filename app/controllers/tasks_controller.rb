@@ -24,9 +24,6 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     if @task.update(task_params)
       redirect_to tasks_path, notice: 'タスクの内容が変更されました'
