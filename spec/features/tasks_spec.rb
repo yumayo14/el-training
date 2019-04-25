@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature'Tasks',type: :feature do
+RSpec.feature'Tasks', type: :feature do
   let(:task) { create(:task) }
   describe 'タスクの一覧表示' do
     before do
@@ -33,7 +33,7 @@ RSpec.feature'Tasks',type: :feature do
           expect(find('th.created_day')).to have_content '2020/08/09'
         end
         within all('tr.tasks')[1] do
-          expect(find('th.created_day')).to have_content  '2020/07/24'
+          expect(find('th.created_day')).to have_content '2020/07/24'
         end
       end
     end
@@ -46,7 +46,7 @@ RSpec.feature'Tasks',type: :feature do
             expect(find('th.created_day')).to have_content '2020/08/09'
           end
           within all('tr.tasks')[1] do
-            expect(find('th.created_day')).to have_content  '2020/07/24'
+            expect(find('th.created_day')).to have_content '2020/07/24'
           end
         end
       end
@@ -73,7 +73,7 @@ RSpec.feature'Tasks',type: :feature do
             expect(find('th.dead_line_on')).to have_content '2020-07-24'
           end
           within all('tr.tasks')[1] do
-            expect(find('th.dead_line_on')).to have_content  '2020-08-09'
+            expect(find('th.dead_line_on')).to have_content '2020-08-09'
           end
         end
       end
@@ -99,7 +99,7 @@ RSpec.feature'Tasks',type: :feature do
             expect(find('th.importance')).to have_content '高'
           end
           within all('tr.tasks')[1] do
-            expect(find('th.importance')).to have_content  '中'
+            expect(find('th.importance')).to have_content '中'
           end
         end
       end
@@ -114,7 +114,7 @@ RSpec.feature'Tasks',type: :feature do
             expect(find('th.importance')).to have_content '中'
           end
           within all('tr.tasks')[1] do
-            expect(find('th.importance')).to have_content  '高'
+            expect(find('th.importance')).to have_content '高'
           end
         end
       end
@@ -220,7 +220,7 @@ RSpec.feature'Tasks',type: :feature do
   end
 
   describe 'タスクを表示しているページの切り替え' do
-    context '10個以下の場合' , js: true do
+    context '10個以下の場合', js: true do
       before do
         10.times { create(:task) }
         visit current_path
