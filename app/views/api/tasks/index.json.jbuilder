@@ -1,16 +1,12 @@
+# frozen_string_literal: true
+
 json.nested do
   json.current_page @tasks.current_page
   json.last_page @tasks.total_pages
-  unless @tasks.last_page?
-    json.next_page_url "/api/tasks.json?page=" + @tasks.next_page.to_s
-  else
-    json.next_page_url ""
-  end
-  unless @tasks.first_page?
-    json.prev_page_url "/api/tasks.json?page=" + @tasks.prev_page.to_s
-  else
-    json.prev_page_url ""
-  end
+  json.next_page_url '/api/tasks.json?page=' + @tasks.next_page.to_s unless @tasks.last_page?
+  json.next_page_url '' if @tasks.last_page?
+  json.prev_page_url '/api/tasks.json?page=' + @tasks.prev_page.to_s unless @tasks.first_page?
+  json.prev_page_url '' if @tasks.first_page?
   json.data do
     json.array! @tasks do |task|
       json.id task.id
@@ -29,7 +25,3 @@ json.nested do
     end
   end
 end
-
-
-
-

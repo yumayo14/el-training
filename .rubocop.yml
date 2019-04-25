@@ -1,15 +1,33 @@
-LineLength:
-  Max: 150
+AsciiComments:
+ Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - 'bin/*'
 
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'bin/*'
+
+Metrics/LineLength:
+  Max: 150
+  Exclude:
+    - 'bin/*'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'bin/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'bin/*'
+
 Style/Documentation:
   Enabled: false
-
-AsciiComments:
- Enabled: false
 
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
@@ -17,3 +35,11 @@ Style/PercentLiteralDelimiters:
     '%I': '()'
     '%w': '()'
     '%W': '()'
+
+Style/MixinUsage:
+  Exclude:
+      - 'bin/**/*'
+
+Style/NumericLiterals:
+  Exclude:
+        - 'db/**/*'
