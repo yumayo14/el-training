@@ -12,8 +12,6 @@ Capybara.register_driver :selenium_chrome do |app|
   options.add_argument('--disable-gpu')
   options.add_argument('--window-size=1920,1080')
   Capybara::Selenium::Driver.new(
-    app,
-    :browser => :chrome,
-    options: options
+    app, browser: :chrome, options: options
   )
 end
