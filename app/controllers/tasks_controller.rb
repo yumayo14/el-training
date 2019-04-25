@@ -37,7 +37,7 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice: 'タスクを削除しました'
   end
 
- private
+  private
 
   def set_task
     @task = Task.find(params[:id])
