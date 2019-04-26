@@ -71,7 +71,6 @@ window.tasks = new Vue ({
         },
         getTasks: function(){
             axios.get(this.resource_url).then(function (response) {
-                console.log(response);
                 this.tasks = response.data.nested.data
             }.bind(this)).catch(function (e) {
                 console.error(e)
@@ -88,6 +87,5 @@ window.tasks = new Vue ({
     },
     created: function () {
         this.getTasks();
-    }
+    },
 })
-console.log(tasks)
