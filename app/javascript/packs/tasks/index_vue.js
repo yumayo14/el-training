@@ -58,14 +58,16 @@ window.tasks = new Vue ({
             )
         },
         search: function () {
-            this.searchByTitle()
-            this.searchByStatus()
-        },
-        searchByTitle: function() {
-            this.tasks = this.tasks.filter(task => task.title.match(this.searchQuery) )
-        },
-        searchByStatus: function () {
-            this.tasks = (this.selectedStatus != '') ? this.tasks.filter( task => task.status.num == this.selectedStatus ) : this.tasks
+            axios.get(this.resource_url, {
+                params: {
+                    title: this.searchQuery,
+                    status: this.selectedStatus,
+                }
+            }).then(function (response) {
+                this.tasks = response.data.nested.data
+            }.bind(this)).catch(function (e) {
+                console.error(e)
+            })
         },
         getTasks: function(){
             axios.get(this.resource_url).then(function (response) {
