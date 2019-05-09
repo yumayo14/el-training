@@ -26,6 +26,46 @@ RSpec.describe Task, type: :model do
       it { is_expected.to eq false }
     end
   end
+  describe 'Taskのenum' do
+    describe '正しい値が入っている場合' do
+      subject { build(:task, title: 'test', importance: importance, status: status) }
+      context '両方に正しい文字列が入っている場合' do
+        let(:importance) { '低' }
+        let(:status) { '完了' }
+        it { is_expected.to be_valid }
+      end
+      context '両方に正しい数字が入っている場合' do
+        let(:importance) { 2 }
+        let(:status) { 0 }
+        it { is_expected.to be_valid }
+      end
+    end
+    describe '正しくない値が入っている場合' do
+      subject { Proc.new { build(:task, title: 'test', importance: importance, status: status) } }
+      context 'importanceの値が異常な場合' do
+        let(:status) { '未着手' }
+        context 'importanceに異常な文字が入っている場合' do
+          let(:importance) { 'hoge' }
+          it { is_expected.to raise_error(ArgumentError) }
+        end
+        context 'importanceに異常な数字が入っている場合' do
+          let(:importance) { 3 }
+          it { is_expected.to raise_error(ArgumentError) }
+        end
+      end
+      context 'statusの値が異常な場合' do
+        let(:importance) { '低' }
+        context 'statusに異常な文字が入っている場合' do
+          let(:status) { 'hoge' }
+          it { is_expected.to raise_error(ArgumentError) }
+        end
+        context 'statusに異常な文字が入っている場合' do
+          let(:status) { 3 }
+          it { is_expected.to raise_error(ArgumentError) }
+        end
+      end
+    end
+  end
   describe 'Taskのscope' do
     let!(:task1) { create(:task, title: 'matched_task', status: '着手') }
     let!(:task2) { create(:task, title: 'matching', status: '着手') }
