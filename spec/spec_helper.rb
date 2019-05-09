@@ -16,6 +16,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'factory_bot'
+require 'support/rspec_module'
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -104,4 +105,7 @@ RSpec.configure do |config|
   # Kernel.srand config.seed
 
   config.include FactoryBot::Syntax::Methods
+
+  # subjectにブロックを渡す際に用いるモジュールをインクルード
+  config.include IsExpectedBlock
 end

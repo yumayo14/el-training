@@ -41,27 +41,27 @@ RSpec.describe Task, type: :model do
       end
     end
     describe '正しくない値が入っている場合' do
-      subject { Proc.new { build(:task, title: 'test', importance: importance, status: status) } }
+      subject { build(:task, title: 'test', importance: importance, status: status) }
       context 'importanceの値が異常な場合' do
         let(:status) { '未着手' }
         context 'importanceに異常な文字が入っている場合' do
           let(:importance) { 'hoge' }
-          it { is_expected.to raise_error(ArgumentError) }
+          it { is_expected_block.to raise_error(ArgumentError) }
         end
         context 'importanceに異常な数字が入っている場合' do
           let(:importance) { 3 }
-          it { is_expected.to raise_error(ArgumentError) }
+          it { is_expected_block.to raise_error(ArgumentError) }
         end
       end
       context 'statusの値が異常な場合' do
         let(:importance) { '低' }
         context 'statusに異常な文字が入っている場合' do
           let(:status) { 'hoge' }
-          it { is_expected.to raise_error(ArgumentError) }
+          it { is_expected_block.to raise_error(ArgumentError) }
         end
         context 'statusに異常な文字が入っている場合' do
           let(:status) { 3 }
-          it { is_expected.to raise_error(ArgumentError) }
+          it { is_expected_block.to raise_error(ArgumentError) }
         end
       end
     end
