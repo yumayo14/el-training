@@ -4,40 +4,65 @@ require 'rails_helper'
 
 RSpec.describe Task, type: :model do
   describe 'Taskのバリデーション' do
+    let(:task) { build(:task, title: title, importance: importance, status: status, dead_line_on: dead_line_on) }
+    let(:title) { 'test' }
+    let(:importance) { '低' }
+    let(:status) { '未着手' }
+    let(:dead_line_on) { nil }
+    subject { task.valid? }
     context 'titleが30文字以内で入力されている場合' do
-      it '保存できる' do
-        task = FactoryBot.build(:task)
-        expect(task.valid?).to eq true
-      end
+      it { is_expected.to eq true }
     end
     context 'titleの値がnilの場合' do
-      it '保存できない' do
-        task = FactoryBot.build(:task, title: nil)
-        expect(task.valid?).to eq false
-      end
+      let(:title) { nil }
+      it { is_expected.to eq false }
     end
     context 'titleが30文字以上の場合' do
-      it '保存できない' do
-        task = FactoryBot.build(:task, title: '12345678910/12345678910/12345678910')
-        expect(task.valid?).to eq false
-      end
-    end
-    context 'importanceが(低, 中, 高)以外の場合' do
-      it '作成できない' do
-        expect { FactoryBot.build(:task, importance: 'sasa') }.to raise_error(ArgumentError)
-        expect { FactoryBot.build(:task, importance: 99) }.to raise_error(ArgumentError)
-      end
-    end
-    context 'statusが(未着手, 着手, 完了)以外の場合' do
-      it '作成できない' do
-        expect { FactoryBot.build(:task, status: 'sasa') }.to raise_error(ArgumentError)
-        expect { FactoryBot.build(:task, status: 99) }.to raise_error(ArgumentError)
-      end
+      let(:title) { '12345678910/12345678910/12345678910' }
+      it { is_expected.to eq false }
     end
     context '期限が過去の日付の場合' do
-      it '作成できない' do
-        task = FactoryBot.build(:task, dead_line_on: '2008-09-25')
-        expect(task.valid?).to eq false
+      let(:dead_line_on) { '2008-09-25' }
+      it { is_expected.to eq false }
+    end
+  end
+  describe 'Taskのenum' do
+    describe '正しい値が入っている場合' do
+      subject { build(:task, title: 'test', importance: importance, status: status) }
+      context '両方に正しい文字列が入っている場合' do
+        let(:importance) { '低' }
+        let(:status) { '完了' }
+        it { is_expected.to be_valid }
+      end
+      context '両方に正しい数字が入っている場合' do
+        let(:importance) { 2 }
+        let(:status) { 0 }
+        it { is_expected.to be_valid }
+      end
+    end
+    describe '正しくない値が入っている場合' do
+      subject { build(:task, title: 'test', importance: importance, status: status) }
+      context 'importanceの値が異常な場合' do
+        let(:status) { '未着手' }
+        context 'importanceに異常な文字が入っている場合' do
+          let(:importance) { 'hoge' }
+          it { is_expected_block.to raise_error(ArgumentError) }
+        end
+        context 'importanceに異常な数字が入っている場合' do
+          let(:importance) { 3 }
+          it { is_expected_block.to raise_error(ArgumentError) }
+        end
+      end
+      context 'statusの値が異常な場合' do
+        let(:importance) { '低' }
+        context 'statusに異常な文字が入っている場合' do
+          let(:status) { 'hoge' }
+          it { is_expected_block.to raise_error(ArgumentError) }
+        end
+        context 'statusに異常な文字が入っている場合' do
+          let(:status) { 3 }
+          it { is_expected_block.to raise_error(ArgumentError) }
+        end
       end
     end
   end
