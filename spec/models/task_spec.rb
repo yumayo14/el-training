@@ -47,7 +47,7 @@ RSpec.describe Task, type: :model do
     let!(:task3) { create(:task, title: 'hoge_fuga', status: '完了') }
     let(:search_query) { '' }
     let(:selected_status) { '未着手' }
-    describe 'search_by_title' do
+    describe 'by_title' do
       subject { Task.by_title(search_query).map(&:id) }
       context '検索クエリが入力されていない場合' do
         it { is_expected.to contain_exactly(task1.id, task2.id, task3.id) }
@@ -67,7 +67,7 @@ RSpec.describe Task, type: :model do
         end
       end
     end
-    describe 'search_by_status' do
+    describe 'by_status' do
       subject { Task.by_status(selected_status).map(&:id) }
       context 'ステータスで絞り込まない場合' do
         it '全てのタスクが返ってくる'
