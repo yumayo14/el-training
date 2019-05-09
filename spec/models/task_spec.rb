@@ -4,41 +4,26 @@ require 'rails_helper'
 
 RSpec.describe Task, type: :model do
   describe 'Taskのバリデーション' do
+    let(:task) { build(:task, title: title, importance: importance, status: status, dead_line_on: dead_line_on) }
+    let(:title) { 'test' }
+    let(:importance) { '低' }
+    let(:status) { '未着手' }
+    let(:dead_line_on) { nil }
+    subject { task.valid? }
     context 'titleが30文字以内で入力されている場合' do
-      it '保存できる' do
-        task = build(:task)
-        expect(task.valid?).to eq true
-      end
+      it { is_expected.to eq true }
     end
     context 'titleの値がnilの場合' do
-      it '保存できない' do
-        task = build(:task, title: nil)
-        expect(task.valid?).to eq false
-      end
+      let(:title) { nil }
+      it { is_expected.to eq false }
     end
     context 'titleが30文字以上の場合' do
-      it '保存できない' do
-        task = build(:task, title: '12345678910/12345678910/12345678910')
-        expect(task.valid?).to eq false
-      end
-    end
-    context 'importanceが(低, 中, 高)以外の場合' do
-      it '作成できない' do
-        expect { build(:task, importance: 'sasa') }.to raise_error(ArgumentError)
-        expect { build(:task, importance: 99) }.to raise_error(ArgumentError)
-      end
-    end
-    context 'statusが(未着手, 着手, 完了)以外の場合' do
-      it '作成できない' do
-        expect { build(:task, status: 'sasa') }.to raise_error(ArgumentError)
-        expect { build(:task, status: 99) }.to raise_error(ArgumentError)
-      end
+      let(:title) { '12345678910/12345678910/12345678910' }
+      it { is_expected.to eq false }
     end
     context '期限が過去の日付の場合' do
-      it '作成できない' do
-        task = build(:task, dead_line_on: '2008-09-25')
-        expect(task.valid?).to eq false
-      end
+      let(:dead_line_on) { '2008-09-25' }
+      it { is_expected.to eq false }
     end
   end
   describe 'Taskのscope' do
