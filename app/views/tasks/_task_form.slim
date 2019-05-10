@@ -8,13 +8,13 @@
     = f.text_field :title, class: "form-control", placeholder: "タイトル"
   .importance_block.form-group
     = f.label :importance
-    = f.select :importance, Task.importances.keys.to_a, {}
+    = f.select :importance, Task.importances.keys.map{ |k| [Task.human_attribute_enum_value('importance', k), k] }
   .dead_line_on_block.form-group
     = f.label :dead_line_on
     = f.date_select :dead_line_on
   .status_block.form-group
     = f.label :status
-    = f.select :status, Task.statuses.keys.to_a, {}
+    = f.select :status, Task.statuses.keys.map{ |k| [Task.human_attribute_enum_value('status', k), k] }
   .detail_block.form-group
     = f.label :detail
     = f.text_area :detail, class: "form-control", placeholder: "説明文"
