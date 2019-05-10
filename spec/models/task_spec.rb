@@ -6,8 +6,8 @@ RSpec.describe Task, type: :model do
   describe 'Taskのバリデーション' do
     let(:task) { build(:task, title: title, importance: importance, status: status, dead_line_on: dead_line_on) }
     let(:title) { 'test' }
-    let(:importance) { '低' }
-    let(:status) { '未着手' }
+    let(:importance) { 'low' }
+    let(:status) { 'not_started' }
     let(:dead_line_on) { nil }
     subject { task.valid? }
     context 'titleが30文字以内で入力されている場合' do
@@ -30,8 +30,8 @@ RSpec.describe Task, type: :model do
     describe '正しい値が入っている場合' do
       subject { build(:task, title: 'test', importance: importance, status: status) }
       context '両方に正しい文字列が入っている場合' do
-        let(:importance) { '低' }
-        let(:status) { '完了' }
+        let(:importance) { 'low' }
+        let(:status) { 'completed' }
         it { is_expected.to be_valid }
       end
       context '両方に正しい数字が入っている場合' do
@@ -43,7 +43,7 @@ RSpec.describe Task, type: :model do
     describe '正しくない値が入っている場合' do
       subject { build(:task, title: 'test', importance: importance, status: status) }
       context 'importanceの値が異常な場合' do
-        let(:status) { '未着手' }
+        let(:status) { 'not_started' }
         context 'importanceに異常な文字が入っている場合' do
           let(:importance) { 'hoge' }
           it { is_expected_block.to raise_error(ArgumentError) }
@@ -54,7 +54,7 @@ RSpec.describe Task, type: :model do
         end
       end
       context 'statusの値が異常な場合' do
-        let(:importance) { '低' }
+        let(:importance) { 'low' }
         context 'statusに異常な文字が入っている場合' do
           let(:status) { 'hoge' }
           it { is_expected_block.to raise_error(ArgumentError) }
@@ -67,11 +67,11 @@ RSpec.describe Task, type: :model do
     end
   end
   describe 'Taskのscope' do
-    let!(:task1) { create(:task, title: 'matched_task', status: '着手') }
-    let!(:task2) { create(:task, title: 'matching', status: '着手') }
-    let!(:task3) { create(:task, title: 'hoge_fuga', status: '完了') }
+    let!(:task1) { create(:task, title: 'matched_task', status: 'working') }
+    let!(:task2) { create(:task, title: 'matching', status: 'working') }
+    let!(:task3) { create(:task, title: 'hoge_fuga', status: 'completed') }
     let(:search_query) { '' }
-    let(:selected_status) { '未着手' }
+    let(:selected_status) { 'not_started' }
     describe 'by_title' do
       subject { Task.by_title(search_query).map(&:id) }
       context '検索クエリが入力されていない場合' do
@@ -99,11 +99,11 @@ RSpec.describe Task, type: :model do
       end
       context 'ステータスで絞り込む場合' do
         context '選択したステータスと同じステータスのタスクがある場合' do
-          let(:selected_status) { '着手' }
+          let(:selected_status) { 'working' }
           it { is_expected.to contain_exactly(task1.id, task2.id) }
         end
         context '選択したステータスと同じステータスのタスクがない場合' do
-          let(:selected_status) { '未着手' }
+          let(:selected_status) { 'not_started' }
           it { is_expected.to be_empty }
         end
       end
@@ -113,12 +113,12 @@ RSpec.describe Task, type: :model do
       context 'クエリとステータスの両方で絞り込む場合' do
         context 'クエリとタイトルが一致し、ステータスが同じする場合' do
           let(:search_query) { 'match' }
-          let(:selected_status) { '着手' }
+          let(:selected_status) { 'working' }
           it { is_expected.to contain_exactly(task1.id, task2.id) }
         end
         context 'クエリとタイトルは一致するが、ステータスが異なる場合' do
           let(:search_query) { 'match' }
-          let(:selected_status) { '完了' }
+          let(:selected_status) { 'completed' }
           it { is_expected.to be_empty }
         end
       end
@@ -127,7 +127,7 @@ RSpec.describe Task, type: :model do
           it 'クエリとタイトルが一致するタスクの一覧が返ってくる'
         end
         context 'ステータスのみで絞り込む場合' do
-          let(:selected_status) { '完了' }
+          let(:selected_status) { 'completed' }
           it { is_expected.to contain_exactly(task3.id) }
         end
       end
