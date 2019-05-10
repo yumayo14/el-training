@@ -14,6 +14,14 @@ class Task < ApplicationRecord
   scope :by_status, ->(status) { where(status: status) }
   scope :search, ->(title, status) { by_title(title).by_status(status) }
 
+  def self.human_attribute_enum_value(attr_name, value)
+    human_attribute_name("#{attr_name}.#{value}")
+  end
+
+  def human_attribute_enum(attr_name)
+    self.class.human_attribute_enum_value(attr_name, self[attr_name])
+  end
+
   def dead_line_on_cannot_be_in_the_past
     errors.add(:dead_line_on, 'に過去の日付は使用できません') if dead_line_on.present? && dead_line_on < Date.today
   end
