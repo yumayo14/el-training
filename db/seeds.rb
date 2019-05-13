@@ -9,6 +9,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'factory_bot'
 
-1000.times do
-  FactoryBot.create(:task)
-end
+FactoryBot.create(:user, name: '田中 宏和', accountid: 'tanahiro', password: 'Iamtestman')
