@@ -21,9 +21,9 @@
             .status
               select v-model="selectedStatus" name="status" id="search_status"
                 option value='' 選択しない
-                option value="0" 未着手
-                option value="1" 着手
-                option value="2" 完了
+                option value="0" = t("actionview.task.index.status_value.not_started")
+                option value="1" = t("actionview.task.index.status_value.working")
+                option value="2" = t("actionview.task.index.status_value.completed")
           .submit
             button v-on:click="search" 検索
             button v-on:click="reset" 検索条件をリセット

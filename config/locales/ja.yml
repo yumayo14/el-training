@@ -9,13 +9,29 @@ ja:
         dead_line_on: 期限
         status: 状態
         detail: 説明文
+      task/importance:
+        low: "低"
+        middle: "中"
+        high: "高"
+      task/status:
+        not_started: "未着手"
+        working: "着手"
+        completed: "完了"
   actionview:
     task:
       index:
         title: タイトル
         importance: 優先順位
+        importance_value:
+          low: 低
+          middle: 中
+          high: 高
         dead_line_on: 期限
         status: 状態
+        status_value:
+          not_started: 未着手
+          working: 着手
+          completed: 完了
         detail: 説明文
         created_at_day: 作成日
         link: 個別リンク
