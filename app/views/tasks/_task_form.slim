@@ -5,7 +5,7 @@
         p = error_message
   .title_block.form-group
     = f.label :title
-    = f.text_field :title, class: "form-control", placeholder: "タイトル"
+    = f.text_field :title, class: "form-control"
   .importance_block.form-group
     = f.label :importance
     = f.select :importance, Task.importances.keys.map{ |k| [Task.human_attribute_enum_value('importance', k), k] }
@@ -17,6 +17,6 @@
     = f.select :status, Task.statuses.keys.map{ |k| [Task.human_attribute_enum_value('status', k), k] }
   .detail_block.form-group
     = f.label :detail
-    = f.text_area :detail, class: "form-control", placeholder: "説明文"
+    = f.text_area :detail, class: "form-control"
   .submit_block.form-group
     = f.submit "新しいタスクを追加", class: "submit_button"
