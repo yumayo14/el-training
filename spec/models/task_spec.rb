@@ -71,7 +71,7 @@ RSpec.describe Task, type: :model do
     let!(:task2) { create(:task, title: 'matching', status: 'working') }
     let!(:task3) { create(:task, title: 'hoge_fuga', status: 'completed') }
     let(:search_query) { '' }
-    let(:selected_status) { 'not_started' }
+    let(:selected_status) { '' }
     describe 'by_title' do
       subject { Task.by_title(search_query).map(&:id) }
       context '検索クエリが入力されていない場合' do
@@ -95,7 +95,7 @@ RSpec.describe Task, type: :model do
     describe 'by_status' do
       subject { Task.by_status(selected_status).map(&:id) }
       context 'ステータスで絞り込まない場合' do
-        it '全てのタスクが返ってくる'
+        it { is_expected.to contain_exactly(task1.id, task2.id, task3.id) }
       end
       context 'ステータスで絞り込む場合' do
         context '選択したステータスと同じステータスのタスクがある場合' do
@@ -124,7 +124,8 @@ RSpec.describe Task, type: :model do
       end
       context 'どちらか片方で絞り込む場合' do
         context 'クエリのみで絞り込む場合' do
-          it 'クエリとタイトルが一致するタスクの一覧が返ってくる'
+          let(:search_query) { 'match' }
+          it { is_expected.to contain_exactly(task1.id, task2.id) }
         end
         context 'ステータスのみで絞り込む場合' do
           let(:selected_status) { 'completed' }
