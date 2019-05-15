@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature'Tasks', type: :feature do
+RSpec.feature'Tasks', type: :feature, js: true do
   let(:task) { create(:task) }
   describe 'タスクの一覧表示' do
     before do
@@ -11,7 +11,7 @@ RSpec.feature'Tasks', type: :feature do
       visit tasks_path
     end
 
-    describe '最初の並び順', js: true do
+    describe '最初の並び順' do
       it 'indexページに投稿されたタスクの一覧が表示される' do
         within all('tr.tasks')[0] do
           expect(find('th.title')).to have_content 'Test1'
@@ -28,7 +28,7 @@ RSpec.feature'Tasks', type: :feature do
           expect(find('th.created_day')).to have_content '2020/07/24'
         end
       end
-      it 'ページ遷移後、投稿日が新しい順に並んでいる', js: true do
+      it 'ページ遷移後、投稿日が新しい順に並んでいる' do
         within all('tr.tasks')[0] do
           expect(find('th.created_day')).to have_content '2020/08/09'
         end
@@ -38,7 +38,7 @@ RSpec.feature'Tasks', type: :feature do
       end
     end
 
-    describe '並び替え', js: true do
+    describe '並び替え' do
       context '投稿日が新しい順' do
         before { click_button '投稿日順' }
         it '投稿日が新しい順に並び替える' do
@@ -120,7 +120,7 @@ RSpec.feature'Tasks', type: :feature do
       end
     end
 
-    describe '絞り込み検索', js: true do
+    describe '絞り込み検索' do
       before { click_button '検索条件をリセット' }
       it 'フォーム検索' do
         fill_in 'query', with: 'Test2'
@@ -220,7 +220,7 @@ RSpec.feature'Tasks', type: :feature do
   end
 
   describe 'タスクを表示しているページの切り替え' do
-    context '10個以下の場合', js: true do
+    context '10個以下の場合' do
       before do
         10.times { create(:task) }
         visit current_path
@@ -233,7 +233,7 @@ RSpec.feature'Tasks', type: :feature do
         expect(page).to have_button 'Go Back', disabled: true
       end
     end
-    context 'タスクが11個以上から20個の場合', js: true do
+    context 'タスクが11個以上から20個の場合' do
       before do
         20.times { create(:task) }
         visit current_path
@@ -266,8 +266,17 @@ RSpec.feature'Tasks', type: :feature do
 
     describe '削除' do
       before { click_link '削除' }
-      it '作成したタスクを削除' do
-        expect(page).to have_content 'タスクを削除しました'
+      context '確認時、Yesを選んだ場合' do
+        it '削除される' do
+          page.driver.browser.switch_to.alert.accept
+          expect(page).to have_content 'タスクを削除しました'
+        end
+      end
+      context '確認時、Noを選んだ場合' do
+        it '削除されない' do
+          page.driver.browser.switch_to.alert.dismiss
+          expect(page).to have_content 'タスクの詳細'
+        end
       end
     end
   end
