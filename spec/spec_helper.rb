@@ -33,11 +33,11 @@ RSpec.configure do |config|
   end
 
   config.before(:suite) do
-    DatabaseRewinder.clean_all
+    DatabaseRewinder.clean_all multiple: false
   end
 
   config.after(:each) do
-    DatabaseRewinder.clean
+    DatabaseRewinder.clean multiple: false
   end
 
   # rspec-mocks config goes here. You can use an alternate test double

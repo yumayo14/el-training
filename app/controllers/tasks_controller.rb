@@ -12,11 +12,11 @@ class TasksController < ApplicationController
   # end
 
   def new
-    @task = Task.new
+    @task = User.first.tasks.new
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = User.first.tasks.new(task_params)
     if @task.save
       redirect_to tasks_path, notice: '新しいタスクが作成されました'
     else
@@ -44,6 +44,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :importance, :dead_line_on, :status, :detail)
+    params.require(:task).permit(:title, :importance, :dead_line_on, :status, :detail, :user_id)
   end
 end
