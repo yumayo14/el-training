@@ -11,7 +11,7 @@ class Task < ApplicationRecord
 
   scope :orderd_by, ->(sort) { order(created_at: sort) }
   scope :by_title, ->(title) { where('title LIKE(?)', "%#{sanitize_sql_like(title)}%") }
-  scope :by_status, ->(status) { where(status: status) }
+  scope :by_status, ->(status) { where(status: status) if status.present? }
   scope :search, ->(title, status) { by_title(title).by_status(status) }
 
   def self.human_attribute_enum_value(attr_name, value)
