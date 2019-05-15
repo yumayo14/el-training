@@ -264,10 +264,19 @@ RSpec.feature'Tasks', type: :feature do
       end
     end
 
-    describe '削除' do
+    describe '削除', js: true do
       before { click_link '削除' }
-      it '作成したタスクを削除' do
-        expect(page).to have_content 'タスクを削除しました'
+      context '確認時、Yesを選んだ場合' do
+        it '削除される' do
+          page.driver.browser.switch_to.alert.accept
+          expect(page).to have_content 'タスクを削除しました'
+        end
+      end
+      context '確認時、Noを選んだ場合' do
+        it '削除されない' do
+          page.driver.browser.switch_to.alert.dismiss
+          expect(page).to have_content 'タスクの詳細'
+        end
       end
     end
   end
