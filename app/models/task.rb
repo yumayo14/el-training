@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
+  belongs_to :user
+
   enum importance: { low: 0, middle: 1, high: 2 }
   enum status: { not_started: 0, working: 1, completed: 2 }
 
