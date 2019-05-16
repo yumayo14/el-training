@@ -152,6 +152,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
   end
 
   describe 'タスクの投稿' do
+    let!(:user) { create(:user) }
     before { visit tasks_path }
     context '必要な値を入力している場合' do
       before do

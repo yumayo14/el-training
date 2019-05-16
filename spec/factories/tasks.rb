@@ -7,5 +7,6 @@ FactoryBot.define do
     sequence(:dead_line_on) { |n| "2020-07-#{n}" }
     status { 0 }
     detail { 'infinity_task...' }
+    user
   end
 end

@@ -12,16 +12,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_31_003228) do
+ActiveRecord::Schema.define(version: 2019_05_16_022820) do
   create_table 'tasks', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
-    t.string 'title', null: false
-    t.integer 'importance', default: 0
-    t.date 'dead_line_on'
-    t.integer 'status', default: 0
-    t.text 'detail'
+    t.string 'title', null: false, comment: 'タスク名'
+    t.integer 'importance', default: 0, comment: 'タスクの優先度'
+    t.date 'dead_line_on', comment: 'タスクの期限'
+    t.integer 'status', default: 0, comment: 'タスクの進捗'
+    t.text 'detail', comment: 'タスクの詳細'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'user_id', comment: 'タスクを投稿したユーザーのidと紐づけられる。投稿したユーザーが削除された場合、そのユーザーが投稿したタスクも削除される'
     t.index ['status'], name: 'index_tasks_on_status'
     t.index ['title'], name: 'index_tasks_on_title'
+    t.index ['user_id'], name: 'index_tasks_on_user_id'
   end
+
+  create_table 'users', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.string 'name', null: false, comment: 'ユーザーの本名'
+    t.string 'accountid', default: '0', null: false, comment: 'ユーザーのアカウントID、ユーザー固有の値'
+    t.string 'password', null: false, comment: 'ユーザーのパスワード'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
+  add_foreign_key 'tasks', 'users'
 end
