@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
+  # 開発環境での、gem bulletの設定
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.raise = true
+    Bullet.bullet_logger = true
+    Bullet.rails_logger  = true
+  end
   # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = true
   # Settings specified here will take precedence over those in config/application.rb.
