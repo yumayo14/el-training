@@ -1,5 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id           :bigint           not null, primary key
+#  user_id      :bigint
+#  title        :string(255)      not null
+#  importance   :integer          default("low")
+#  dead_line_on :date
+#  status       :integer          default("not_started")
+#  detail       :text(65535)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do

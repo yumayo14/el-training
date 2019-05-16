@@ -12,8 +12,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_022820) do
+ActiveRecord::Schema.define(version: 2019_05_16_065009) do
   create_table 'tasks', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.bigint 'user_id', comment: 'タスクを投稿したユーザーのidと紐づけられる。投稿したユーザーが削除された場合、そのユーザーが投稿したタスクも削除される'
     t.string 'title', null: false, comment: 'タスク名'
     t.integer 'importance', default: 0, comment: 'タスクの優先度'
     t.date 'dead_line_on', comment: 'タスクの期限'
@@ -21,7 +22,6 @@ ActiveRecord::Schema.define(version: 2019_05_16_022820) do
     t.text 'detail', comment: 'タスクの詳細'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.bigint 'user_id', comment: 'タスクを投稿したユーザーのidと紐づけられる。投稿したユーザーが削除された場合、そのユーザーが投稿したタスクも削除される'
     t.index ['status'], name: 'index_tasks_on_status'
     t.index ['title'], name: 'index_tasks_on_title'
     t.index ['user_id'], name: 'index_tasks_on_user_id'
