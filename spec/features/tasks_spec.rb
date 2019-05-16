@@ -164,7 +164,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
         select '24', from: 'task_dead_line_on_3i'
         select '着手', from: 'task_status'
         fill_in 'task_detail', with: '東京オリンピック開会日'
-        click_button '新しいタスクを追加'
+        click_button '登録する'
       end
       it '投稿に成功する' do
         expect(page).to have_content '新しいタスクが作成されました'
@@ -180,7 +180,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
         select '24', from: 'task_dead_line_on_3i'
         select '着手', from: 'task_status'
         fill_in 'task_detail', with: '東京オリンピック開会日'
-        click_button '新しいタスクを追加'
+        click_button '登録する'
       end
       it '投稿に失敗する' do
         expect(page).to have_content 'タイトルを入力してください'
@@ -196,7 +196,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
         select '24', from: 'task_dead_line_on_3i'
         select '着手', from: 'task_status'
         fill_in 'task_detail', with: '東京オリンピック開会日'
-        click_button '新しいタスクを追加'
+        click_button '登録する'
       end
       it '投稿に失敗する' do
         expect(page).to have_content 'タイトルは30文字以内で入力してください'
@@ -212,7 +212,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
         select '5', from: 'task_dead_line_on_3i'
         select '着手', from: 'task_status'
         fill_in 'task_detail', with: 'リオデジャネイロオリンピック開会日'
-        click_button '新しいタスクを追加'
+        click_button '登録する'
       end
       it '投稿に失敗する' do
         expect(page).to have_content '期限に過去の日付は使用できません'
@@ -257,7 +257,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
         before do
           click_link '編集'
           fill_in 'task_title', with: 'タスクの更新'
-          click_button '新しいタスクを追加'
+          click_button '更新する'
         end
         it '作成したタスクの更新する' do
           expect(page).to have_content 'タスクの内容が変更されました'
