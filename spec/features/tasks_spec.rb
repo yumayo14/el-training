@@ -260,7 +260,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
           click_button '更新する'
         end
         it '作成したタスクの更新する' do
-          expect(page).to have_content 'タスクの内容が変更されました'
+          expect(page).to have_content 'タスクの内容が更新されました'
         end
       end
     end
