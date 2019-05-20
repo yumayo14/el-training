@@ -183,6 +183,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
         click_button '登録する'
       end
       it '投稿に失敗する' do
+        expect(page).to have_content 'タスクの作成に失敗しました'
         expect(page).to have_content 'タイトルを入力してください'
       end
     end
@@ -199,6 +200,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
         click_button '登録する'
       end
       it '投稿に失敗する' do
+        expect(page).to have_content 'タスクの作成に失敗しました'
         expect(page).to have_content 'タイトルは30文字以内で入力してください'
       end
     end
@@ -215,6 +217,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
         click_button '登録する'
       end
       it '投稿に失敗する' do
+        expect(page).to have_content 'タスクの作成に失敗しました'
         expect(page).to have_content '期限に過去の日付は使用できません'
       end
     end
