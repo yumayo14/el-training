@@ -1,11 +1,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "tasks";
-@import "new";
 @import "form";
 @import "sakura";
 @import "animation/flake";
 @import "animation/delayed_flake";
+@import "common";
 
 html, body {
   //重要じゃないやつで高さを調整する

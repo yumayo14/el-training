@@ -16,7 +16,6 @@ html
           = link_to "タスク一覧", tasks_path, class: "nav-link"
         li.nav-item
           = link_to "タスクの投稿", new_task_path, class: "nav-link"
-    - flash.each do |key, value|
-      .alert.alert-#{key}
-        p = value
-    = yield
+    .spring
+      = render partial: "layouts/flash", locals: { flash: flash } if flash.present?
+      = yield
