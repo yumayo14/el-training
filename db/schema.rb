@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_20_082836) do
+ActiveRecord::Schema.define(version: 2019_05_21_044403) do
   create_table 'tasks', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.bigint 'user_id', comment: 'タスクを投稿したユーザーのidと紐づけられる。投稿したユーザーが削除された場合、そのユーザーが投稿したタスクも削除される'
     t.string 'title', null: false, comment: 'タスク名'
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_05_20_082836) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.string 'hashed_password', null: false, comment: 'ハッシュ化されたユーザーのパスワード'
+    t.string 'salt', null: false, comment: 'パスワードハッシュ化の際に用いるデータ'
   end
 
   add_foreign_key 'tasks', 'users'
