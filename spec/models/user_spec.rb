@@ -60,4 +60,12 @@ RSpec.describe User, type: :model do
       it { is_expected.to eq false }
     end
   end
+  describe 'パスワードの暗号化' do
+    let!(:user) { create(:user, hashed_password: hashed_password) }
+    let(:hashed_password) { 'morethan8' }
+    describe '平文を含まない様に暗号化している' do
+      subject { user.hashed_password }
+      it { is_expected.not_to include hashed_password }
+    end
+  end
 end
