@@ -15,7 +15,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'Userのバリデーション' do
+  describe 'バリデーション' do
     let(:user) { build(:user, name: name, accountid: accountid, hashed_password: hashed_password) }
     let(:name) { '田中 太郎' }
     let(:accountid) { 'tanatarou' }
