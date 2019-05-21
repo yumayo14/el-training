@@ -25,6 +25,10 @@ class User < ApplicationRecord
   private
 
   def hash_password
-    self.hashed_password = Digest::SHA256.hexdigest hashed_password
+    self.hashed_password = Digest::SHA256.hexdigest(set_salt + hashed_password)
+  end
+
+  def set_salt
+    self.salt ||= SecureRandom.hex(8)
   end
 end
