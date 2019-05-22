@@ -15,7 +15,20 @@
 class User < ApplicationRecord
   has_many :tasks, dependent: :destroy
 
+  before_save :hash_password
+
   validates :name, presence: true, length: { maximum: 20 }
   validates :accountid, presence: true, length: { maximum: 15 }, uniqueness: true
-  validates :password, presence: true, length: { minimum: 8 }
+  validates :hashed_password, presence: true, length: { minimum: 8 }
+  validates :salt, presence: true, uniqueness: true, on: :update
+
+  private
+
+  def hash_password
+    self.hashed_password = Digest::SHA256.hexdigest(set_salt + hashed_password)
+  end
+
+  def set_salt
+    self.salt ||= SecureRandom.hex(8)
+  end
 end
