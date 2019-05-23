@@ -68,4 +68,20 @@ RSpec.describe User, type: :model do
       it { is_expected.not_to include hashed_password }
     end
   end
+  describe 'メソッド' do
+    let!(:user) { create(:user, hashed_password: hashed_password) }
+    let(:hashed_password) { 'morethan8' }
+    describe '#authenticate?' do
+      let(:login_password) { '' }
+      subject { user.authenticate?(login_password) }
+      context '入力されたパスワードが登録時と同じ場合' do
+        let(:login_password) { 'morethan8' }
+        it { is_expected.to eq true }
+      end
+      context '入力されたパスワードが登録時と異なる場合' do
+        let(:login_password) { 'differentpassword' }
+        it { is_expected.to eq false }
+      end
+    end
+  end
 end
