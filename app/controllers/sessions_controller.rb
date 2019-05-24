@@ -6,8 +6,12 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(accountid: params[:session][:accountid])
-
-    log_in(user) if user.present? && user.authenticate?(params[:session][:password])
+    if user.present? && user.authenticate?(params[:session][:password])
+      log_in(user)
+      render json: 'ログインに成功しました', status: 200
+    else
+      render json: 'ログインに失敗しました', status: 401
+    end
   end
 end
 
