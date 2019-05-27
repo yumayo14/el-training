@@ -29,7 +29,7 @@ class User < ApplicationRecord
     false
   end
 
-  def make_long_term_cookie
+  def make_cookie_token
     self.cookie_token = new_cookie_token
     update_attributes(hashed_cookie_token: hash(salt, cookie_token))
   end

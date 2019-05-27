@@ -83,13 +83,13 @@ RSpec.describe User, type: :model do
         it { is_expected.to eq false }
       end
     end
-    describe '#remember' do
-      before { user.make_long_term_cookie }
-      it 'remember_tokenがユーザーに紐づけられる' do
+    describe '#make_cookie_token' do
+      before { user.make_cookie_token }
+      it 'cookie_tokenがユーザーに紐づけられる' do
         expect(user.cookie_token).to be_present
         expect(user.cookie_token.length).to eq 22
       end
-      describe 'ハッシュ化されたremember_tokenがデータベースに保存される' do
+      describe 'ハッシュ化されたcookie_tokenがデータベースに保存される' do
         subject { user.hashed_cookie_token }
         it { is_expected.to be_present }
         it { is_expected.not_to include user.cookie_token }

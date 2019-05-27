@@ -5,8 +5,8 @@ module SessionsHelper
     session[:user_id] = user.id
   end
 
-  def set_cookies(user)
-    user.make_long_term_cookie
+  def make_long_term_cookie(user)
+    user.make_cookie_token
     cookies[:user_token] = { value: user.cookie_token, expires: 1.weeks.from_now }
     cookies.signed[:user_id] = { value: user.id, expires: 1.weeks.from_now }
   end
