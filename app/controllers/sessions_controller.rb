@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     user = User.find_by(accountid: params[:session][:accountid])
     if user.present? && user.authenticate?(params[:session][:password])
       log_in(user)
+      set_cookies(user)
       render json: 'ログインに成功しました', status: 200
     else
       render json: 'ログインに失敗しました', status: 401
