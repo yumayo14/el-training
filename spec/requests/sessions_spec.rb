@@ -23,6 +23,12 @@ RSpec.describe 'Session', type: :request do
       it 'レスポンスヘッダーにSet-Cookieが含まれる' do
         expect(response.headers['Set-Cookie']).to be_present
       end
+      it 'レスポンスに暗号化されたユーザーIDの情報が含まれる' do
+        expect(response.cookies['user_id']).to eq cookies['user_id']
+      end
+      it 'レスポンスに記憶トークンが含まれている' do
+        expect(response.cookies['user_token']).to eq cookies['user_token']
+      end
       it 'レスポンスでログイン成功を伝えるメッセージが返る' do
         expect(response.body).to eq 'ログインに成功しました'
       end
