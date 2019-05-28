@@ -13,19 +13,39 @@
 #
 
 class User < ApplicationRecord
+  attr_accessor :cookie_token
   has_many :tasks, dependent: :destroy
 
-  before_save :hash_password
+  before_save :set_hashed_password
 
   validates :name, presence: true, length: { maximum: 20 }
   validates :accountid, presence: true, length: { maximum: 15 }, uniqueness: true
   validates :hashed_password, presence: true, length: { minimum: 8 }
   validates :salt, presence: true, uniqueness: true, on: :update
 
+  def authenticated?(login_password)
+    return true if hashed_password == hashing_with_salt(salt, login_password)
+
+    false
+  end
+
+  def make_cookie_token!
+    self.cookie_token = new_cookie_token
+    update_attributes(hashed_cookie_token: hashing_with_salt(salt, cookie_token))
+  end
+
   private
 
-  def hash_password
-    self.hashed_password = Digest::SHA256.hexdigest(set_salt + hashed_password)
+  def hashing_with_salt(salt, plain_text)
+    Digest::SHA256.hexdigest(salt + plain_text)
+  end
+
+  def new_cookie_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def set_hashed_password
+    self.hashed_password = hashing_with_salt(set_salt, hashed_password)
   end
 
   def set_salt

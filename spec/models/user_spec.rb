@@ -68,4 +68,32 @@ RSpec.describe User, type: :model do
       it { is_expected.not_to include hashed_password }
     end
   end
+  describe 'メソッド' do
+    let!(:user) { create(:user, hashed_password: hashed_password) }
+    let(:hashed_password) { 'morethan8' }
+    describe '#authenticated?' do
+      let(:login_password) { '' }
+      subject { user.authenticated?(login_password) }
+      context '入力されたパスワードが登録時と同じ場合' do
+        let(:login_password) { 'morethan8' }
+        it { is_expected.to eq true }
+      end
+      context '入力されたパスワードが登録時と異なる場合' do
+        let(:login_password) { 'differentpassword' }
+        it { is_expected.to eq false }
+      end
+    end
+    describe '#make_cookie_token!' do
+      before { user.make_cookie_token! }
+      it 'cookie_tokenがユーザーに紐づけられる' do
+        expect(user.cookie_token).to be_present
+        expect(user.cookie_token.length).to eq 22
+      end
+      describe 'ハッシュ化されたcookie_tokenがデータベースに保存される' do
+        subject { user.hashed_cookie_token }
+        it { is_expected.to be_present }
+        it { is_expected.not_to include user.cookie_token }
+      end
+    end
+  end
 end
