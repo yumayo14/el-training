@@ -15,7 +15,3 @@ class SessionsController < ApplicationController
     end
   end
 end
-
-# 飛んでくるparams
-# params[:session][:accountid]
-# params[:session][:password]
