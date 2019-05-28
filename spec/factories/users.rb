@@ -17,7 +17,7 @@ FactoryBot.define do
     name { Faker::Name.name }
     accountid { Faker::Internet.unique.username(1..15) }
     hashed_password { Faker::Internet.password }
-    salt {}
     hashed_cookie_token {}
+    salt {}
   end
 end
