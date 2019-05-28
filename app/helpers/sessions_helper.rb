@@ -5,7 +5,7 @@ module SessionsHelper
     session[:user_id] = user.id
   end
 
-  def make_long_term_cookie(user)
+  def make_long_duration_cookie(user)
     user.make_cookie_token
     cookies[:user_token] = { value: user.cookie_token, expires: 1.weeks.from_now }
     cookies.signed[:user_id] = { value: user.id, expires: 1.weeks.from_now }

@@ -23,20 +23,20 @@ class User < ApplicationRecord
   validates :hashed_password, presence: true, length: { minimum: 8 }
   validates :salt, presence: true, uniqueness: true, on: :update
 
-  def authenticate?(login_password)
-    return true if hashed_password == hash(salt, login_password)
+  def authenticated?(login_password)
+    return true if hashed_password == hashing_with_salt(salt, login_password)
 
     false
   end
 
   def make_cookie_token
     self.cookie_token = new_cookie_token
-    update_attributes(hashed_cookie_token: hash(salt, cookie_token))
+    update_attributes(hashed_cookie_token: hashing_with_salt(salt, cookie_token))
   end
 
   private
 
-  def hash(salt, plain_text)
+  def hashing_with_salt(salt, plain_text)
     Digest::SHA256.hexdigest(salt + plain_text)
   end
 
@@ -45,7 +45,7 @@ class User < ApplicationRecord
   end
 
   def set_hashed_password
-    self.hashed_password = hash(set_salt, hashed_password)
+    self.hashed_password = hashing_with_salt(set_salt, hashed_password)
   end
 
   def set_salt

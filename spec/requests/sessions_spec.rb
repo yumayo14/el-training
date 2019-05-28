@@ -9,13 +9,13 @@ RSpec.describe 'Session', type: :request do
       post sessions_path, params: {
         session: {
           accountid: input_accountid,
-          password: input_hashed_password
+          password: input_password
         }
       }
     end
     context '登録されたユーザーアカウントと同じアカウントIDとパスワードのアカウントがあった場合' do
       let(:input_accountid) { 'Iamtest' }
-      let(:input_hashed_password) { 'thisisTest' }
+      let(:input_password) { 'thisisTest' }
       it 'sessionが発行される' do
         expect(session[:session_id]).to be_present
         expect(session[:user_id]).to eq user.id
@@ -44,7 +44,7 @@ RSpec.describe 'Session', type: :request do
     end
     context '登録されたユーザーアカウントと同じアカウントIDとパスワードのアカウントがなかった場合' do
       let(:input_accountid) { 'Iamwrong' }
-      let(:input_hashed_password) { 'thisisBadTest' }
+      let(:input_password) { 'thisisBadTest' }
       it 'sessionが発行されない' do
         expect(session[:session_id]).to be_nil
       end

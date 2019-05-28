@@ -71,9 +71,9 @@ RSpec.describe User, type: :model do
   describe 'メソッド' do
     let!(:user) { create(:user, hashed_password: hashed_password) }
     let(:hashed_password) { 'morethan8' }
-    describe '#authenticate?' do
+    describe '#authenticated?' do
       let(:login_password) { '' }
-      subject { user.authenticate?(login_password) }
+      subject { user.authenticated?(login_password) }
       context '入力されたパスワードが登録時と同じ場合' do
         let(:login_password) { 'morethan8' }
         it { is_expected.to eq true }
