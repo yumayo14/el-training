@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Session', type: :request do
   describe 'POST#create' do
-    let!(:user) { create(:user, accountid: 'Iamtest', hashed_password: 'thisisTest') }
+    let!(:user) { create(:user, name: 'Json', accountid: 'Iamtest', hashed_password: 'thisisTest') }
     let!(:log_in) do
       post sessions_path, params: {
         session: {
@@ -16,6 +16,7 @@ RSpec.describe 'Session', type: :request do
     context '登録されたユーザーアカウントと同じアカウントIDとパスワードのアカウントがあった場合' do
       let(:input_accountid) { 'Iamtest' }
       let(:input_password) { 'thisisTest' }
+      let(:responsed_user) { JSON.parse(response.body) }
       it 'sessionが発行される' do
         expect(session[:session_id]).to be_present
         expect(session[:user_id]).to eq user.id
@@ -29,8 +30,9 @@ RSpec.describe 'Session', type: :request do
       it 'レスポンスに記憶トークンが含まれている' do
         expect(response.cookies['user_token']).to eq cookies['user_token']
       end
-      it 'レスポンスでログイン成功を伝えるメッセージが返る' do
-        expect(response.body).to eq 'ログインに成功しました'
+      it 'レスポンスで認証されたユーザーのインスタンスが返る' do
+        expect(responsed_user['name']).to eq 'Json'
+        expect(responsed_user['accountid']).to eq 'Iamtest'
       end
       it 'レスポンスのステータスが200' do
         expect(response.status).to eq 200
