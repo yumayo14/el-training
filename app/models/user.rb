@@ -29,7 +29,7 @@ class User < ApplicationRecord
     false
   end
 
-  def make_cookie_token
+  def make_cookie_token!
     self.cookie_token = new_cookie_token
     update_attributes(hashed_cookie_token: hashing_with_salt(salt, cookie_token))
   end

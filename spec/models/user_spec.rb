@@ -83,8 +83,8 @@ RSpec.describe User, type: :model do
         it { is_expected.to eq false }
       end
     end
-    describe '#make_cookie_token' do
-      before { user.make_cookie_token }
+    describe '#make_cookie_token!' do
+      before { user.make_cookie_token! }
       it 'cookie_tokenがユーザーに紐づけられる' do
         expect(user.cookie_token).to be_present
         expect(user.cookie_token.length).to eq 22
