@@ -40,6 +40,12 @@ RSpec.describe 'Session', type: :request do
           get tasks_path
           expect(response.headers['Set-Cookie']).to be_present
         end
+        it 'レスポンスに暗号化されたユーザーIDの情報が含まれる' do
+          expect(response.cookies['user_id']).to eq cookies['user_id']
+        end
+        it 'レスポンスに記憶トークンが含まれている' do
+          expect(response.cookies['user_token']).to eq cookies['user_token']
+        end
       end
     end
     context '登録されたユーザーアカウントと同じアカウントIDとパスワードのアカウントがなかった場合' do
