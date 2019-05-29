@@ -65,7 +65,26 @@ RSpec.describe User, type: :model do
     let(:password) { 'morethan8' }
     describe '平文を含まない様に暗号化している' do
       subject { user.hashed_password }
-      it { is_expected.not_to include hashed_password }
+      it { is_expected.not_to include password }
+    end
+    context 'ユーザー情報が更新された場合' do
+      let!(:previous_hashed_password) { user.hashed_password }
+      context 'パスワードが更新された場合' do
+        let(:new_password) { 'newpassword' }
+        before { user.update(password: new_password) }
+        describe '新しいパスワードを暗号化したものが保存される' do
+          subject { user.hashed_password }
+          it { is_expected.not_to eq previous_hashed_password }
+        end
+      end
+      context 'パスワード以外の情報が更新された場合' do
+        let(:new_name) { 'newname' }
+        before { user.update(name: new_name) }
+        describe 'パスワード情報は更新されない' do
+          subject { user.hashed_password }
+          it { is_expected.to eq previous_hashed_password }
+        end
+      end
     end
   end
   describe 'メソッド' do
