@@ -13,14 +13,15 @@
 #
 
 class User < ApplicationRecord
-  attr_accessor :cookie_token
+  attr_accessor :password, :cookie_token
   has_many :tasks, dependent: :destroy
 
   before_save :set_hashed_password
 
   validates :name, presence: true, length: { maximum: 20 }
   validates :accountid, presence: true, length: { maximum: 15 }, uniqueness: true
-  validates :hashed_password, presence: true, length: { minimum: 8 }
+  validates :password, presence: true, length: { minimum: 8 }, on: :create
+  validates :hashed_password, presence: true, on: :update
   validates :salt, presence: true, uniqueness: true, on: :update
 
   def authenticated?(login_password)
