@@ -46,7 +46,9 @@ class User < ApplicationRecord
   end
 
   def set_hashed_password
-    self.hashed_password = hashing_with_salt(set_salt, hashed_password)
+    return hashed_password if password.nil?
+
+    self.hashed_password = hashing_with_salt(set_salt, password)
   end
 
   def set_salt
