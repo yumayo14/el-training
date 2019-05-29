@@ -20,7 +20,7 @@ RSpec.describe User, type: :model do
     let(:name) { '田中 太郎' }
     let(:accountid) { 'tanatarou' }
     let(:password) { 'morethan8' }
-    subject { user.valid? }
+    subject { user.valid?(:password_change) }
     context '名前が20文字以内の場合' do
       it { is_expected.to eq true }
     end
@@ -70,11 +70,16 @@ RSpec.describe User, type: :model do
     context 'ユーザー情報が更新された場合' do
       let!(:previous_hashed_password) { user.hashed_password }
       context 'パスワードが更新された場合' do
-        let(:new_password) { 'newpassword' }
-        before { user.update(password: new_password) }
-        describe '新しいパスワードを暗号化したものが保存される' do
-          subject { user.hashed_password }
-          it { is_expected.not_to eq previous_hashed_password }
+        before { user.password = new_password }
+        context '新しいパスワードが8文字より多い場合' do
+          let(:new_password) { 'newpassword' }
+          subject { user.save(context: :password_change) }
+          it { is_expected.to eq true }
+        end
+        context '新しいパスワードが8文字より少ない場合' do
+          let(:new_password) { 'new' }
+          subject { user.save(context: :password_change) }
+          it { is_expected.to eq false }
         end
       end
       context 'パスワード以外の情報が更新された場合' do

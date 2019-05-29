@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 20 }
   validates :accountid, presence: true, length: { maximum: 15 }, uniqueness: true
-  validates :password, presence: true, length: { minimum: 8 }, on: :create
+  validates :password, presence: true, length: { minimum: 8 }, on: :password_change
   validates :hashed_password, presence: true, on: :update
   validates :salt, presence: true, uniqueness: true, on: :update
 
