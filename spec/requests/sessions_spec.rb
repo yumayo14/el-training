@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Session', type: :request do
   describe 'POST#create' do
-    let!(:user) { create(:user, name: 'Json', accountid: 'Iamtest', hashed_password: 'thisisTest') }
+    let!(:user) { create(:user, name: 'Json', accountid: 'Iamtest', password: 'thisisTest') }
     let!(:log_in) do
       post sessions_path, params: {
         session: {
