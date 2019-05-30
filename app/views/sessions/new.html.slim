@@ -1,0 +1,16 @@
+.page_title_box
+  h1.page_title ログイン
+.login_form
+  = form_tag('/sessions', method: :post, class: 'form-horizontal', id: 'login_form', remote: true, '@submit.prevent'=>'requestLogin') do
+    .accountid.form-group
+      .col-sm-6
+        = text_field_tag :accountid, '', class: 'form-control', placeholder: 'アカウントID', 'v-model'=>'accountid'
+    .password.form-group
+      .col-sm-6
+        = text_field_tag :password, '', class: 'form-control', placeholder: 'パスワード', 'v-model'=>'password'
+    .submit
+      = submit_tag 'ログイン', class: 'submit_button', 'v-bind:disabled'=>'processing'
+
+
+= javascript_pack_tag 'sessions/sessions_vue'
+
