@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import axios from 'axios';
 import VuePaginator from 'vuejs-paginator';
-import lodash from 'lodash';
+import _ from 'lodash';
 
 Vue.prototype.$http = axios
 
@@ -66,14 +66,14 @@ window.tasks = new Vue ({
             }).then(function (response) {
                 this.tasks = response.data.nested.data
             }.bind(this)).catch(function (e) {
-                console.error(e)
+                alert(e)
             })
         },
         getTasks: function(){
             axios.get(this.resource_url).then(function (response) {
                 this.tasks = response.data.nested.data
             }.bind(this)).catch(function (e) {
-                console.error(e)
+                alert(e)
             })
         },
         reset: function(){
