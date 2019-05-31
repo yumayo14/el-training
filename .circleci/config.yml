@@ -53,7 +53,7 @@ jobs:
           command: bin/rails db:schema:load --trace
       - run:
           name: Run ESLint
-          command: eslint app/javascript
+          command: npm run lint_all_managed_by_webpacker --silent
       - run:
           name: Run rubocop
           command: bundle exec rubocop
