@@ -17,8 +17,7 @@ RSpec.feature 'Sessions', type: :feature, js: true do
         click_button 'ログイン'
       end
       it 'タスク一覧画面に遷移する' do
-        sleep 3
-        expect(current_path).to eq tasks_path
+        expect(page).to have_content 'タスク一覧'
       end
     end
     context '登録されているユーザーとアカウントIDとパスワードが異なる場合' do
@@ -29,6 +28,17 @@ RSpec.feature 'Sessions', type: :feature, js: true do
       end
       it '画面は変わらない' do
         expect(current_path).to eq new_session_path
+      end
+      context '入力を間違えた後、登録されているユーザーのアカウントIDとパスワードを入力した場合' do
+        before do
+          sleep 2
+          fill_in 'accountid', with: accountid
+          fill_in 'password', with: password
+          click_button 'ログイン'
+        end
+        it 'タスク一覧画面に遷移する' do
+          expect(page).to have_content 'タスク一覧'
+        end
       end
     end
   end
