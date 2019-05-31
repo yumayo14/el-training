@@ -7,10 +7,8 @@ RSpec.describe 'Session', type: :request do
     let!(:user) { create(:user, name: 'Json', accountid: 'Iamtest', password: 'thisisTest') }
     let!(:log_in) do
       post sessions_path, params: {
-        session: {
-          accountid: input_accountid,
-          password: input_password
-        }
+        accountid: input_accountid,
+        password: input_password
       }
     end
     context '登録されたユーザーアカウントと同じアカウントIDとパスワードのアカウントがあった場合' do
