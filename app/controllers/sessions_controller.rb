@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if @user.present? && @user.authenticated?(params[:password])
       log_in @user
       make_long_duration_cookie_for @user
-      render json: @user, status: 200
+      render json: {user: @user, redirect_url: '/tasks'}, status: 200
     else
       render json: 'ログインに失敗しました', status: 401
     end
