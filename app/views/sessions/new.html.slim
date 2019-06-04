@@ -10,6 +10,6 @@
         = label_tag :password, "#{t('helpers.label.session.password')}", class: 'col-sm-12'
         = password_field_tag :password, '', class: 'form-control', 'v-model': 'password'
       .submit.mt-4
-        = submit_tag 'ログイン', class: 'btn btn-primary', 'v-bind:disabled'=>'processing'
+        = submit_tag 'ログイン', class: 'btn btn-primary', 'v-bind:disabled': 'processing_login_request'
 
 = javascript_pack_tag 'sessions/sessions_vue'

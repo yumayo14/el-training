@@ -8,7 +8,7 @@ window.loginForm = new Vue ({
       login_url: '/sessions',
       accountid: '',
       password: '',
-      processing: false
+      processing_login_request: false
     },
     methods: {
         requestLogin: function() {
@@ -27,9 +27,9 @@ window.loginForm = new Vue ({
         },
         reloadForm: function(time) {
             (new Promise(resolve =>  {
-                resolve(this.processing = true);
+                resolve(this.processing_login_request = true);
             })).then(function (){
-                setTimeout(()=> this.processing = false, time)
+                setTimeout(()=> this.processing_login_request = false, time)
             }.bind(this));
         }
     }
