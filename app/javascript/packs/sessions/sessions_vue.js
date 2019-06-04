@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
+import toastr from 'toastr';
 
 axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest',
@@ -24,7 +25,7 @@ window.loginForm = new Vue ({
             axios.post(this.login_url, params).then(function (response) {
                 window.location.href = response.data.redirect_url;
             }.bind(this)).catch(function(e) {
-                console.log(e);
+                toastr.error('認証に失敗しました。IDとパスワードを確認してください。');
             }).finally(function() {
                 this.reloadForm(1000)
             }.bind(this));
