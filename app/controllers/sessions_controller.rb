@@ -2,6 +2,7 @@
 
 class SessionsController < ApplicationController
   include SessionsHelper
+  LOGIN_SUCCESS_URL = '/tasks'
   def new; end
 
   def create
@@ -9,7 +10,7 @@ class SessionsController < ApplicationController
     if @user.present? && @user.authenticated?(params[:password])
       log_in @user
       make_long_duration_cookie_for @user
-      render json: { user: @user, redirect_url: '/tasks' }, status: 200
+      render json: { user: @user, redirect_url: LOGIN_SUCCESS_URL }, status: 200
     else
       render json: 'ログインに失敗しました', status: 401
     end
