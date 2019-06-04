@@ -1,11 +1,6 @@
 import Vue from 'vue';
-import axios from 'axios';
+import axios from '../modules/axios';
 import toastr from 'toastr';
-
-axios.defaults.headers.common = {
-    'X-Requested-With': 'XMLHttpRequest',
-    'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-};
 
 window.loginForm = new Vue ({
     el: '#login_form',
@@ -23,6 +18,7 @@ window.loginForm = new Vue ({
 
             axios.post(this.login_url, params).then(function (response) {
                 window.location.href = response.data.redirect_url;
+                toastr.success('認証に成功しました。');
             }.bind(this)).catch(function(e) {
                 toastr.error('認証に失敗しました。IDとパスワードを確認してください。');
             }).finally(function() {
