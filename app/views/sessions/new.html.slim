@@ -1,5 +1,5 @@
 .container
-  .login_form.mx-auto
+  .login_form.mx-auto.w-50
     .page_title_box
       h2.text-center ログイン
     = form_tag('/sessions', method: :post, class: 'form-horizontal', id: 'login_form', remote: true, '@submit.prevent': 'requestLogin') do
