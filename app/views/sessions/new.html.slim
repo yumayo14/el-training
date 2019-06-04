@@ -4,10 +4,10 @@
       h2.text-center ログイン
     = form_tag('/sessions', method: :post, class: 'form-horizontal', id: 'login_form', remote: true, '@submit.prevent': 'requestLogin') do
       .accountid.form-group
-        = label_tag :session, :accountid, class: 'col-sm-12'
+        = label_tag :accountid, "#{t('helpers.label.session.accountid')}", class: 'col-sm-12'
         = text_field_tag :accountid, '', class: 'form-control', 'v-model': 'accountid'
       .password.form-group
-        = label_tag :session, :password, class: 'col-sm-12'
+        = label_tag :password, "#{t('helpers.label.session.password')}", class: 'col-sm-12'
         = password_field_tag :password, '', class: 'form-control', 'v-model': 'password'
       .submit.mt-4
         = submit_tag 'ログイン', class: 'btn btn-primary', 'v-bind:disabled'=>'processing'
