@@ -1,11 +1,14 @@
 {
   "name": "el-training",
   "private": true,
+  "scripts": {
+    "lint_all_managed_by_webpacker": "eslint app/javascript"
+  },
   "dependencies": {
     "@rails/webpacker": "^3.5.5",
     "axios": "^0.18.0",
     "hoek": "5.0.3",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "postcss-preset-env": "^5.3.0",
     "vue": "^2.5.17",
     "vue-loader": "^15.3.0",
@@ -13,6 +16,8 @@
     "vuejs-paginator": "^2.0.2"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3.1.5"
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.2",
+    "webpack-dev-server": "^3.4.1"
   }
 }
