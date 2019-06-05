@@ -24,7 +24,7 @@ window.loginForm = new Vue({
       }.bind(this));
     },
     reloadForm: function(time) {
-      (new Promise(resolve =>  {
+      (new Promise((resolve)=> {
         resolve(this.processing_login_request = true);
       })).then(function() {
         setTimeout(()=> this.processing_login_request = false, time);
