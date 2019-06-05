@@ -18,16 +18,16 @@ window.tasks = new Vue ({
       remote_next_page_url: 'nested.next_page_url',
       remote_prev_page_url: 'nested.prev_page_url',
       next_button_text: 'Go Next',
-      previous_button_text: 'Go Back'
+      previous_button_text: 'Go Back',
     },
     searchQuery: '',
     selectedStatus: '',
     createdOrder: true,
     deadLineOrder: false,
-    importanceOrder: true
+    importanceOrder: true,
   },
   components: {
-    VPaginator: VuePaginator
+    VPaginator: VuePaginator,
   },
   methods: {
     orderByCreatedDay: function () {
@@ -62,7 +62,7 @@ window.tasks = new Vue ({
         params: {
           title: this.searchQuery,
           status: this.selectedStatus,
-        }
+        },
       }).then(function (response) {
         this.tasks = response.data.nested.data
       }.bind(this)).catch(function (e) {
@@ -83,7 +83,7 @@ window.tasks = new Vue ({
     },
     updateResource: function(data) {
       this.tasks = data
-    }
+    },
   },
   created: function () {
     this.getTasks();
