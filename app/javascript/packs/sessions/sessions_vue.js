@@ -5,7 +5,7 @@ import toastr from 'toastr';
 window.loginForm = new Vue ({
     el: '#login_form',
     data: {
-      login_url: '/sessions',
+      login_url: '/login',
       accountid: '',
       password: '',
       processing_login_request: false

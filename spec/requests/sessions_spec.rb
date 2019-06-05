@@ -6,7 +6,7 @@ RSpec.describe 'Session', type: :request do
   describe 'POST#create' do
     let!(:user) { create(:user, name: 'Json', accountid: 'Iamtest', password: 'thisisTest') }
     let!(:log_in) do
-      post sessions_path, params: {
+      post login_path, params: {
         accountid: input_accountid,
         password: input_password
       }

@@ -8,7 +8,7 @@ RSpec.feature 'Sessions', type: :feature, js: true do
     let(:password) { 'testPassword' }
     let!(:user) { create(:user, accountid: accountid, password: password) }
     before do
-      visit new_session_path
+      visit login_path
     end
     context '登録されているユーザーと同じアカウントIDとパスワードが入力されている場合' do
       before do
@@ -27,7 +27,7 @@ RSpec.feature 'Sessions', type: :feature, js: true do
         click_button 'ログイン'
       end
       it '画面は変わらない' do
-        expect(current_path).to eq new_session_path
+        expect(current_path).to eq login_path
       end
       context '入力を間違えた後、登録されているユーザーのアカウントIDとパスワードを入力した場合' do
         before do
