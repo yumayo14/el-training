@@ -17,7 +17,7 @@ window.loginForm = new Vue({
       ).then(function(response) {
         window.location.href = response.data.redirect_url;
         toastr.success('ログインに成功しました。');
-      }.bind(this)).catch(function() {
+      }).catch(function() {
         toastr.error('ログインに失敗しました。IDとパスワードを確認してください。');
       }).finally(function() {
         this.reloadForm(1000);
