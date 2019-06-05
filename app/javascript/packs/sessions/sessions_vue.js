@@ -20,14 +20,14 @@ window.loginForm = new Vue ({
       }.bind(this)).catch(function() {
         toastr.error('ログインに失敗しました。IDとパスワードを確認してください。');
       }).finally(function() {
-        this.reloadForm(1000)
+        this.reloadForm(1000);
       }.bind(this));
     },
     reloadForm: function(time) {
       (new Promise(resolve =>  {
         resolve(this.processing_login_request = true);
       })).then(function (){
-        setTimeout(()=> this.processing_login_request = false, time)
+        setTimeout(()=> this.processing_login_request = false, time);
       }.bind(this));
     },
   },

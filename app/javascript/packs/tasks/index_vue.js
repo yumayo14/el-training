@@ -3,7 +3,7 @@ import axios from 'axios';
 import VuePaginator from 'vuejs-paginator';
 import _ from 'lodash';
 
-Vue.prototype.$http = axios
+Vue.prototype.$http = axios;
 
 window.tasks = new Vue ({
   el: '#all_tasks',
@@ -37,7 +37,7 @@ window.tasks = new Vue ({
       ) : (
         this.tasks = _.orderBy(this.tasks, 'created_at'),
         this.createdOrder = !this.createdOrder
-      )
+      );
     },
     orderByDeadLine: function () {
       (this.deadLineOrder) ? (
@@ -46,7 +46,7 @@ window.tasks = new Vue ({
       ) : (
         this.tasks = _.orderBy(this.tasks, 'dead_line_on'),
         this.deadLineOrder = !this.deadLineOrder
-      )
+      );
     },
     orderByImportance: function () {
       (this.importanceOrder) ? (
@@ -55,7 +55,7 @@ window.tasks = new Vue ({
       ) : (
         this.tasks = _.orderBy(this.tasks, 'importance.rank'),
         this.importanceOrder = !this.importanceOrder
-      )
+      );
     },
     search: function () {
       axios.get(this.resource_url, {
@@ -64,28 +64,28 @@ window.tasks = new Vue ({
           status: this.selectedStatus,
         },
       }).then(function (response) {
-        this.tasks = response.data.nested.data
+        this.tasks = response.data.nested.data;
       }.bind(this)).catch(function (e) {
-        alert(e)
-      })
+        alert(e);
+      });
     },
     getTasks: function() {
       axios.get(this.resource_url).then(function (response) {
-        this.tasks = response.data.nested.data
+        this.tasks = response.data.nested.data;
       }.bind(this)).catch(function (e) {
-        alert(e)
-      })
+        alert(e);
+      });
     },
     reset: function() {
       this.getTasks();
-      this.searchQuery = ''
-      this.selectedStatus = ''
+      this.searchQuery = '';
+      this.selectedStatus = '';
     },
     updateResource: function(data) {
-      this.tasks = data
+      this.tasks = data;
     },
   },
   created: function () {
     this.getTasks();
   },
-})
+});
