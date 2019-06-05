@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import axios from '../modules/axios';
+import prepareAxios from '../modules/axios';
 import toastr from 'toastr';
 
 window.loginForm = new Vue ({
@@ -16,7 +16,7 @@ window.loginForm = new Vue ({
             params.append('accountid', this.accountid);
             params.append('password', this.password);
 
-            axios.post(this.login_url, params).then(function (response) {
+            prepareAxios().post(this.login_url, params).then(function (response) {
                 window.location.href = response.data.redirect_url;
                 toastr.success('ログインに成功しました。');
             }.bind(this)).catch(function(e) {
