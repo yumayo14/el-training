@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 Vue.prototype.$http = axios;
 
-window.tasks = new Vue ({
+window.tasks = new Vue({
   el: '#all_tasks',
   data: {
     tasks: [],
@@ -30,7 +30,7 @@ window.tasks = new Vue ({
     VPaginator: VuePaginator,
   },
   methods: {
-    orderByCreatedDay: function () {
+    orderByCreatedDay: function() {
       (this.createdOrder) ? (
         this.tasks = _.orderBy(this.tasks, 'created_at', 'desc'),
         this.createdOrder = !this.createdOrder
@@ -39,7 +39,7 @@ window.tasks = new Vue ({
         this.createdOrder = !this.createdOrder
       );
     },
-    orderByDeadLine: function () {
+    orderByDeadLine: function() {
       (this.deadLineOrder) ? (
         this.tasks = _.orderBy(this.tasks, 'dead_line_on', 'desc'),
         this.deadLineOrder = !this.deadLineOrder
@@ -48,7 +48,7 @@ window.tasks = new Vue ({
         this.deadLineOrder = !this.deadLineOrder
       );
     },
-    orderByImportance: function () {
+    orderByImportance: function() {
       (this.importanceOrder) ? (
         this.tasks = _.orderBy(this.tasks, 'importance.rank', 'desc'),
         this.importanceOrder = !this.importanceOrder
@@ -57,22 +57,22 @@ window.tasks = new Vue ({
         this.importanceOrder = !this.importanceOrder
       );
     },
-    search: function () {
+    search: function() {
       axios.get(this.resource_url, {
         params: {
           title: this.searchQuery,
           status: this.selectedStatus,
         },
-      }).then(function (response) {
+      }).then(function(response) {
         this.tasks = response.data.nested.data;
-      }.bind(this)).catch(function (e) {
+      }.bind(this)).catch(function(e) {
         alert(e);
       });
     },
     getTasks: function() {
-      axios.get(this.resource_url).then(function (response) {
+      axios.get(this.resource_url).then(function(response) {
         this.tasks = response.data.nested.data;
-      }.bind(this)).catch(function (e) {
+      }.bind(this)).catch(function(e) {
         alert(e);
       });
     },
@@ -85,7 +85,7 @@ window.tasks = new Vue ({
       this.tasks = data;
     },
   },
-  created: function () {
+  created: function() {
     this.getTasks();
   },
 });
