@@ -19,7 +19,7 @@ window.loginForm = new Vue ({
             prepareAxios().post(this.login_url, params).then(function (response) {
                 window.location.href = response.data.redirect_url;
                 toastr.success('ログインに成功しました。');
-            }.bind(this)).catch(function(e) {
+            }.bind(this)).catch(function() {
                 toastr.error('ログインに失敗しました。IDとパスワードを確認してください。');
             }).finally(function() {
                 this.reloadForm(1000)
