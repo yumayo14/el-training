@@ -12,11 +12,9 @@ window.loginForm = new Vue ({
     },
     methods: {
         requestLogin: function() {
-            let params = new URLSearchParams();
-            params.append('accountid', this.accountid);
-            params.append('password', this.password);
-
-            prepareAxios().post(this.login_url, params).then(function (response) {
+            prepareAxios().post(this.login_url,
+                                new URLSearchParams({'accountid': this.accountid, 'password': this.password})
+            ).then(function (response) {
                 window.location.href = response.data.redirect_url;
                 toastr.success('ログインに成功しました。');
             }.bind(this)).catch(function() {
