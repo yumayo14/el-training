@@ -3,6 +3,7 @@ env:
   es6: true
 extends:
   - 'eslint:recommended'
+  - 'google'
   - 'plugin:vue/essential'
 globals:
   Atomics: readonly
@@ -12,4 +13,7 @@ parserOptions:
   sourceType: module
 plugins:
   - vue
-rules: {}
+rules: {
+  indent: ["error", 2, {CallExpression: {arguments: "first"}}],
+  max-len: ["error", { "code": 110 }]
+}
