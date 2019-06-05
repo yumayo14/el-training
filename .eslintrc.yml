@@ -13,4 +13,6 @@ parserOptions:
   sourceType: module
 plugins:
   - vue
-rules: {}
+rules: {
+  indent: ["error", 2, {CallExpression: {arguments: "first"}}]
+}
