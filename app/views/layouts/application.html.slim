@@ -8,7 +8,7 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application'
   body
-    nav.application_header
+    nav.navbar.navbar-expand-lg.application_header
       .navbar-header
         = link_to "TaskApp", tasks_path, class: "navbar-brand logo"
       ul.nav.navbar-nav.navbar-nav_extend

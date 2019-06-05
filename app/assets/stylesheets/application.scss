@@ -1,4 +1,3 @@
-@import "bootstrap-sprockets";
 @import "bootstrap";
 @import "common";
 @import "tasks";
@@ -7,29 +6,4 @@
 @import "animation/flake";
 @import "animation/delayed_flake";
 @import "common";
-
-html, body {
-  //重要じゃないやつで高さを調整する
-  font-family: SF Pro JP, SF Pro Text, Apple TP, Myriad Set Pro, SF Pro Icons, Hiragino Kaku Gothic Pro, ヒラギノ角ゴ Pro W3, メイリオ, Meiryo, ＭＳ, Ｐゴシック, Helvetica Neue, Helvetica, Arial;
-}
-
-.application_header {
-  width: 100vw;
-  display: flex;
-  background-color: rgba(60,120,230,0.2);
-  .logo { color: rgb(146,64,93); }
-  ul.navbar-nav_extend {
-    margin-left: 10px;
-    li {
-      color: rgb(146,64,93);
-      a  {
-        color: rgb(146,64,93);
-        &:hover {
-          color: rgb(146,64,93);
-          background-color: rgba(255, 102, 204, 0.2) !important;
-        }
-      }
-    }
-  }
-}
-
+@import "../../../node_modules/toastr/toastr";

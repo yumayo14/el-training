@@ -6,17 +6,15 @@ RSpec.describe 'Session', type: :request do
   describe 'POST#create' do
     let!(:user) { create(:user, name: 'Json', accountid: 'Iamtest', password: 'thisisTest') }
     let!(:log_in) do
-      post sessions_path, params: {
-        session: {
-          accountid: input_accountid,
-          password: input_password
-        }
+      post login_path, params: {
+        accountid: input_accountid,
+        password: input_password
       }
     end
     context '登録されたユーザーアカウントと同じアカウントIDとパスワードのアカウントがあった場合' do
       let(:input_accountid) { 'Iamtest' }
       let(:input_password) { 'thisisTest' }
-      let(:responsed_user) { JSON.parse(response.body) }
+      let(:response_for_authenticated_user) { JSON.parse(response.body) }
       it 'sessionが発行される' do
         expect(session[:session_id]).to be_present
         expect(session[:user_id]).to eq user.id
@@ -31,8 +29,8 @@ RSpec.describe 'Session', type: :request do
         expect(response.cookies['user_token']).to eq cookies['user_token']
       end
       it 'レスポンスで認証されたユーザーのインスタンスが返る' do
-        expect(responsed_user['name']).to eq 'Json'
-        expect(responsed_user['accountid']).to eq 'Iamtest'
+        expect(response_for_authenticated_user['user']['name']).to eq 'Json'
+        expect(response_for_authenticated_user['user']['accountid']).to eq 'Iamtest'
       end
       it 'レスポンスのステータスが200' do
         expect(response.status).to eq 200
