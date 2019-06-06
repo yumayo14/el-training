@@ -9,8 +9,7 @@ window.tasks = new Vue({
   el: '#all_tasks',
   data: {
     tasks: [],
-    resort_url: 'tasks.json',
-    resource_url: '/api/tasks.json',
+    resource_url: '/api/tasks',
     options: {
       remote_data: 'nested.data',
       remote_current_page: 'nested.current_page',
