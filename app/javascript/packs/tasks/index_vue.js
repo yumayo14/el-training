@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import axios from 'axios';
+import prepareAxios from '../modules/axios';
 import VuePaginator from 'vuejs-paginator';
 import _ from 'lodash';
 
-Vue.prototype.$http = axios;
+Vue.prototype.$http = prepareAxios(false, false);
 
 window.tasks = new Vue({
   el: '#all_tasks',
@@ -57,7 +57,7 @@ window.tasks = new Vue({
       );
     },
     search: function() {
-      axios.get(this.resource_url, {
+      prepareAxios(false, true).get(this.resource_url, {
         params: {
           title: this.searchQuery,
           status: this.selectedStatus,
@@ -69,7 +69,7 @@ window.tasks = new Vue({
       });
     },
     getTasks: function() {
-      axios.get(this.resource_url, {withCredentials: true}).then(function(response) {
+      prepareAxios(false, true).get(this.resource_url, {withCredentials: true}).then(function(response) {
         this.tasks = response.data.nested.data;
       }.bind(this)).catch(function(e) {
         alert(e);
