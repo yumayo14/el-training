@@ -14,4 +14,17 @@ module SessionsHelper
   def current_user
     User.find(cookies.signed[:user_id]) if cookies[:user_id].present?
   end
+
+  def logged_in?
+    return true if current_user.present?
+
+    false
+  end
+
+  def require_login
+    unless logged_in? # rubocop:disable Style/GuardClause
+      flash[:danger] = 'ログインを行なってください'
+      redirect_to login_path
+    end
+  end
 end

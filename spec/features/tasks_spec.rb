@@ -291,4 +291,26 @@ RSpec.feature'Tasks', type: :feature, js: true do
       end
     end
   end
+  context 'ログインしていない場合' do
+    context 'ログインせず、別の画面に遷移しようとした場合' do
+      it 'ログイン画面に遷移する' do
+        visit tasks_path
+        expect(current_path).to eq login_path
+        expect(page).to have_content 'ログインを行なってください'
+      end
+    end
+    context 'ログイン画面から別の画面に遷移しようとした場合' do
+      before { visit login_path }
+      it 'タスク一覧画面に遷移しようとしても、ログイン画面に遷移する' do
+        click_link 'タスク一覧'
+        expect(current_path).to eq login_path
+        expect(page).to have_content 'ログインを行なってください'
+      end
+      it 'タスク投稿画面に遷移しようとしても、ログイン画面に遷移する' do
+        click_link 'タスクの投稿'
+        expect(current_path).to eq login_path
+        expect(page).to have_content 'ログインを行なってください'
+      end
+    end
+  end
 end
