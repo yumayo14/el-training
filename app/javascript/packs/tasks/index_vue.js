@@ -70,7 +70,7 @@ window.tasks = new Vue({
       });
     },
     getTasks: function() {
-      axios.get(this.resource_url).then(function(response) {
+      axios.get(this.resource_url, {withCredentials: true}).then(function(response) {
         this.tasks = response.data.nested.data;
       }.bind(this)).catch(function(e) {
         alert(e);
