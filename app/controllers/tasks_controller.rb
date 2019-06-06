@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
+  include SessionsHelper
   before_action :set_task, only: %i(show edit update destroy)
 
   def index; end
