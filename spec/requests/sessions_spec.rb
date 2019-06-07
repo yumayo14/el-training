@@ -80,6 +80,15 @@ RSpec.describe 'Session', type: :request do
       it 'sessionからユーザーIDの値が削除される' do
         expect(session[:user_id]).to eq nil
       end
+      it 'レスポンスのステータスが200' do
+        expect(response.status).to eq 200
+      end
+      it 'レスポンスから暗号化されたユーザーIDの情報が取り除かれる' do
+        expect(response.cookies['user_id']).to eq nil
+      end
+      it 'レスポンスからユーザーの記憶トークンが取り除かれる' do
+        expect(response.cookies['user_token']).to eq nil
+      end
     end
   end
 end

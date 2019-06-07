@@ -15,6 +15,12 @@ module SessionsHelper
     cookies.signed[:user_id] = { value: user.id, expires: 1.weeks.from_now }
   end
 
+  def delete_long_duration_cookie_for(user)
+    user.delete_cookie_token!
+    cookies.delete(:user_token)
+    cookies.delete(:user_id)
+  end
+
   def current_user
     User.find(cookies.signed[:user_id]) if cookies[:user_id].present?
   end

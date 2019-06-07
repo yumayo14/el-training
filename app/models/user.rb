@@ -35,6 +35,10 @@ class User < ApplicationRecord
     update_attributes(hashed_cookie_token: hashing_with_salt(salt, cookie_token))
   end
 
+  def delete_cookie_token!
+    self.cookie_token = nil
+    update_attributes(hashed_cookie_token: nil)
+  end
   private
 
   def hashing_with_salt(salt, plain_text)

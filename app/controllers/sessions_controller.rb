@@ -18,5 +18,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
+    delete_long_duration_cookie_for current_user
+    render json: 'ログアウトに成功しました', status: 200
   end
 end
