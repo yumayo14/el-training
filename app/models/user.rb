@@ -39,6 +39,7 @@ class User < ApplicationRecord
     self.cookie_token = nil
     update_attributes(hashed_cookie_token: nil)
   end
+
   private
 
   def hashing_with_salt(salt, plain_text)

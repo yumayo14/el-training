@@ -69,8 +69,8 @@ RSpec.describe 'Session', type: :request do
     let!(:user) { create(:user, name: 'Json', accountid: 'Iamtest', password: 'thisisTest') }
     let!(:log_in) do
       post login_path, params: {
-          accountid: 'Iamtest',
-          password: 'thisisTest'
+        accountid: 'Iamtest',
+        password: 'thisisTest'
       }
     end
     before do
