@@ -130,30 +130,42 @@ RSpec.feature'Tasks', type: :feature, js: true do
 
       describe '絞り込み検索' do
         before { click_button '検索条件をリセット' }
-        it 'フォーム検索' do
-          fill_in 'query', with: 'Test2'
-          click_button '検索'
-          expect(page).to have_selector 'tr.tasks', count: 1
-          within all('tr.tasks')[0] do
-            expect(find('th.title')).to have_content 'Test2'
+        context 'タイトル名でのみ検索する場合' do
+          before do
+            fill_in 'query', with: 'Test2'
+            click_button '検索'
+          end
+          it '検索文言とタイトル名が部分一致するタスクのみ表示される' do
+            expect(page).to have_selector 'tr.tasks', count: 1
+            within all('tr.tasks')[0] do
+              expect(find('th.title')).to have_content 'Test2'
+            end
           end
         end
-        it 'ステータス検索' do
-          select '着手', from: 'status'
-          click_button '検索'
-          expect(page).to have_selector 'tr.tasks', count: 1
-          within all('tr.tasks')[0] do
-            expect(find('th.status')).to have_content '着手'
+        context 'ステータスのみで検索する場合' do
+          before do
+            select '着手', from: 'status'
+            click_button '検索'
+          end
+          it '同じステータスのタスクのみが表示される' do
+            expect(page).to have_selector 'tr.tasks', count: 1
+            within all('tr.tasks')[0] do
+              expect(find('th.status')).to have_content '着手'
+            end
           end
         end
-        it 'フォームとステータスで検索' do
-          fill_in 'query', with: 'Test1'
-          select '着手', from: 'status'
-          click_button '検索'
-          expect(page).to have_selector 'tr.tasks', count: 1
-          within all('tr.tasks')[0] do
-            expect(find('th.title')).to have_content 'Test1'
-            expect(find('th.status')).to have_content '着手'
+        context 'タイトル名とステータスで検索する場合' do
+          before do
+            fill_in 'query', with: 'Test1'
+            select '着手', from: 'status'
+            click_button '検索'
+          end
+          it '検索文言とタイトル名が部分一致した上でステータスが同じタスクのみが表示される' do
+            expect(page).to have_selector 'tr.tasks', count: 1
+            within all('tr.tasks')[0] do
+              expect(find('th.title')).to have_content 'Test1'
+              expect(find('th.status')).to have_content '着手'
+            end
           end
         end
       end
@@ -247,9 +259,9 @@ RSpec.feature'Tasks', type: :feature, js: true do
         before do
           20.times { create(:task, user: user) }
           visit tasks_path
+          click_button 'Go Next'
         end
         it '2ページ目に11個目から20個目までが表示される' do
-          click_button 'Go Next'
           expect(all('tr.tasks').size).to eq 10
         end
       end
@@ -277,14 +289,14 @@ RSpec.feature'Tasks', type: :feature, js: true do
       describe '削除' do
         before { click_link '削除' }
         context '確認時、Yesを選んだ場合' do
+          before { page.driver.browser.switch_to.alert.accept }
           it '削除される' do
-            page.driver.browser.switch_to.alert.accept
             expect(page).to have_content 'タスクを削除しました'
           end
         end
         context '確認時、Noを選んだ場合' do
+          before { page.driver.browser.switch_to.alert.dismiss }
           it '削除されない' do
-            page.driver.browser.switch_to.alert.dismiss
             expect(page).to have_content 'タスクの詳細'
           end
         end
@@ -293,23 +305,27 @@ RSpec.feature'Tasks', type: :feature, js: true do
   end
   context 'ログインしていない場合' do
     context 'ログインせず、別の画面に遷移しようとした場合' do
+      before { visit tasks_path }
       it 'ログイン画面に遷移する' do
-        visit tasks_path
         expect(current_path).to eq login_path
         expect(page).to have_content 'ログインを行なってください'
       end
     end
     context 'ログイン画面から別の画面に遷移しようとした場合' do
       before { visit login_path }
-      it 'タスク一覧画面に遷移しようとしても、ログイン画面に遷移する' do
-        click_link 'タスク一覧'
-        expect(current_path).to eq login_path
-        expect(page).to have_content 'ログインを行なってください'
+      context 'タスク一覧画面に遷移しようとした場合' do
+        before { click_link 'タスク一覧' }
+        it 'ログイン画面に遷移する' do
+          expect(current_path).to eq login_path
+          expect(page).to have_content 'ログインを行なってください'
+        end
       end
-      it 'タスク投稿画面に遷移しようとしても、ログイン画面に遷移する' do
-        click_link 'タスクの投稿'
-        expect(current_path).to eq login_path
-        expect(page).to have_content 'ログインを行なってください'
+      context 'タスク投稿画面に遷移しようとした場合' do
+        before { click_link 'タスクの投稿' }
+        it 'タスク投稿画面に遷移しようとしても、ログイン画面に遷移する' do
+          expect(current_path).to eq login_path
+          expect(page).to have_content 'ログインを行なってください'
+        end
       end
     end
   end
