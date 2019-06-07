@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.feature'Tasks', type: :feature, js: true do
-  let(:task) { create(:task) }
   let!(:user) { create(:user, accountid: 'IamTest', password: 'testPassword') }
   context 'ログインしている場合' do
     before do
@@ -268,6 +267,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
     end
 
     describe 'タスクの編集、更新、削除' do
+      let(:task) { create(:task, user: user) }
       before do
         visit tasks_path
         visit task_path(task.id)
