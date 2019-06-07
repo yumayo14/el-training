@@ -65,4 +65,21 @@ RSpec.describe 'Session', type: :request do
       end
     end
   end
+  describe 'DELETE#destroy' do
+    let!(:user) { create(:user, name: 'Json', accountid: 'Iamtest', password: 'thisisTest') }
+    let!(:log_in) do
+      post login_path, params: {
+          accountid: 'Iamtest',
+          password: 'thisisTest'
+      }
+    end
+    before do
+      delete logout_path
+    end
+    context 'ログイン済みのユーザーの場合' do
+      it 'sessionからユーザーIDの値が削除される' do
+        expect(session[:user_id]).to eq nil
+      end
+    end
+  end
 end
