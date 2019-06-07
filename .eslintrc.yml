@@ -14,6 +14,6 @@ parserOptions:
 plugins:
   - vue
 rules: {
-  indent: ["error", 2, {CallExpression: {arguments: "first"}}],
+  indent: ["error", 2, {CallExpression: {arguments: "first"}, "ObjectExpression": "first"}],
   max-len: ["error", { "code": 120 }]
 }

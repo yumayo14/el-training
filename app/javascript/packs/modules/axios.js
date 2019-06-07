@@ -2,9 +2,9 @@ import axios from 'axios';
 
 /**
  * 各リクエストの際、必要な設定をしたaxiosを返す関数。
- * @param {boolean} withCsrf CSRFトークンを埋め込むかどうか
- * @param {boolean} withCookie withCredentials オプションをtrueにするかどうか
- * @return {axios} CSRFトークンをリクエストヘッダに含めたaxiosを返す
+ * @param {object} settingParams withCsrf(CSRFトークンを埋め込むか)とwithCookie（withCredentialsオプションをtrueにするか）というキーで
+ *                               boolean型のデータが入っている
+ * @return {axios} settingParamsの値に応じて設定されたaxiosを返す
  */
 function prepareAxios(withCsrf, withCookie) {
   let headersOption = {};
