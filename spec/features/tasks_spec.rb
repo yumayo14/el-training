@@ -10,7 +10,7 @@ RSpec.feature'Tasks', type: :feature, js: true do
       fill_in 'accountid', with: 'IamTest'
       fill_in 'password', with: 'testPassword'
       click_button 'ログイン'
-      sleep 1
+      expect(page).to have_content 'タスク一覧'
     end
     describe 'タスクの一覧表示' do
       let!(:tasks_for_listing_test) do
