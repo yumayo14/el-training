@@ -6,20 +6,18 @@ import axios from 'axios';
  *                               boolean型のデータが入っている
  * @return {axios} settingParamsの値に応じて設定されたaxiosを返す
  */
-function prepareAxios(withCsrf, withCookie) {
-  let headersOption = {};
+function prepareAxios(settingParams) {
+  const axiosConfiguration = {};
+  const headersOption = {'X-Requested-With': 'XMLHttpRequest'};
 
-  if (withCsrf) {
-    headersOption = {
-      'X-Requested-With': 'XMLHttpRequest',
-      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-    };
+  if (settingParams['withCsrf']) {
+    headersOption['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   }
 
-  return axios.create({
-    headers: headersOption,
-    withCredentials: withCookie,
-  });
+  axiosConfiguration['headers'] = headersOption;
+  axiosConfiguration['withCredentials'] = settingParams['withCookie'];
+
+  return axios.create(axiosConfiguration);
 }
 
 export default prepareAxios;
