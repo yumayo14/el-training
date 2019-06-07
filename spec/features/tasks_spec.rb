@@ -14,11 +14,11 @@ RSpec.feature'Tasks', type: :feature, js: true do
       sleep 1
     end
     describe 'タスクの一覧表示' do
-      before do
+      let!(:tasks_for_listing_test) do
         create(:task, title: 'Test2', user: user, importance: 2, status: 0, dead_line_on: '2020-07-24', created_at: '2020/07/24 16:00::55')
         create(:task, title: 'Test1', user: user, importance: 1, status: 1, dead_line_on: '2020-08-09', created_at: '2020/08/09 09:00:00')
-        visit tasks_path
       end
+      before { visit tasks_path }
       describe '最初の並び順' do
         it 'indexページに投稿されたタスクの一覧が表示される' do
           within all('tr.tasks')[0] do
@@ -243,8 +243,8 @@ RSpec.feature'Tasks', type: :feature, js: true do
 
     describe 'タスクを表示しているページの切り替え' do
       context '10個以下の場合' do
+        let!(:tasks_for_pagination_test) { 10.times { create(:task, user: user) } }
         before do
-          10.times { create(:task, user: user) }
           visit tasks_path
         end
         it '10個まで表示される' do
@@ -256,8 +256,8 @@ RSpec.feature'Tasks', type: :feature, js: true do
         end
       end
       context 'タスクが11個以上から20個の場合' do
+        let!(:tasks_for_pagination_test) { 20.times { create(:task, user: user) } }
         before do
-          20.times { create(:task, user: user) }
           visit tasks_path
           click_button 'Go Next'
         end
