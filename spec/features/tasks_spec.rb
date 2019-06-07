@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature'Tasks', type: :feature, js: true do
+RSpec.feature 'Tasks', type: :feature, js: true do
   let!(:user) { create(:user, accountid: 'IamTest', password: 'testPassword') }
   context 'ログインしている場合' do
     before do
