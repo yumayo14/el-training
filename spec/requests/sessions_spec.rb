@@ -89,6 +89,9 @@ RSpec.describe 'Session', type: :request do
       it 'レスポンスからユーザーの記憶トークンが取り除かれる' do
         expect(response.cookies['user_token']).to eq nil
       end
+      it 'レスポンスでログアウト成功を伝えるメッセージが返る' do
+        expect(response.body).to eq 'ログアウトに成功しました'
+      end
     end
   end
 end
