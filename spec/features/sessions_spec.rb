@@ -15,10 +15,10 @@ RSpec.feature 'Sessions', type: :feature, js: true do
         fill_in 'accountid', with: accountid
         fill_in 'password', with: password
         click_button 'ログイン'
-      end
-      it 'タスク一覧画面に遷移する' do
         expect(page).to have_content 'タスク一覧'
       end
+      it 'タスク一覧画面に遷移する'
+        # expect(page).to have_selector '#title_log'
     end
     context '登録されているユーザーとアカウントIDとパスワードが異なる場合' do
       before do
@@ -31,14 +31,13 @@ RSpec.feature 'Sessions', type: :feature, js: true do
       end
       context '入力を間違えた後、登録されているユーザーのアカウントIDとパスワードを入力した場合' do
         before do
-          sleep 2
           fill_in 'accountid', with: accountid
           fill_in 'password', with: password
           click_button 'ログイン'
-        end
-        it 'タスク一覧画面に遷移する' do
           expect(page).to have_content 'タスク一覧'
         end
+        it 'タスク一覧画面に遷移する'
+          # expect(page).to have_content 'タスク一覧'
       end
     end
   end
