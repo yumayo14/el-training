@@ -19,6 +19,13 @@ RSpec.feature 'Sessions', type: :feature, js: true do
       end
       it 'タスク一覧画面に遷移する'
         # expect(page).to have_selector '#title_log'
+      context 'ログインした後' do
+        before { visit tasks_path }
+        it 'ログインのリンクが表示されなくなり、ログアウトのリンクが表示される' do
+          expect(page).not_to have_selector 'a#login_link', text: 'ログイン'
+          expect(page).to have_selector 'a#logout_link', text: 'ログアウト'
+        end
+      end
     end
     context '登録されているユーザーとアカウントIDとパスワードが異なる場合' do
       before do
@@ -38,6 +45,13 @@ RSpec.feature 'Sessions', type: :feature, js: true do
         end
         it 'タスク一覧画面に遷移する'
           # expect(page).to have_content 'タスク一覧'
+        context 'ログインした後' do
+          before { visit tasks_path }
+          it 'ログインのリンクが表示されなくなり、ログアウトのリンクが表示される' do
+            expect(page).not_to have_selector 'a#login_link', text: 'ログイン'
+            expect(page).to have_selector 'a#logout_link', text: 'ログアウト'
+          end
+        end
       end
     end
   end
