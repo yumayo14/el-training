@@ -55,4 +55,37 @@ RSpec.feature 'Sessions', type: :feature, js: true do
       end
     end
   end
+  describe 'ログアウト' do
+    let!(:user) { create(:user, accountid: 'Iamtest', password: 'testPassword') }
+    before  do
+      visit login_path
+      fill_in 'accountid', with: 'Iamtest'
+      fill_in 'password', with: 'testPassword'
+      click_button 'ログイン'
+      expect(page).to have_content 'タスク一覧'
+      visit tasks_path
+      click_link 'ログアウト'
+    end
+    context '確認ダイアログでYesを押した場合' do
+      before { page.driver.browser.switch_to.alert.accept }
+      it 'ログイン画面に遷移する'
+      # expect(page).to have_content 'ログイン'
+      context 'ログアウトした後'do
+        before { visit tasks_path }
+        it 'ログアウトのリンクが表示されなくなり、ログインのリンクが表示される' do
+          expect(page).not_to have_selector 'a#logout_link', text: 'ログアウト'
+          expect(page).to have_selector 'a#login_link', text: 'ログイン'
+        end
+      end
+    end
+    context '確認ダイアログでNoを押した場合' do
+      before { page.driver.browser.switch_to.alert.dismiss }
+      # it '画面は変わらない'
+      #   expect(current_path).to eq tasks_path
+      it 'ログアウトのリンクが表示され、ログインのリンクは表示されない' do
+        expect(page).not_to have_selector 'a#login_link', text: 'ログイン'
+        expect(page).to have_selector 'a#logout_link', text: 'ログアウト'
+      end
+    end
+  end
 end
