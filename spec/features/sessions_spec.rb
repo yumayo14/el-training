@@ -18,7 +18,7 @@ RSpec.feature 'Sessions', type: :feature, js: true do
         expect(page).to have_content 'タスク一覧'
       end
       it 'タスク一覧画面に遷移する'
-        # expect(page).to have_selector '#title_log'
+      # expect(page).to have_selector '#title_log'
       context 'ログインした後' do
         before { visit tasks_path }
         it 'ログインのリンクが表示されなくなり、ログアウトのリンクが表示される' do
@@ -44,7 +44,7 @@ RSpec.feature 'Sessions', type: :feature, js: true do
           expect(page).to have_content 'タスク一覧'
         end
         it 'タスク一覧画面に遷移する'
-          # expect(page).to have_content 'タスク一覧'
+        # expect(page).to have_content 'タスク一覧'
         context 'ログインした後' do
           before { visit tasks_path }
           it 'ログインのリンクが表示されなくなり、ログアウトのリンクが表示される' do
@@ -70,7 +70,7 @@ RSpec.feature 'Sessions', type: :feature, js: true do
       before { page.driver.browser.switch_to.alert.accept }
       it 'ログイン画面に遷移する'
       # expect(page).to have_content 'ログイン'
-      context 'ログアウトした後'do
+      context 'ログアウトした後' do
         before { visit tasks_path }
         it 'ログアウトのリンクが表示されなくなり、ログインのリンクが表示される' do
           expect(page).not_to have_selector 'a#logout_link', text: 'ログアウト'
@@ -80,7 +80,7 @@ RSpec.feature 'Sessions', type: :feature, js: true do
     end
     context '確認ダイアログでNoを押した場合' do
       before { page.driver.browser.switch_to.alert.dismiss }
-      # it '画面は変わらない'
+      it '画面は変わらない'
       #   expect(current_path).to eq tasks_path
       it 'ログアウトのリンクが表示され、ログインのリンクは表示されない' do
         expect(page).not_to have_selector 'a#login_link', text: 'ログイン'
