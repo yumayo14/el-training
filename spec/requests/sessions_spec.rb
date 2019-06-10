@@ -58,7 +58,7 @@ RSpec.describe 'Session', type: :request do
         expect(response.header['Set-Cookie']).to be_nil
       end
       it 'レスポンスでアラートメッセージが返ってくる' do
-        expect(response.body).to eq 'ログインに失敗しました'
+        expect(response.body).to eq 'ログインに失敗しました。IDとパスワードを確認してください。'
       end
       it 'レスポンスのステータスが401' do
         expect(response.status).to eq 401

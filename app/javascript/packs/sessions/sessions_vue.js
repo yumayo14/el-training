@@ -16,9 +16,8 @@ window.loginForm = new Vue({
                           new URLSearchParams({'accountid': this.accountid, 'password': this.password})
       ).then(function(response) {
         window.location.href = response.data.redirect_url;
-        toastr.success('ログインに成功しました。');
-      }).catch(function() {
-        toastr.error('ログインに失敗しました。IDとパスワードを確認してください。');
+      }).catch(function(error) {
+        toastr.error(error.response.data);
       }).finally(function() {
         this.reloadForm(1000);
       }.bind(this));

@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       make_long_duration_cookie_for @user
       render json: { user: @user, redirect_url: LOGIN_SUCCESS_URL }, status: 200
     else
-      render json: 'ログインに失敗しました', status: 401
+      render json: 'ログインに失敗しました。IDとパスワードを確認してください。', status: 401
     end
   end
 end
