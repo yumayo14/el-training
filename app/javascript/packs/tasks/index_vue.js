@@ -1,16 +1,15 @@
 import Vue from 'vue';
-import axios from 'axios';
+import prepareAxios from '../modules/axios';
 import VuePaginator from 'vuejs-paginator';
 import _ from 'lodash';
 
-Vue.prototype.$http = axios;
+Vue.prototype.$http = prepareAxios({withCsrf: false, withCookie: false});
 
 window.tasks = new Vue({
   el: '#all_tasks',
   data: {
     tasks: [],
-    resort_url: 'tasks.json',
-    resource_url: '/api/tasks.json',
+    resource_url: '/api/tasks',
     options: {
       remote_data: 'nested.data',
       remote_current_page: 'nested.current_page',
@@ -58,7 +57,7 @@ window.tasks = new Vue({
       );
     },
     search: function() {
-      axios.get(this.resource_url, {
+      prepareAxios({withCsrf: false, withCookie: true}).get(this.resource_url, {
         params: {
           title: this.searchQuery,
           status: this.selectedStatus,
@@ -70,7 +69,7 @@ window.tasks = new Vue({
       });
     },
     getTasks: function() {
-      axios.get(this.resource_url).then(function(response) {
+      prepareAxios({withCsrf: false, withCookie: true}).get(this.resource_url).then(function(response) {
         this.tasks = response.data.nested.data;
       }.bind(this)).catch(function(e) {
         alert(e);

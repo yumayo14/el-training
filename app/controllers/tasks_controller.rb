@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
+  include SessionsHelper
   before_action :set_task, only: %i(show edit update destroy)
+  before_action :require_login
 
-  # def index
-  #   @tasks = Task.order(created_at: 'DESC')
-  #   respond_to do |format|
-  #     format.html
-  #     format.json
-  #   end
-  # end
+  def index; end
 
   def new
     @task = User.first.tasks.new
