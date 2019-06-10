@@ -5,10 +5,20 @@ module SessionsHelper
     session[:user_id] = user.id
   end
 
+  def log_out
+    session.delete(:user_id)
+  end
+
   def make_long_duration_cookie_for(user)
     user.make_cookie_token!
     cookies[:user_token] = { value: user.cookie_token, expires: 1.weeks.from_now }
     cookies.signed[:user_id] = { value: user.id, expires: 1.weeks.from_now }
+  end
+
+  def delete_long_duration_cookie_for(user)
+    user.delete_cookie_token!
+    cookies.delete(:user_token)
+    cookies.delete(:user_id)
   end
 
   def current_user

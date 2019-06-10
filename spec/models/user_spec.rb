@@ -119,5 +119,17 @@ RSpec.describe User, type: :model do
         it { is_expected.not_to include user.cookie_token }
       end
     end
+    describe '#delete_cookie_token!' do
+      before do
+        user.make_cookie_token!
+        user.delete_cookie_token!
+      end
+      it '紐づけられていたcookie_tokenがなくなる' do
+        expect(user.cookie_token).to eq nil
+      end
+      it 'データベースに保村されていたcookie_tokenがなくなる' do
+        expect(user.hashed_cookie_token).to eq nil
+      end
+    end
   end
 end

@@ -15,4 +15,10 @@ class SessionsController < ApplicationController
       render json: 'ログインに失敗しました。IDとパスワードを確認してください。', status: 401
     end
   end
+
+  def destroy
+    log_out
+    delete_long_duration_cookie_for current_user
+    render json: 'ログアウトに成功しました', status: 200
+  end
 end
