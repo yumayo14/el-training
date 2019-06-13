@@ -51,6 +51,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_rewinder'
   gem 'factory_bot_rails'
+  gem 'foreman'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rails-controller-testing'
