@@ -26,7 +26,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'slim-rails', '~> 3.1', '>= 3.1.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-gem 'webpacker', github: 'rails/webpacker'
+gem 'webpacker', '~> 4', github: 'rails/webpacker'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
