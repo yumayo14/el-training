@@ -5,21 +5,21 @@
     "lint_all_managed_by_webpacker": "eslint app/javascript"
   },
   "dependencies": {
-    "@rails/webpacker": "^3.5.5",
+    "@rails/webpacker": "^4.0.7",
     "axios": "^0.18.0",
     "hoek": "5.0.3",
     "lodash": "^4.17.11",
     "postcss-preset-env": "^5.3.0",
     "toastr": "^2.1.4",
-    "vue": "^2.5.17",
-    "vue-loader": "^15.3.0",
-    "vue-template-compiler": "^2.5.17",
+    "vue": "^2.6.10",
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.10",
     "vuejs-paginator": "^2.0.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-google": "^0.13.0",
     "eslint-plugin-vue": "^5.2.2",
-    "webpack-dev-server": "^3.4.1"
+    "webpack-dev-server": "^3.7.1"
   }
 }
