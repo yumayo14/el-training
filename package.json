@@ -13,6 +13,7 @@
     "toastr": "^2.1.4",
     "vue": "^2.6.10",
     "vue-loader": "^15.7.0",
+    "vue-material": "^1.0.0-beta-11",
     "vue-template-compiler": "^2.6.10",
     "vuejs-paginator": "^2.0.2"
   },
