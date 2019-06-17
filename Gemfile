@@ -57,6 +57,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'rubocop', '~> 0.67.2', require: false
+  gem 'simplecov', require: false
   gem 'selenium-webdriver', '>= 3.1.0'
   gem 'webdrivers'
   gem 'yard'

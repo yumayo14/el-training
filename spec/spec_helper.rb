@@ -15,6 +15,9 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'simplecov'
+SimpleCov.start
+
 require 'factory_bot'
 require 'support/rspec_module'
 RSpec.configure do |config|
