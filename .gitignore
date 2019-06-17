@@ -39,6 +39,7 @@ package-lock.json
 # Ignore yard documents
 .yardoc/
 doc/
+coverage
 
 /public/packs
 /public/packs-test
