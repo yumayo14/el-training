@@ -1,8 +1,9 @@
-.container
-  .login_form.mx-auto.w-50
-    .page_title_box
-      h2.text-center ログイン
-    form#login_form @submit.prevent="requestLogin"
+form#login_form @submit.prevent="requestLogin"
+  .md-layout.md-alignment-top-center.page_title_box
+    .md-layout-item.md-size-25
+      h2 ログイン
+  .md-layout.md-alignment-top-center
+    .md-layout-item.md-size-25
       md-field
         label #{t('helpers.label.session.accountid')}
         md-input#accountid v-model="accountid"
