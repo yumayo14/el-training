@@ -1,8 +1,8 @@
 import Vue from 'vue/dist/vue.esm.js';
 import prepareAxios from '../modules/axios';
-import toastr from "toastr";
+import toastr from 'toastr';
 
-window.task_form = new Vue ({
+window.task_form = new Vue({
   el: '#task_form',
   data: {
     create_url: '/api/tasks',
@@ -11,7 +11,7 @@ window.task_form = new Vue ({
     dead_line_on: '',
     status: 'not_started',
     detail: '',
-    processing_request: false
+    processing_request: false,
   },
   methods: {
     createTask: function() {
@@ -24,7 +24,9 @@ window.task_form = new Vue ({
       ).then(function(response) {
         window.location.href = response.data.redirect_url;
       }).catch(function(error) {
-        error.response.data.forEach(function(message) {toastr.error(message)});
+        error.response.data.forEach(function(message) {
+          toastr.error(message);
+        });
       }).finally(function() {
         this.reloadForm(1000);
       }.bind(this));
@@ -36,5 +38,5 @@ window.task_form = new Vue ({
         setTimeout(()=> this.processing_request = false, time);
       }.bind(this));
     },
-  }
+  },
 });
