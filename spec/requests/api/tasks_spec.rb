@@ -71,4 +71,55 @@ RSpec.describe 'Api::Tasks', type: :request do
       end
     end
   end
+  describe 'POST#create' do
+    let(:title) { 'test_task' }
+    let(:importance) { 'low' }
+    let(:dead_line_on) { '2022-01-13' }
+    let(:status) { 'working' }
+    let(:detail) { 'this_is_the_doc' }
+    let(:task_create_request) do
+      post api_tasks_path, params: {
+        title: title,
+        importance: importance,
+        dead_line_on: dead_line_on,
+        status: status,
+        detail: detail
+      }
+    end
+    context '必要な値が、全て送られてきている場合' do
+      it '投稿に成功する' do
+        task_create_request
+        created_task = JSON.parse(response.body)['task']
+        expect(created_task['title']).to eq 'test_task'
+        expect(response.status).to eq 200
+      end
+    end
+    context 'titleが空の場合' do
+      let(:title) { '' }
+      it '投稿に失敗する' do
+        task_create_request
+        error_messages = JSON.parse(response.body)
+        expect(error_messages).to include 'タイトルを入力してください'
+        expect(response.status).to eq 400
+      end
+    end
+    context 'titleが30文字以上の場合' do
+      let(:title) { '12345678910/12345678910/12345678910/' }
+      it '投稿に失敗する' do
+        task_create_request
+        error_messages = JSON.parse(response.body)
+        expect(error_messages).to include 'タイトルは30文字以内で入力してください'
+        expect(response.status).to eq 400
+      end
+    end
+    context 'dead_line_onが過去の日付の場合' do
+      let(:dead_line_on) { '2019-04-01' }
+      it '投稿に失敗する' do
+        task_create_request
+        error_messages = JSON.parse(response.body)
+        expect(error_messages).to include '期限に過去の日付は使用できません'
+        expect(response.status).to eq 400
+      end
+    end
+  end
 end
