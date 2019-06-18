@@ -12,7 +12,7 @@ RSpec.describe 'Api::Tasks', type: :request do
   end
   describe 'GET#index' do
     let!(:login_users_task) { create(:task, title: 'login_users_task', user: user) }
-    let!(:other_users_task)
+    let!(:other_users_task) { create(:task) }
     context 'ログインを行なっている場合' do
       context '絞り込み検索を行わない場合' do
         before do
