@@ -7,20 +7,7 @@ class TasksController < ApplicationController
 
   def index; end
 
-  def new
-    @task = User.first.tasks.new
-  end
-
-  def create
-    @task = User.first.tasks.new(task_params)
-    if @task.save
-      flash[:success] = '新しいタスクが作成されました'
-      redirect_to tasks_path
-    else
-      flash.now[:danger] = 'タスクの作成に失敗しました'
-      render :new
-    end
-  end
+  def new; end
 
   def update
     if @task.update(task_params)
