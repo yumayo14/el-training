@@ -12,7 +12,7 @@ class Api::TasksController < ApplicationController # rubocop:disable Style/Class
   end
 
   def create
-    @task = User.first.tasks.new(task_params)
+    @task = current_user.tasks.new(task_params)
     if @task.save
       render json: { task: @task, redirect_url: CREATE_SUCCESS_URL }, status: 200
     else
