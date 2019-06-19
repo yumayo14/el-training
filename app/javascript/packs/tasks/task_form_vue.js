@@ -21,15 +21,15 @@ window.task_form = new Vue({
                                                                                   'dead_line_on': this.dead_line_on,
                                                                                   'status': this.status,
                                                                                   'detail': this.detail})
-      ).then(function(response) {
+      ).then((response)=> {
         window.location.href = response.data.redirect_url;
-      }).catch(function(error) {
+      }).catch((error)=> {
         error.response.data.forEach(function(message) {
           toastr.error(message);
         });
-      }).finally(function() {
+      }).finally(()=> {
         this.reloadForm(1000);
-      }.bind(this));
+      });
     },
     reloadForm: function(time) {
       (new Promise((resolve)=> {

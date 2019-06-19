@@ -15,13 +15,13 @@ window.loginForm = new Vue({
       prepareAxios({withCsrf: true, withCookie: false}).post(this.login_url,
                                                              new URLSearchParams({'accountid': this.accountid,
                                                                                   'password': this.password})
-      ).then(function(response) {
+      ).then((response)=> {
         window.location.href = response.data.redirect_url;
-      }).catch(function(error) {
+      }).catch((error)=> {
         toastr.error(error.response.data);
-      }).finally(function() {
+      }).finally(()=> {
         this.reloadForm(1000);
-      }.bind(this));
+      });
     },
     reloadForm: function(time) {
       (new Promise((resolve)=> {

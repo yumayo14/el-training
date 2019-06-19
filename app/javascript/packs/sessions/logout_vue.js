@@ -9,7 +9,7 @@ window.logoutLink = new Vue({
   methods: {
     requestLogout: function() {
       prepareAxios({withCsrf: true, withCookie: true}).delete(this.logout_url)
-        .then(function(response) {
+        .then((response)=> {
           window.location.href = response.data;
         });
     },

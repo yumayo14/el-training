@@ -69,9 +69,9 @@ window.tasks = new Vue({
       });
     },
     getTasks: function() {
-      prepareAxios({withCsrf: false, withCookie: true}).get(this.resource_url).then(function(response) {
+      prepareAxios({withCsrf: false, withCookie: true}).get(this.resource_url).then((response)=> {
         this.tasks = response.data.nested.data;
-      }.bind(this)).catch(function(e) {
+      }).catch(function(e) {
         alert(e);
       });
     },
