@@ -1,4 +1,4 @@
-const taskFormMixin = {
+const taskFormDataSharable = {
   data: function() {
     return {
       create_url: '/api/tasks',
@@ -10,15 +10,6 @@ const taskFormMixin = {
       processing_request: false,
     };
   },
-  methods: {
-    reloadForm: function(time) {
-      (new Promise((resolve)=> {
-        resolve(this.processing_request = true);
-      })).then(function() {
-        setTimeout(()=> this.processing_request = false, time);
-      }.bind(this));
-    },
-  },
 };
 
-export default taskFormMixin;
+export default taskFormDataSharable;
