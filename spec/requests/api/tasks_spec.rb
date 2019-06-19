@@ -40,7 +40,7 @@ RSpec.describe 'Api::Tasks', type: :request do
         context 'タスク名でのみ検索する場合' do
           let(:title) { 'search' }
           before { search_request }
-          let(:searched_tasks) { JSON.parse(response.body)['nested']['data']  }
+          let(:searched_tasks) { JSON.parse(response.body)['nested']['data'] }
           it '検索文言とタイトル名が部分一致するタスクのみ表示される' do
             expect(searched_tasks.length).to eq 2
             expect(searched_tasks[0]['title']).to include title
@@ -50,7 +50,7 @@ RSpec.describe 'Api::Tasks', type: :request do
         context 'ステータスのみで検索する場合' do
           let(:status) { 'working' }
           before { search_request }
-          let(:searched_tasks) { JSON.parse(response.body)['nested']['data']  }
+          let(:searched_tasks) { JSON.parse(response.body)['nested']['data'] }
           it '同じステータスのタスクのみが表示される' do
             expect(searched_tasks.length).to eq 2
             expect(searched_tasks[0]['status']['text']).to eq '着手'
@@ -61,7 +61,7 @@ RSpec.describe 'Api::Tasks', type: :request do
           let(:title) { 'search' }
           let(:status) { 'working' }
           before { search_request }
-          let(:searched_tasks) { JSON.parse(response.body)['nested']['data']  }
+          let(:searched_tasks) { JSON.parse(response.body)['nested']['data'] }
           it '検索文言とタイトル名が部分一致した上でステータスが同じタスクのみ表示される' do
             expect(searched_tasks.length).to eq 1
             expect(searched_tasks[0]['title']).to include title
