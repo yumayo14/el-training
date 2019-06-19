@@ -1,18 +1,11 @@
 import Vue from 'vue/dist/vue.esm.js';
+import taskFormMixin from '../modules/task_form_mixin';
 import prepareAxios from '../modules/axios';
 import toastr from 'toastr';
 
 window.task_form = new Vue({
   el: '#task_form',
-  data: {
-    create_url: '/api/tasks',
-    title: '',
-    importance: 'low',
-    dead_line_on: '',
-    status: 'not_started',
-    detail: '',
-    processing_request: false,
-  },
+  mixins: [taskFormMixin],
   methods: {
     createTask: function() {
       prepareAxios({withCsrf: true, withCookie: false}).post(this.create_url,
@@ -30,13 +23,6 @@ window.task_form = new Vue({
       }).finally(()=> {
         this.reloadForm(1000);
       });
-    },
-    reloadForm: function(time) {
-      (new Promise((resolve)=> {
-        resolve(this.processing_request = true);
-      })).then(function() {
-        setTimeout(()=> this.processing_request = false, time);
-      }.bind(this));
     },
   },
 });
