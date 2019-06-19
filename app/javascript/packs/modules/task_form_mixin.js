@@ -1,4 +1,4 @@
-let taskFormMixin = {
+const taskFormMixin = {
   data: function() {
     return {
       create_url: '/api/tasks',
@@ -8,7 +8,7 @@ let taskFormMixin = {
       status: 'not_started',
       detail: '',
       processing_request: false,
-    }
+    };
   },
   methods: {
     reloadForm: function(time) {
@@ -17,8 +17,8 @@ let taskFormMixin = {
       })).then(function() {
         setTimeout(()=> this.processing_request = false, time);
       }.bind(this));
-    }
-  }
+    },
+  },
 };
 
 export default taskFormMixin;
