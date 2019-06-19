@@ -1,11 +1,12 @@
 import Vue from 'vue/dist/vue.esm.js';
-import taskFormMixin from '../modules/task_form_mixin';
+import formReloadable from '../modules/form_common_mixin';
+import taskFormSharable from '../modules/task_form_mixin';
 import prepareAxios from '../modules/axios';
 import toastr from 'toastr';
 
 window.task_form = new Vue({
   el: '#task_form',
-  mixins: [taskFormMixin],
+  mixins: [formReloadable, taskFormSharable],
   methods: {
     createTask: function() {
       prepareAxios({withCsrf: true, withCookie: false}).post(this.create_url,

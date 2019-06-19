@@ -1,9 +1,11 @@
 import Vue from 'vue/dist/vue.esm.js';
+import formReloadable from '../modules/form_common_mixin';
 import prepareAxios from '../modules/axios';
 import toastr from 'toastr';
 
 window.loginForm = new Vue({
   el: '#login_form',
+  mixins: [formReloadable],
   data: {
     login_url: '/login',
     accountid: '',
@@ -22,13 +24,6 @@ window.loginForm = new Vue({
       }).finally(()=> {
         this.reloadForm(1000);
       });
-    },
-    reloadForm: function(time) {
-      (new Promise((resolve)=> {
-        resolve(this.processing_login_request = true);
-      })).then(function() {
-        setTimeout(()=> this.processing_login_request = false, time);
-      }.bind(this));
     },
   },
 });
