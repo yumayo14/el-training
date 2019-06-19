@@ -4,7 +4,7 @@ import toastr from 'toastr';
 export default {
   data: function() {
     return {
-      url: '',
+      request_url: '',
       title: '',
       importance: 'low',
       dead_line_on: '',
@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     requestUrl: function() {
-      prepareAxios({withCsrf: true, withCookie: false}).post(this.url,
+      prepareAxios({withCsrf: true, withCookie: false}).post(this.request_url,
                                                              new URLSearchParams({
                                                                'title': this.title,
                                                                'importance': this.importance,
