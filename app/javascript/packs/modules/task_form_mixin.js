@@ -1,4 +1,4 @@
-import {requestByConfiguredAxios} from './axios';
+import requestByConfiguredAxios from './axios';
 import toastr from 'toastr';
 
 export default {

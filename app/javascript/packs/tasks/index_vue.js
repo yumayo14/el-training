@@ -1,6 +1,6 @@
 import Vue from 'vue/dist/vue.esm.js';
-import {prepareAxios} from '../modules/axios';
 import axios from 'axios';
+import requestByConfiguredAxios from '../modules/axios';
 import VuePaginator from 'vuejs-paginator';
 import _ from 'lodash';
 
@@ -9,6 +9,8 @@ Vue.prototype.$http = axios;
 window.tasks = new Vue({
   el: '#all_tasks',
   data: {
+    method: 'get',
+    request_url: '/api/tasks',
     tasks: [],
     options: {
       remote_data: 'nested.data',
@@ -57,19 +59,25 @@ window.tasks = new Vue({
       );
     },
     search: function() {
-      prepareAxios({withCsrf: false, withCookie: true}).get(this.resource_url, {
-        params: {
-          title: this.searchQuery,
-          status: this.selectedStatus,
-        },
-      }).then(function(response) {
+      requestByConfiguredAxios({method: 'get',
+                                url: this.request_url,
+                                requestParams: {'title': this.searchQuery,
+                                                'status': this.selectedStatus},
+                                withCsrf: false,
+                                withCookie: true}
+      ).then(function(response) {
         this.tasks = response.data.nested.data;
       }.bind(this)).catch(function(e) {
         alert(e);
       });
     },
     getTasks: function() {
-      prepareAxios({withCsrf: false, withCookie: true}).get(this.resource_url).then((response)=> {
+      requestByConfiguredAxios({method: this.method,
+                                url: this.request_url,
+                                requestParams: null,
+                                withCsrf: false,
+                                withCookie: true}
+      ).then((response)=> {
         this.tasks = response.data.nested.data;
       }).catch(function(e) {
         alert(e);
