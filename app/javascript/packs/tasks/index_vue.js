@@ -1,5 +1,5 @@
 import Vue from 'vue/dist/vue.esm.js';
-import prepareAxios from '../modules/axios';
+import {prepareAxios} from '../modules/axios';
 import VuePaginator from 'vuejs-paginator';
 import _ from 'lodash';
 
