@@ -11,20 +11,15 @@ RSpec.describe 'Api::Tasks', type: :request do
     }
   end
   describe 'GET#index' do
-    let!(:login_users_task) { create(:task, title: 'login_users_task', user: user) }
-    let!(:other_users_task) { create(:task) }
     context 'ログインを行なっている場合' do
       context '絞り込み検索を行わない場合' do
-        before do
-          2.times { create(:task, title: 'login_userd_task', user: user) }
-          3.times { create(:task) }
-          get api_tasks_path
-        end
-        let(:login_user_tasks) { JSON.parse(response.body)['nested']['data'] }
+        let!(:login_users_task) { create(:task, title: 'login_users_task', user: user) }
+        let!(:other_users_task) { create(:task) }
+        before { get api_tasks_path }
+        let(:responded_task) { JSON.parse(response.body)['nested']['data'] }
         it '自分が投稿したタスクのみが表示される' do
-          expect(login_user_tasks.length).to eq 2
-          expect(login_user_tasks[0]['title']).to eq 'login_userd_task'
-          expect(login_user_tasks[1]['title']).to eq 'login_userd_task'
+          expect(responded_task.length).to eq 1
+          expect(responded_task[0]['title']).to eq 'login_users_task'
         end
       end
       context '絞り込み検索を行う場合' do
@@ -88,39 +83,41 @@ RSpec.describe 'Api::Tasks', type: :request do
         detail: detail
       }
     end
-    context '必要な値が、全て送られてきている場合' do
+    context '必要な値が全て送られてきている場合' do
+      before { task_create_request }
+      let(:created_task) { JSON.parse(response.body)['task'] }
       it '投稿に成功する' do
-        task_create_request
-        created_task = JSON.parse(response.body)['task']
         expect(created_task['title']).to eq 'test_task'
         expect(response.status).to eq 200
       end
     end
-    context 'titleが空の場合' do
-      let(:title) { '' }
-      it '投稿に失敗する' do
-        task_create_request
-        error_messages = JSON.parse(response.body)
-        expect(error_messages).to include 'タイトルを入力してください'
-        expect(response.status).to eq 400
+    context '必要な値が送られて来ていない場合' do
+      context 'titleが空の場合' do
+        let(:title) { '' }
+        before { task_create_request }
+        let(:error_messages) { JSON.parse(response.body) }
+        it '投稿に失敗する' do
+          expect(error_messages).to include 'タイトルを入力してください'
+          expect(response.status).to eq 400
+        end
       end
-    end
-    context 'titleが30文字以上の場合' do
-      let(:title) { '12345678910/12345678910/12345678910/' }
-      it '投稿に失敗する' do
-        task_create_request
-        error_messages = JSON.parse(response.body)
-        expect(error_messages).to include 'タイトルは30文字以内で入力してください'
-        expect(response.status).to eq 400
+      context 'titleが30文字以上の場合' do
+        let(:title) { '12345678910/12345678910/12345678910/' }
+        before { task_create_request }
+        let(:error_messages) { JSON.parse(response.body) }
+        it '投稿に失敗する' do
+          expect(error_messages).to include 'タイトルは30文字以内で入力してください'
+          expect(response.status).to eq 400
+        end
       end
-    end
-    context 'dead_line_onが過去の日付の場合' do
-      let(:dead_line_on) { '2019-04-01' }
-      it '投稿に失敗する' do
-        task_create_request
-        error_messages = JSON.parse(response.body)
-        expect(error_messages).to include '期限に過去の日付は使用できません'
-        expect(response.status).to eq 400
+      context 'dead_line_onが過去の日付の場合' do
+        let(:dead_line_on) { '2019-04-01' }
+        before { task_create_request }
+        let(:error_messages) { JSON.parse(response.body) }
+        it '投稿に失敗する' do
+          expect(error_messages).to include '期限に過去の日付は使用できません'
+          expect(response.status).to eq 400
+        end
       end
     end
   end
