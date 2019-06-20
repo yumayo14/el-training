@@ -126,48 +126,6 @@ RSpec.feature 'Tasks', type: :feature, js: true do
           end
         end
       end
-
-      describe '絞り込み検索' do
-        before { click_button '検索条件をリセット' }
-        context 'タイトル名でのみ検索する場合' do
-          before do
-            fill_in 'query', with: 'Test2'
-            click_button '検索'
-          end
-          it '検索文言とタイトル名が部分一致するタスクのみ表示される' do
-            expect(page).to have_selector 'tr.tasks', count: 1
-            within all('tr.tasks')[0] do
-              expect(find('th.title')).to have_content 'Test2'
-            end
-          end
-        end
-        context 'ステータスのみで検索する場合' do
-          before do
-            select '着手', from: 'status'
-            click_button '検索'
-          end
-          it '同じステータスのタスクのみが表示される' do
-            expect(page).to have_selector 'tr.tasks', count: 1
-            within all('tr.tasks')[0] do
-              expect(find('th.status')).to have_content '着手'
-            end
-          end
-        end
-        context 'タイトル名とステータスで検索する場合' do
-          before do
-            fill_in 'query', with: 'Test1'
-            select '着手', from: 'status'
-            click_button '検索'
-          end
-          it '検索文言とタイトル名が部分一致した上でステータスが同じタスクのみが表示される' do
-            expect(page).to have_selector 'tr.tasks', count: 1
-            within all('tr.tasks')[0] do
-              expect(find('th.title')).to have_content 'Test1'
-              expect(find('th.status')).to have_content '着手'
-            end
-          end
-        end
-      end
     end
 
     describe 'タスクの投稿' do
