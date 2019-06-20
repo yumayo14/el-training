@@ -1,5 +1,5 @@
 import Vue from 'vue/dist/vue.esm.js';
-import requestByConfiguredAxios from '../modules/axios';
+import requestByConfiguredAxios from '../modules/configured_axios';
 
 window.logoutLink = new Vue({
   el: '#logout_link',

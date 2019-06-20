@@ -1,5 +1,5 @@
 import Vue from 'vue/dist/vue.esm.js';
-import requestByConfiguredAxios from '../modules/axios';
+import requestByConfiguredAxios from '../modules/configured_axios';
 import toastr from 'toastr';
 
 window.loginForm = new Vue({
