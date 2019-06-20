@@ -5,6 +5,7 @@ window.task_form = new Vue({
   el: '#task_form',
   mixins: [taskFormRequestable],
   data: {
+    method: 'post',
     request_url: '/api/tasks',
   },
 });

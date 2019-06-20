@@ -1,10 +1,11 @@
-import prepareAxios from './axios';
+import {requestByConfiguredAxios} from './axios';
 import toastr from 'toastr';
 
 export default {
   data: function() {
     return {
       request_url: '',
+      method: '',
       title: '',
       importance: 'low',
       dead_line_on: '',
@@ -15,13 +16,16 @@ export default {
   },
   methods: {
     requestUrl: function() {
-      prepareAxios({withCsrf: true, withCookie: false}).post(this.request_url,
-                                                             new URLSearchParams({
-                                                               'title': this.title,
-                                                               'importance': this.importance,
-                                                               'dead_line_on': this.dead_line_on,
-                                                               'status': this.status,
-                                                               'detail': this.detail})
+      requestByConfiguredAxios({method: this.method,
+                                url: this.request_url,
+                                requestParams: new URLSearchParams({'title': this.title,
+                                                                    'importance': this.importance,
+                                                                    'dead_line_on': this.dead_line_on,
+                                                                    'status': this.status,
+                                                                    'detail': this.detail}),
+                                withCsrf: true,
+                                withCookie: false}
+
       ).then((response)=> {
         window.location.href = response.data.redirect_url;
       }).catch((error)=> {
