@@ -1,9 +1,10 @@
 import Vue from 'vue/dist/vue.esm.js';
 import {prepareAxios} from '../modules/axios';
+import axios from 'axios';
 import VuePaginator from 'vuejs-paginator';
 import _ from 'lodash';
 
-Vue.prototype.$http = prepareAxios({withCsrf: false, withCookie: false});
+Vue.prototype.$http = axios;
 
 window.tasks = new Vue({
   el: '#all_tasks',
