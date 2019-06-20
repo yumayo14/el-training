@@ -65,9 +65,9 @@ window.tasks = new Vue({
                                                 'status': this.selectedStatus},
                                 withCsrf: false,
                                 withCookie: true}
-      ).then(function(response) {
+      ).then((response)=> {
         this.tasks = response.data.nested.data;
-      }.bind(this)).catch(function(e) {
+      }).catch(function(e) {
         alert(e);
       });
     },
@@ -79,7 +79,7 @@ window.tasks = new Vue({
                                 withCookie: true}
       ).then((response)=> {
         this.tasks = response.data.nested.data;
-      }).catch(function(e) {
+      }).catch((e)=> {
         alert(e);
       });
     },

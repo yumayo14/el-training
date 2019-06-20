@@ -29,7 +29,7 @@ export default {
       ).then((response)=> {
         window.location.href = response.data.redirect_url;
       }).catch((error)=> {
-        error.response.data.forEach(function(message) {
+        error.response.data.forEach((message)=> {
           toastr.error(message);
         });
       }).finally(()=> {
@@ -39,9 +39,9 @@ export default {
     reloadForm: function(time) {
       (new Promise((resolve)=> {
         resolve(this.processing_request = true);
-      })).then(function() {
+      })).then(()=> {
         setTimeout(()=> this.processing_request = false, time);
-      }.bind(this));
+      });
     },
   },
 };

@@ -30,9 +30,9 @@ window.loginForm = new Vue({
     reloadForm: function(time) {
       (new Promise((resolve)=> {
         resolve(this.processing_login_request = true);
-      })).then(function() {
+      })).then(()=> {
         setTimeout(()=> this.processing_login_request = false, time);
-      }.bind(this));
+      });
     },
   },
 });
