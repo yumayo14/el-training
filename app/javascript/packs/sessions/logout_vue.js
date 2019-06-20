@@ -11,7 +11,6 @@ window.logoutLink = new Vue({
     requestLogout: function() {
       requestByConfiguredAxios({method: this.method,
                                 url: this.request_url,
-                                requestParams: null,
                                 withCsrf: true,
                                 withCookie: true}
       ).then((response)=> {

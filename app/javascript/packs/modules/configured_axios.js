@@ -19,7 +19,7 @@ function requestByConfiguredAxios(settingParams) {
   }
   axiosConfiguration['method'] = settingParams['method'];
   axiosConfiguration['url'] = settingParams['url'];
-  if (settingParams['requestParams'] !== null) {
+  if (settingParams['requestParams'] != null) {
     axiosConfiguration['params'] = settingParams['requestParams'];
   }
   axiosConfiguration['headers'] = headersOption;

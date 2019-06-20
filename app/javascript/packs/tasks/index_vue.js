@@ -74,7 +74,6 @@ window.tasks = new Vue({
     getTasks: function() {
       requestByConfiguredAxios({method: this.method,
                                 url: this.request_url,
-                                requestParams: null,
                                 withCsrf: false,
                                 withCookie: true}
       ).then((response)=> {
