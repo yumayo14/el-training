@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root to: 'tasks#index'
-  resources :tasks
+  resources :tasks, except: :create
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
   namespace :api, format: 'json' do
-    resources :tasks, only: [:index]
+    resources :tasks, only: %i(index create)
   end
 end

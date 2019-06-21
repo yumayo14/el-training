@@ -1,22 +1,20 @@
-= form_for task, html: {class: 'task_form'} do |f|
-  - if task.errors.any?
-    .error_announce
-      - task.errors.full_messages.each do |error_message|
-        p = error_message
+= form_tag('/api/tasks', method: :post, class: 'form-horizontal', id: 'task_form', remote: true, ' @submit.prevent.stop': 'requestUrl') do
   .title_block.form-group
-    = f.label :title
-    = f.text_field :title, class: "form-control"
+    = label_tag :title
+    = text_field_tag :task_title, '', class:'form-control', 'v-model': 'title'
   .importance_block.form-group
-    = f.label :importance
-    = f.select :importance, Task.importances.keys.map{ |k| [Task.human_attribute_enum_value('importance', k), k] }
+    = label_tag :importance
+    = select_tag :task_importance, options_for_select(Task.importances.keys.map {|k| [Task.human_attribute_enum_value('importance', k), k]}, 'low'), 'v-model': 'importance'
   .dead_line_on_block.form-group
-    = f.label :dead_line_on
-    = f.date_select :dead_line_on
+    = label_tag :dead_line_on
+    input#task_dead_line_on type="date" v-model="dead_line_on"
   .status_block.form-group
-    = f.label :status
-    = f.select :status, Task.statuses.keys.map{ |k| [Task.human_attribute_enum_value('status', k), k] }
+    = label_tag :status
+    = select_tag :task_status, options_for_select(Task.statuses.keys.map {|k| [Task.human_attribute_enum_value('status', k), k]}, 'not_started'), 'v-model': 'status'
   .detail_block.form-group
-    = f.label :detail
-    = f.text_area :detail, class: "form-control"
+    = label_tag :detail
+    = text_area :task, :detail, class:'form-control', 'v-model': 'detail'
   .submit_block.form-group
-    = f.submit class: "submit_button"
+    = submit_tag '登録する', class:'submit_button', 'v-bind:disabled': 'processing_request'
+
+= javascript_pack_tag 'tasks/create_task_form_vue'

@@ -1,34 +1,38 @@
 import Vue from 'vue/dist/vue.esm.js';
-import prepareAxios from '../modules/axios';
+import requestByConfiguredAxios from '../modules/request_by_configured_axios';
 import toastr from 'toastr';
 
 window.loginForm = new Vue({
   el: '#login_form',
   data: {
-    login_url: '/login',
+    method: 'post',
+    request_url: '/login',
     accountid: '',
     password: '',
     processing_login_request: false,
   },
   methods: {
     requestLogin: function() {
-      prepareAxios({withCsrf: true, withCookie: false}).post(this.login_url,
-                                                             new URLSearchParams({'accountid': this.accountid,
-                                                                                  'password': this.password})
-      ).then(function(response) {
+      requestByConfiguredAxios({method: this.method,
+                                url: this.request_url,
+                                requestParams: new URLSearchParams({'accountid': this.accountid,
+                                                                    'password': this.password}),
+                                withCsrf: true,
+                                withCookie: false}
+      ).then((response)=> {
         window.location.href = response.data.redirect_url;
-      }).catch(function(error) {
+      }).catch((error)=> {
         toastr.error(error.response.data);
-      }).finally(function() {
+      }).finally(()=> {
         this.reloadForm(1000);
-      }.bind(this));
+      });
     },
     reloadForm: function(time) {
       (new Promise((resolve)=> {
         resolve(this.processing_login_request = true);
-      })).then(function() {
+      })).then(()=> {
         setTimeout(()=> this.processing_login_request = false, time);
-      }.bind(this));
+      });
     },
   },
 });

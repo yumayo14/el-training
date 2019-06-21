@@ -45,5 +45,5 @@
           th.created_day scope="row" = "{{task.created_at}}"
           th.each_task_link
             a v-bind:href='"/tasks/" + task.id' 詳細
-      v-paginator#paginator :options="options" :resource_url="resource_url" @update="updateResource"
+      v-paginator#paginator v-bind:options="options" resource_url="/api/tasks" v-on:update="updateResource"
 = javascript_pack_tag 'tasks/index_vue'
