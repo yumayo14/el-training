@@ -2,7 +2,7 @@
 
 class TasksController < ApplicationController
   include SessionsHelper
-  before_action :set_task, only: %i(show edit update destroy)
+  before_action :set_task, only: %i(show edit update)
   before_action :require_login
 
   def index; end
@@ -17,12 +17,6 @@ class TasksController < ApplicationController
       flash.now[:danger] = 'タスクの更新に失敗しました'
       render :edit
     end
-  end
-
-  def destroy
-    @task.destroy
-    flash[:success] = 'タスクを削除しました'
-    redirect_to tasks_path
   end
 
   private
