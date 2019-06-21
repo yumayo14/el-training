@@ -121,4 +121,16 @@ RSpec.describe 'Api::Tasks', type: :request do
       end
     end
   end
+  describe 'DELETE#destroy' do
+    let!(:created_task) { create(:task, user: user) }
+    before { delete api_task_path(created_task.id) }
+    context 'タスクの削除に成功した場合' do
+      it '削除後、遷移先の画面のURLがレスポンスで返る' do
+        expect(response.body).to eq '/tasks'
+      end
+      it '200のステータスが返る' do
+        expect(response.status).to eq 200
+      end
+    end
+  end
 end
