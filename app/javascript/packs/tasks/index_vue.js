@@ -10,7 +10,7 @@ window.tasks = new Vue({
   el: '#all_tasks',
   data: {
     method: 'get',
-    request_url: '/api/tasks',
+    request_url: '/api/tasks/',
     tasks: [],
     options: {
       remote_data: 'nested.data',
@@ -89,6 +89,18 @@ window.tasks = new Vue({
     },
     updateResource: function(data) {
       this.tasks = data;
+    },
+    deleteTask: function(id) {
+      if (window.confirm('選択したタスクを削除しますか')) {
+        requestByConfiguredAxios({
+          method: 'delete',
+          url: this.request_url + id,
+          withCsrf: true,
+          withCookie: true}
+        ).then((response)=> {
+          window.location.href = response.data;
+        });
+      }
     },
   },
   created: function() {

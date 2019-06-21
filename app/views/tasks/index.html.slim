@@ -43,7 +43,10 @@
           th.dead_line_on scope="row" = "{{task.dead_line_on}}"
           th.detail scope="row" = "{{task.detail}}"
           th.created_day scope="row" = "{{task.created_at}}"
-          th.each_task_link
-            a v-bind:href='"/tasks/" + task.id' 詳細
+          th.each_task_links
+            .each_task_detail_link
+              a v-bind:href='"/tasks/" + task.id' 詳細
+            .each_task_delete_link
+              a data-method="delete" v-bind:href='"/api/tasks/" + task.id' v-on:click.prevent.stop='deleteTask(task.id)' 削除
       v-paginator#paginator v-bind:options="options" resource_url="/api/tasks" v-on:update="updateResource"
 = javascript_pack_tag 'tasks/index_vue'

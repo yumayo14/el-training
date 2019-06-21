@@ -4,6 +4,5 @@
   .task_head
     p #{@task.title} #{@task.importance} #{@task.status} #{@task.dead_line_on}
     span = link_to "編集", edit_task_path(@task.id)
-    span = link_to "削除", task_path(@task.id), method: :delete, data: { confirm: '本当に削除しますか？' }
   .task_detail
     p #{@task.detail}
