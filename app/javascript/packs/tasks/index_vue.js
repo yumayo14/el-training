@@ -1,6 +1,7 @@
 import Vue from 'vue/dist/vue.esm.js';
 import axios from 'axios';
 import requestByConfiguredAxios from '../modules/request_by_configured_axios';
+import toastr from 'toastr';
 import VuePaginator from 'vuejs-paginator';
 import _ from 'lodash';
 
@@ -99,6 +100,8 @@ window.tasks = new Vue({
           withCookie: true}
         ).then((response)=> {
           window.location.href = response.data;
+        }).catch((error)=> {
+          toastr(error.response.data);
         });
       }
     },

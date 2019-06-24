@@ -35,5 +35,7 @@ class Api::TasksController < ApplicationController # rubocop:disable Style/Class
 
   def set_task
     @task = Task.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render json: '選択したタスクが見つかりませんでした', status: 404
   end
 end
