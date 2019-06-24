@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   namespace :api, format: 'json' do
-    resources :tasks, only: %i(index create destroy)
+    resources :tasks, only: %i(index create update destroy)
   end
 end

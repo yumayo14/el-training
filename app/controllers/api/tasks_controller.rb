@@ -5,7 +5,7 @@ class Api::TasksController < ApplicationController # rubocop:disable Style/Class
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_error_message_and_status
 
-  before_action :set_task, only: %i(destroy)
+  before_action :set_task, only: %i(update destroy)
   REDIRECT_URL_AFTER_CREATE_UPDATE_DESTROY = '/tasks'
 
   def index
@@ -28,6 +28,14 @@ class Api::TasksController < ApplicationController # rubocop:disable Style/Class
   def destroy
     @task.destroy
     render json: REDIRECT_URL_AFTER_CREATE_UPDATE_DESTROY, status: 200
+  end
+
+  def update
+    if @task.update(task_params)
+      render json: { task: @task, redirect_url: REDIRECT_URL_AFTER_CREATE_UPDATE_DESTROY }, status: 200
+    else
+      render json: @task.errors.full_messages, status: 400
+    end
   end
 
   private
