@@ -2,6 +2,7 @@
 
 class Api::TasksController < ApplicationController # rubocop:disable Style/ClassAndModuleChildren
   SUCCESS_URL_AFTER_ALL_ACTION = '/tasks'
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_error_message_and_status
   before_action :set_task, only: %i(destroy)
   include SessionsHelper
 
@@ -35,7 +36,9 @@ class Api::TasksController < ApplicationController # rubocop:disable Style/Class
 
   def set_task
     @task = Task.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
+  end
+
+  def render_not_found_error_message_and_status
     render json: '選択したタスクが見つかりませんでした', status: 404
   end
 end
