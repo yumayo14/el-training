@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class Api::TasksController < ApplicationController # rubocop:disable Style/ClassAndModuleChildren
-  SUCCESS_URL_AFTER_ALL_ACTION = '/tasks'
-  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_error_message_and_status
-  before_action :set_task, only: %i(destroy)
   include SessionsHelper
+
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_error_message_and_status
+
+  before_action :set_task, only: %i(destroy)
+  REDIRECT_URL_AFTER_CREATE_UPDATE_DESTROY = '/tasks'
 
   def index
     @tasks = if params[:title] || params[:status]
@@ -17,7 +19,7 @@ class Api::TasksController < ApplicationController # rubocop:disable Style/Class
   def create
     @task = current_user.tasks.new(task_params)
     if @task.save
-      render json: { task: @task, redirect_url: SUCCESS_URL_AFTER_ALL_ACTION }, status: 200
+      render json: { task: @task, redirect_url: REDIRECT_URL_AFTER_CREATE_UPDATE_DESTROY }, status: 200
     else
       render json: @task.errors.full_messages, status: 400
     end
@@ -25,7 +27,7 @@ class Api::TasksController < ApplicationController # rubocop:disable Style/Class
 
   def destroy
     @task.destroy
-    render json: SUCCESS_URL_AFTER_ALL_ACTION, status: 200
+    render json: REDIRECT_URL_AFTER_CREATE_UPDATE_DESTROY, status: 200
   end
 
   private
