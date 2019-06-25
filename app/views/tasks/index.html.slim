@@ -48,5 +48,7 @@
               a v-bind:href='"/tasks/" + task.id' 詳細
             .each_task_delete_link
               a data-method="delete" v-bind:href='"/api/tasks/" + task.id' v-on:click.prevent.stop='deleteTask(task.id)' 削除
+          th.update_form
+            update-task-form v-bind:task="task"
       v-paginator#paginator v-bind:options="options" resource_url="/api/tasks" v-on:update="updateResource"
 = javascript_pack_tag 'tasks/index_vue'

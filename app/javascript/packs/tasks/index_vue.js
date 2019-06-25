@@ -2,6 +2,7 @@ import Vue from 'vue/dist/vue.esm.js';
 import axios from 'axios';
 import requestByConfiguredAxios from '../modules/request_by_configured_axios';
 import toastr from 'toastr';
+import updateTaskForm from '../modules/update_task_form_component.js'
 import VuePaginator from 'vuejs-paginator';
 import _ from 'lodash';
 
@@ -30,6 +31,7 @@ window.tasks = new Vue({
   },
   components: {
     VPaginator: VuePaginator,
+    updateTaskForm: updateTaskForm
   },
   methods: {
     orderByCreatedDay: function() {
