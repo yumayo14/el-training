@@ -68,8 +68,8 @@ window.tasks = new Vue({
                                 withCookie: true}
       ).then((response)=> {
         this.tasks = response.data.nested.data;
-      }).catch(function(e) {
-        toastr(e);
+      }).catch(()=> {
+        toastr.error('通信中にエラーが発生しました');
       });
     },
     getTasks: function() {
@@ -79,8 +79,8 @@ window.tasks = new Vue({
                                 withCookie: true}
       ).then((response)=> {
         this.tasks = response.data.nested.data;
-      }).catch((e)=> {
-        toastr(e);
+      }).catch(()=> {
+        toastr.error('通信中にエラーが発生しました');
       });
     },
     reset: function() {
