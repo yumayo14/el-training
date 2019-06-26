@@ -12,17 +12,17 @@ export default {
       dead_line_on: this.task.dead_line_on,
       status: this.task.status.value,
       detail: this.task.detail,
-      onDisplay: false,
+      editFormRendering: false,
     };
   },
   template: `<div>
                <div>
-                 <button v-on:click="showEditForm">
-                   <span v-if="onDisplay">閉じる</span>
+                 <button v-on:click="switchEditFormRendering">
+                   <span v-if="editFormRendering">閉じる</span>
                    <span v-else>編集</span>
                  </button>
                </div>
-               <div v-if="onDisplay">
+               <div v-if="editFormRendering">
                  <form v-on:submit.prevent="requestUrl">
                    <div class="title_block">
                      <label for="title_input">タイトル：</label>
@@ -60,8 +60,8 @@ export default {
              </div>
              `,
   methods: {
-    showEditForm: function() {
-      (this.onDisplay) ? (this.onDisplay = false) : (this.onDisplay = true);
+    switchEditFormRendering: function() {
+      this.editFormRendering = !this.editFormRendering;
     },
   },
 };
