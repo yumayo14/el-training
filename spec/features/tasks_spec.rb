@@ -154,48 +154,6 @@ RSpec.feature 'Tasks', type: :feature, js: true do
       end
     end
 
-    describe 'タスクの編集、更新、削除' do
-      let(:task) { create(:task, user: user) }
-      before do
-        visit tasks_path
-        visit task_path(task.id)
-      end
-
-      describe '編集と更新' do
-        context '必要な値を入力している場合' do
-          before do
-            click_link '編集'
-            fill_in 'task_title', with: 'タスクの更新'
-            click_button '更新する'
-          end
-          it 'タスクの更新に成功する' do
-            expect(page).to have_content 'タスクの内容が更新されました'
-          end
-        end
-        context 'タスクのタイトルを30文字以上にしてしまった場合' do
-          before do
-            click_link '編集'
-            fill_in 'task_title', with: '12345678910/123456778910/12345678910/'
-            click_button '更新する'
-          end
-          it 'タスクの更新に失敗する' do
-            expect(page).to have_content 'タスクの更新に失敗しました'
-          end
-        end
-        context '期限をタスク更新日より前に設定してしまった場合' do
-          before do
-            click_link '編集'
-            select '2019', from: 'task_dead_line_on_1i'
-            select '1月', from: 'task_dead_line_on_2i'
-            select '1', from: 'task_dead_line_on_3i'
-            click_button '更新する'
-          end
-          it 'タスクの更新に失敗する' do
-            expect(page).to have_content 'タスクの更新に失敗しました'
-          end
-        end
-      end
-    end
   end
   context 'ログインしていない場合' do
     context 'ログインせず、別の画面に遷移しようとした場合' do

@@ -1,8 +1,0 @@
-.page_title_box
-  h1.page_title タスクの詳細
-.task
-  .task_head
-    p #{@task.title} #{@task.importance} #{@task.status} #{@task.dead_line_on}
-    span = link_to "編集", edit_task_path(@task.id)
-  .task_detail
-    p #{@task.detail}
