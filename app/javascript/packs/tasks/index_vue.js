@@ -69,7 +69,7 @@ window.tasks = new Vue({
       ).then((response)=> {
         this.tasks = response.data.nested.data;
       }).catch(function(e) {
-        alert(e);
+        toastr(e);
       });
     },
     getTasks: function() {
@@ -80,7 +80,7 @@ window.tasks = new Vue({
       ).then((response)=> {
         this.tasks = response.data.nested.data;
       }).catch((e)=> {
-        alert(e);
+        toastr(e);
       });
     },
     reset: function() {
