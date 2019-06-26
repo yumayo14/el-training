@@ -8,9 +8,9 @@ export default {
       method: 'patch',
       request_url: `/api/tasks/` + this.task.id,
       title: this.task.title,
-      importance: this.task.importance,
+      importance: this.task.importance.value,
       dead_line_on: this.task.dead_line_on,
-      status: this.task.status,
+      status: this.task.status.value,
       detail: this.task.detail,
       onDisplay: false
     };
@@ -47,7 +47,7 @@ export default {
                    </div>
                    <div class="detail_block">
                      <label for="detail_text_area">詳細：</label>
-                     <textarea id="detail_text_area" rows="2" cols="30"></textarea>
+                     <textarea id="detail_text_area" rows="2" cols="30" v-model="detail"></textarea>
                    </div>
                    <div class="submit_block">
                      <input type="submit">
