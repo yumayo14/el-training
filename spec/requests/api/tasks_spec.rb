@@ -148,4 +148,70 @@ RSpec.describe 'Api::Tasks', type: :request do
       end
     end
   end
+  describe 'PATCH#update' do
+    let(:created_task) { create(:task, user: user) }
+    let(:title) { created_task.title }
+    let(:importance) { created_task.importance }
+    let(:dead_line_on) { created_task.dead_line_on }
+    let(:status) { created_task.status }
+    let(:detail) { created_task.detail }
+    let(:task_update_request) do
+      patch api_task_path(created_task.id), params: {
+        title: title,
+        importance: importance,
+        dead_line_on: dead_line_on,
+        status: status,
+        detail: detail
+      }
+    end
+    context 'タスクの更新に成功した場合' do
+      let(:title) { 'update_task_title' }
+      before { task_update_request }
+      let(:updated_task) { JSON.parse(response.body)['task'] }
+      let(:redirect_url_after_update) { JSON.parse(response.body)['redirect_url'] }
+      it '更新されたタスクの情報とredirect先のurlが返る' do
+        expect(updated_task['title']).to eq 'update_task_title'
+        expect(redirect_url_after_update).to eq '/tasks'
+      end
+      it '200のステータスを返す' do
+        expect(response.status).to eq 200
+      end
+    end
+    context 'タスクの更新に失敗した場合' do
+      context '更新しようとしたタスクが存在しなかった場合' do
+        before do
+          created_task.destroy
+          task_update_request
+        end
+        it 'エラーメッセージを返す' do
+          expect(response.body).to eq '選択したタスクが見つかりませんでした'
+        end
+        it '404のステータスを返す' do
+          expect(response.status).to eq 404
+        end
+      end
+      context 'タスクのタイトルを30文字以上で更新しようとした場合' do
+        let(:title) { '12345678910/12345678910/12345678910/' }
+        before { task_update_request }
+        let(:error_messages) { JSON.parse(response.body) }
+        it 'エラーメッセージを返す' do
+          expect(error_messages).to include 'タイトルは30文字以内で入力してください'
+        end
+        it '400のステータスを返す' do
+          expect(response.status).to eq 400
+        end
+      end
+      context '期限を更新日より前にしてしまった場合' do
+        let(:dead_line_on) { '2019-04-01' }
+        before { task_update_request }
+        let(:error_messages) { JSON.parse(response.body) }
+        it 'エラーメッセージを返す' do
+          expect(error_messages).to include '期限に過去の日付は使用できません'
+        end
+        it '400のステータスを返す' do
+          expect(response.status).to eq 400
+        end
+      end
+    end
+  end
 end
