@@ -69,7 +69,7 @@ RSpec.feature 'Sessions', type: :feature, js: true do
       it 'ログイン画面に遷移する'
       context 'ログアウトした後' do
         before { visit tasks_path }
-        it 'ログアウトのリンクが表示されなくなり、ログインのリンクが表示される' 
+        it 'ログアウトのリンクが表示されなくなり、ログインのリンクが表示される'
       end
     end
     context '確認ダイアログでNoを押した場合' do
