@@ -12,7 +12,7 @@ export default {
       dead_line_on: this.task.dead_line_on,
       status: this.task.status.value,
       detail: this.task.detail,
-      onDisplay: false
+      onDisplay: false,
     };
   },
   template: `<div>
@@ -59,6 +59,6 @@ export default {
   methods: {
     showEditForm: function() {
       (this.onDisplay) ? (this.onDisplay = false) : (this.onDisplay = true);
-    }
-  }
-}
+    },
+  },
+};

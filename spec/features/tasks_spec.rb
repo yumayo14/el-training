@@ -153,7 +153,6 @@ RSpec.feature 'Tasks', type: :feature, js: true do
         end
       end
     end
-
   end
   context 'ログインしていない場合' do
     context 'ログインせず、別の画面に遷移しようとした場合' do
