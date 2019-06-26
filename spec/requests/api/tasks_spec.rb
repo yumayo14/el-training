@@ -83,21 +83,25 @@ RSpec.describe 'Api::Tasks', type: :request do
         detail: detail
       }
     end
-    context '必要な値が全て送られてきている場合' do
+    context 'タスクの投稿に成功した場合' do
       before { task_create_request }
       let(:created_task) { JSON.parse(response.body)['task'] }
-      it '投稿に成功する' do
+      it '投稿したタスクの情報とredirect先のurlを返す' do
         expect(created_task['title']).to eq 'test_task'
+      end
+      it '200のステータスを返す' do
         expect(response.status).to eq 200
       end
     end
-    context '必要な値が送られて来ていない場合' do
+    context 'タスクの投稿に失敗した場合' do
       context 'titleが空の場合' do
         let(:title) { '' }
         before { task_create_request }
         let(:error_messages) { JSON.parse(response.body) }
-        it '投稿に失敗する' do
+        it 'エラーメッセージを返す' do
           expect(error_messages).to include 'タイトルを入力してください'
+        end
+        it '400のステータスを返す' do
           expect(response.status).to eq 400
         end
       end
@@ -105,8 +109,10 @@ RSpec.describe 'Api::Tasks', type: :request do
         let(:title) { '12345678910/12345678910/12345678910/' }
         before { task_create_request }
         let(:error_messages) { JSON.parse(response.body) }
-        it '投稿に失敗する' do
+        it 'エラーメッセージを返す' do
           expect(error_messages).to include 'タイトルは30文字以内で入力してください'
+        end
+        it '400のステータスを返す' do
           expect(response.status).to eq 400
         end
       end
@@ -114,8 +120,10 @@ RSpec.describe 'Api::Tasks', type: :request do
         let(:dead_line_on) { '2019-04-01' }
         before { task_create_request }
         let(:error_messages) { JSON.parse(response.body) }
-        it '投稿に失敗する' do
+        it 'エラーメッセージを返す' do
           expect(error_messages).to include '期限に過去の日付は使用できません'
+        end
+        it '400のステータスを返す' do
           expect(response.status).to eq 400
         end
       end
@@ -125,10 +133,10 @@ RSpec.describe 'Api::Tasks', type: :request do
     context 'タスクの削除に成功した場合' do
       let!(:created_task) { create(:task, user: user) }
       before { delete api_task_path(created_task.id) }
-      it '削除後、遷移先の画面のURLがレスポンスで返る' do
+      it '削除後、遷移先の画面のURLを返す' do
         expect(response.body).to eq '/tasks'
       end
-      it '200のステータスが返る' do
+      it '200のステータスを返す' do
         expect(response.status).to eq 200
       end
     end
@@ -142,7 +150,7 @@ RSpec.describe 'Api::Tasks', type: :request do
         it 'エラーメッセージを返す' do
           expect(response.body).to eq '選択したタスクが見つかりませんでした'
         end
-        it '404のステータスが返る' do
+        it '404のステータスを返す' do
           expect(response.status).to eq 404
         end
       end
