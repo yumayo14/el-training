@@ -17,7 +17,10 @@ export default {
   },
   template: `<div>
                <div>
-                 <button v-on:click="showEditForm">編集</button>
+                 <button v-on:click="showEditForm">
+                   <span v-if="onDisplay">閉じる</span>
+                   <span v-else>編集</span>
+                 </button>
                </div>
                <div v-if="onDisplay">
                  <form v-on:submit.prevent="requestUrl">

@@ -35,7 +35,7 @@
           th.head scope="col" = t("actionview.task.index.dead_line_on")
           th.head scope="col" = t("actionview.task.index.detail")
           th.head scope="col" = t("actionview.task.index.created_at_day")
-          th.head scope="col" = t("actionview.task.index.link")
+          th.head scope="col" = t("actionview.task.index.option")
         tr.tasks v-for="task in tasks"
           th.title scope="row" = "{{task.title}}"
           th.importance scope="row" = "{{task.importance.text}}"
@@ -44,11 +44,9 @@
           th.detail scope="row" = "{{task.detail}}"
           th.created_day scope="row" = "{{task.created_at}}"
           th.each_task_links
-            .each_task_detail_link
-              a v-bind:href='"/tasks/" + task.id' 詳細
-            .each_task_delete_link
-              a data-method="delete" v-bind:href='"/api/tasks/" + task.id' v-on:click.prevent.stop='deleteTask(task.id)' 削除
-          th.update_form
-            update-task-form v-bind:task="task"
+            .each_task_update_form_button
+              update-task-form v-bind:task="task"
+            .each_task_delete_button
+              button v-on:click="deleteTask(task.id)" 削除
       v-paginator#paginator v-bind:options="options" resource_url="/api/tasks" v-on:update="updateResource"
 = javascript_pack_tag 'tasks/index_vue'

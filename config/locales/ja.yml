@@ -34,7 +34,7 @@ ja:
           completed: 完了
         detail: 説明文
         created_at_day: 作成日
-        link: 個別リンク
+        option: 編集と削除
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
