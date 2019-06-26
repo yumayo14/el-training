@@ -173,7 +173,7 @@ RSpec.describe 'Api::Tasks', type: :request do
         expect(updated_task['title']).to eq 'update_task_title'
         expect(redirect_url_after_update).to eq '/tasks'
       end
-      it '200のステータスが返る' do
+      it '200のステータスを返す' do
         expect(response.status).to eq 200
       end
     end
@@ -186,7 +186,7 @@ RSpec.describe 'Api::Tasks', type: :request do
         it 'エラーメッセージを返す' do
           expect(response.body).to eq '選択したタスクが見つかりませんでした'
         end
-        it '404のステータスが返る' do
+        it '404のステータスを返す' do
           expect(response.status).to eq 404
         end
       end
