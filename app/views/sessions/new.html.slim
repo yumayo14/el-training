@@ -1,15 +1,15 @@
-.container
-  .login_form.mx-auto.w-50
-    .page_title_box
-      h2.text-center ログイン
-    = form_tag('/login', method: :post, class: 'form-horizontal', id: 'login_form', remote: true, '@submit.prevent': 'requestLogin') do
-      .accountid.form-group
-        = label_tag :accountid, "#{t('helpers.label.session.accountid')}", class: 'col-sm-12'
-        = text_field_tag :accountid, '', class: 'form-control', 'v-model': 'accountid'
-      .password.form-group
-        = label_tag :password, "#{t('helpers.label.session.password')}", class: 'col-sm-12'
-        = password_field_tag :password, '', class: 'form-control', 'v-model': 'password'
-      .submit.mt-4
-        = submit_tag 'ログイン', class: 'btn btn-primary', 'v-bind:disabled': 'processing_login_request'
+form#login_form @submit.prevent="requestLogin"
+  .md-layout.md-alignment-top-center.page_title_box
+    .md-layout-item.md-size-25
+      span.md-display-1 ログイン
+  .md-layout.md-alignment-top-center
+    .md-layout-item.md-size-25
+      md-field
+        label #{t('helpers.label.session.accountid')}
+        md-input#accountid v-model="accountid"
+      md-field
+        = label_tag :password, "#{t('helpers.label.session.password')}"
+        md-input#password type="password" v-model="password"
+      md-button.md-raised.md-primary type="submit" v-bind:disabled="processing_login_request" ログイン
 
 = javascript_pack_tag 'sessions/sessions_vue'
