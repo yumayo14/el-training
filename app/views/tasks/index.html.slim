@@ -36,7 +36,7 @@
           th.head scope="col" = t("actionview.task.index.detail")
           th.head scope="col" = t("actionview.task.index.created_at_day")
           th.head scope="col" = t("actionview.task.index.option")
-        tr.tasks v-for="task in tasks"
+        tr.tasks v-for="task in tasks" v-bind:key="task.id"
           th.title scope="row" = "{{task.title}}"
           th.importance scope="row" = "{{task.importance.text}}"
           th.status scope="row" = "{{task.status.text}}"
