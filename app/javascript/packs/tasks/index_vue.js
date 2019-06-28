@@ -3,7 +3,7 @@ import axios from 'axios';
 import requestByConfiguredAxios from '../modules/request_by_configured_axios';
 import toastr from 'toastr';
 import updateTaskForm from '../modules/update_task_form_component.js';
-import VueMaterial from 'vue-material';
+import {MdTable} from 'vue-material/dist/components';
 import VuePaginator from 'vuejs-paginator';
 import _ from 'lodash';
 import 'toastr/toastr.scss';
@@ -11,7 +11,7 @@ import '../../stylesheets/application.scss';
 
 Vue.prototype.$http = axios;
 
-Vue.use(VueMaterial);
+Vue.use(MdTable);
 
 window.tasks = new Vue({
   el: '#all_tasks',
