@@ -6,7 +6,7 @@ import updateTaskForm from '../modules/update_task_form_component.js';
 import VueMaterial from 'vue-material';
 import VuePaginator from 'vuejs-paginator';
 import _ from 'lodash';
-import "toastr/toastr.scss";
+import 'toastr/toastr.scss';
 import '../../stylesheets/application.scss';
 
 Vue.prototype.$http = axios;

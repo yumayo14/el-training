@@ -2,7 +2,7 @@ import Vue from 'vue/dist/vue.esm.js';
 import requestByConfiguredAxios from '../modules/request_by_configured_axios';
 import toastr from 'toastr';
 import {MdButton, MdField} from 'vue-material/dist/components';
-import "toastr/toastr.scss";
+import 'toastr/toastr.scss';
 import '../../stylesheets/application.scss';
 
 Vue.use(MdButton);
