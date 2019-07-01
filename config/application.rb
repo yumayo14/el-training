@@ -34,5 +34,8 @@ module ElTraining
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    
+    # lib/apisディレクトリー配下のクラス、モジュールをrailsで使えるようにする
+    config.paths.add 'lib/apis', eager_load: true
   end
 end
