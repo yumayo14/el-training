@@ -1,5 +1,6 @@
 import requestByConfiguredAxios from './request_by_configured_axios';
 import toastr from 'toastr';
+import 'toastr/toastr.scss';
 
 export default {
   data: function() {
