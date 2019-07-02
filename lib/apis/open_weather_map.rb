@@ -2,7 +2,7 @@
 
 require 'open-uri'
 
-API_KEY = ENV['EL_TRAINING_OPEN_WEATHER_MAP_API_KEY']
+API_KEY = Rails.application.credentials.api[:open_weather_map_keys]
 BASE_URL = 'http://api.openweathermap.org/data/2.5/weather'
 
 class OpenWeatherMap

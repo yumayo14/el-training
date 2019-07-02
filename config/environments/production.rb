@@ -95,4 +95,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # 本番環境でmaster_keyが読み取れない場合、アプリが立ち上がらないようにする
+  config.require_master_key = true
 end
