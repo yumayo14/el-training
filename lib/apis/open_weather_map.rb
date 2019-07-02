@@ -7,6 +7,6 @@ class OpenWeatherMap
   BASE_URL = 'http://api.openweathermap.org/data/2.5/weather'
 
   def self.fetch_current_tokyo_weather
-    JSON.parse(OpenURI.open_uri(BASE_URL + "?q=Tokyo,jp&units=metric&APPID=#{API_KEY}").read)
+    JSON.parse(OpenURI.open_uri("#{BASE_URL}?q=Tokyo,jp&units=metric&APPID=#{API_KEY}").read)
   end
 end
