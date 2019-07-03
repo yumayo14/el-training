@@ -26,8 +26,8 @@ RSpec.describe 'Api::OpenWeatherMaps', type: :request do
         it 'エラーメッセージを返す' do
           expect(response.body).to eq '天気情報の取得に失敗しました'
         end
-        it 'ステータス400を返す' do
-          expect(response.status).to eq 400
+        it 'ステータス401を返す' do
+          expect(response.status).to eq 401
         end
       end
       context 'OpenWeatherMapから404のステータスコードが返ってきた場合' do
@@ -38,8 +38,8 @@ RSpec.describe 'Api::OpenWeatherMaps', type: :request do
         it 'エラーメッセージを返す' do
           expect(response.body).to eq '天気情報の取得に失敗しました'
         end
-        it 'ステータス400を返す' do
-          expect(response.status).to eq 400
+        it 'ステータス404を返す' do
+          expect(response.status).to eq 404
         end
       end
     end
