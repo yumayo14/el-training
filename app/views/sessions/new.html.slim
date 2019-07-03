@@ -2,6 +2,7 @@ form#login_form @submit.prevent="requestLogin"
   .md-layout.md-alignment-top-center.page_title_box
     .md-layout-item.md-size-25
       span.md-display-1 ログイン
+      img v-bind:src="weatherImageUrl"
   .md-layout.md-alignment-top-center
     .md-layout-item.md-size-25
       md-field
