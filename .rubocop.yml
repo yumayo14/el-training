@@ -19,6 +19,7 @@ Metrics/LineLength:
   Max: 150
   Exclude:
     - 'bin/*'
+    - 'config/routes.rb'
 
 Metrics/PerceivedComplexity:
   Exclude:
