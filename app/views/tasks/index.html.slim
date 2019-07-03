@@ -27,7 +27,6 @@
           .submit
             button v-on:click="search" 検索
             button v-on:click="reset" 検索条件をリセット
-      /vue-materialのMdTableを用いて実装したもの
       md-table v-model="tasks" md-sort="created_at" md-sort-order="asc"
         md-table-row slot="md-table-row" slot-scope="{item}"
           md-table-cell md-label="タイトル" {{item.title}}
@@ -38,27 +37,4 @@
           md-table-cell md-label="作成日" md-sort-by="created_at" {{ item.created_at }}
           update-task-form v-bind:task="item"
 
-      /vue-materialを用いない普通のテーブルで実装したもの。まだデザインが定まっておらず、変更の際に参考する可能性があるのでコメントアウトにして残している。
-      / table.table#paginated_tasks
-      /   tr
-      /     th.head scope="col" = t("actionview.task.index.title")
-      /     th.head scope="col" = t("actionview.task.index.importance")
-      /     th.head scope="col" = t("actionview.task.index.status")
-      /     th.head scope="col" = t("actionview.task.index.dead_line_on")
-      /     th.head scope="col" = t("actionview.task.index.detail")
-      /     th.head scope="col" = t("actionview.task.index.created_at_day")
-      /     th.head scope="col" = t("actionview.task.index.option")
-      /   tr.tasks v-for="task in tasks" v-bind:key="task.id"
-      /     th.title scope="row" = "{{task.title}}"
-      /     th.importance scope="row" = "{{task.importance.text}}"
-      /     th.status scope="row" = "{{task.status.text}}"
-      /     th.dead_line_on scope="row" = "{{task.dead_line_on}}"
-      /     th.detail scope="row" = "{{task.detail}}"
-      /     th.created_day scope="row" = "{{task.created_at}}"
-      /     th.each_task_links
-      /       .each_task_update_form_button
-      /         update-task-form v-bind:task="task"
-      /       .each_task_delete_button
-      /         button v-on:click="deleteTask(task.id)" 削除
-      / v-paginator#paginator v-bind:options="options" resource_url="/api/tasks" v-on:update="updateResource"
 = javascript_pack_tag 'tasks/index_vue'
