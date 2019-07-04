@@ -2,7 +2,7 @@
   "name": "el-training",
   "private": true,
   "scripts": {
-    "lint_all_managed_by_webpacker": "eslint app/javascript"
+    "lint_all_managed_by_webpacker": "eslint app/webpacker/packs"
   },
   "dependencies": {
     "@rails/webpacker": "^4.0.7",
