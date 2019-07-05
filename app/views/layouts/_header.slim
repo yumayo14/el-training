@@ -10,4 +10,4 @@ nav.navbar.navbar-expand-lg.application_header
       = link_to "ログアウト", logout_path, method: :delete, 'v-on:click.prevent.stop': 'requestLogout', class: "nav-link", id: "logout_link" if logged_in?
       = link_to "ログイン", login_path, class: "nav-link", id: 'login_link' unless logged_in?
 
-= javascript_pack_tag 'sessions/logout_vue'
+= javascript_pack_tag 'javascript/sessions/logout_vue'
