@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/yumayo14/el-training/tree/master.svg?style=svg)](https://circleci.com/gh/yumayo14/el-training/tree/master)
 
-# Small Project Manager(仮)
+# Small Privete Project Manager(仮)
 
 ## アプリケーションの仕様
 
