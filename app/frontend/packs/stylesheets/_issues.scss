@@ -1,3 +1,28 @@
+.box {
+  align-items: center;
+  padding-top: 70px;
+}
+.new_issue_box {
+  margin: auto;
+  .new_issue {
+    align-items: center;
+    display: flex;
+    width: 250px;
+    border-bottom: solid 1px #ffffff;
+    opacity: 0.5;
+    margin: 0 auto;
+    span {
+      padding-left: 30px;
+      font-size: 18px;
+      color: #ffffff;
+    }
+  }
+}
+
+.status_select {
+  color: #ffffff;
+}
+
 .issue_title {
   font-size: 18px;
 }
