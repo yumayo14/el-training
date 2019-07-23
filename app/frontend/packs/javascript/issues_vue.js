@@ -18,9 +18,15 @@ window.issues = new Vue({
     request_url: '/api/issues/',
     issues: [],
     selectedStatus: '',
+    renderingTasks: false
   },
   components: {
     newIssueForm: newIssueForm,
     stepCircle: step_circle_component
   },
+  methods: {
+    showTasks: function() {
+      console.log(this.renderingTasks = !this.renderingTasks);
+    }
+  }
 });

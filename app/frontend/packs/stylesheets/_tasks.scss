@@ -1,0 +1,31 @@
+.tasks_box {
+  min-height: 250px;
+  min-width: 350px;
+  margin: 0 auto;
+  .tasks {
+    border: solid 1px #4CAF50;
+    border-radius: 10px;
+  }
+  .new_task {
+    padding-top: 20px;
+    align-items: center;
+    display: flex;
+    width: 250px;
+    border-bottom: solid 1px #ffffff;
+    opacity: 0.5;
+    margin: 0 auto;
+    span {
+      padding-left: 30px;
+      font-size: 18px;
+      color: #ffffff;
+    }
+  }
+}
+.all_tasks_in_step {
+  padding-top: 20px;
+}
+.each_task {
+  padding-top: 10px;
+  padding-left: 10px;
+  color: #F7F7F7;
+}
