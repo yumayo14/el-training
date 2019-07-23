@@ -1,0 +1,38 @@
+= render partial: "layouts/header"
+.menu#sakura
+  = render partial: "flask"
+  .container
+    #all_tasks
+      h1 id="title_log" タスク一覧
+      .fillters
+        .tasks_sort
+          .order.sort
+            button v-on:click="orderByCreatedDay" 投稿日順
+          .order.dead_line
+            button v-on:click="orderByDeadLine" 期限日順
+          .order.importance
+            button v-on:click="orderByImportance" 優先順位順
+        .tasks_search
+          .search_form
+            .query
+              input v-model="searchQuery" name="query" id="search_query" placeholder="タスク名で検索"
+            .status
+              select v-model="selectedStatus" name="status" id="search_status"
+                option value='' 選択しない
+                option value="0" = t("actionview.task.index.status_value.not_started")
+                option value="1" = t("actionview.task.index.status_value.working")
+                option value="2" = t("actionview.task.index.status_value.completed")
+          .submit
+            button v-on:click="search" 検索
+            button v-on:click="reset" 検索条件をリセット
+      md-table v-model="tasks" md-sort="created_at" md-sort-order="asc"
+        md-table-row slot="md-table-row" slot-scope="{item}"
+          md-table-cell md-label="タイトル" {{item.title}}
+          md-table-cell md-label="優先順位" md-sort-by="importance.text" {{item.importance.text}}
+          md-table-cell md-label="状態" md-sort-by="status.text" {{ item.status.text }}
+          md-table-cell md-label="期限" md-sort-by="dead_line_on" {{ item.dead_line_on }}
+          md-table-cell md-label="説明文" {{ item.detail }}
+          md-table-cell md-label="作成日" md-sort-by="created_at" {{ item.created_at }}
+          update-task-form v-bind:task="item"
+
+= javascript_pack_tag 'javascript/tasks/index_vue'
