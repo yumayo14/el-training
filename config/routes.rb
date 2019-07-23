@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   root to: 'tasks#index'
   resources :tasks, except: %i(create destroy)
+  resources :issues, only: :index
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
