@@ -7,7 +7,7 @@ export default {
       fill: '#1A1A26',
       stroke: '#4CAF50',
       renderingTasks: false,
-    }
+    };
   },
   template: `
                <div v-if="renderingTasks">       
@@ -49,8 +49,8 @@ export default {
                  </button>
                </div>`,
   methods: {
-    showTasks: function () {
+    showTasks: function() {
       this.renderingTasks = !this.renderingTasks;
-    }
-  }
+    },
+  },
 };
