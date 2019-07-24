@@ -17,6 +17,8 @@
 
 FactoryBot.define do
   factory :issue do
-    
+    title { Faker::Book.title }
+    status { [0,1,2].sample }
+    dead_line_on { '2019-08-30' }
   end
 end
