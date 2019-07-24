@@ -12,7 +12,7 @@ export default {
   template: `
                <div v-if="renderingTasks">       
                  <div class="tasks_box">
-                   <md-button class="md-primary" style="color: #4CAF50; border-radius: 10px" v-on:click="showTasks">戻る</md-button>
+                   <md-button class="md-primary" v-on:click="showTasks">戻る</md-button>
                    <div class="tasks">
                      <div class="new_task">
                         <button type="button">
