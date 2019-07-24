@@ -12,7 +12,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_005135) do
+ActiveRecord::Schema.define(version: 2019_07_24_075158) do
+
+  create_table 'issues', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.string 'title', null: false
+    t.integer 'status', default: 0
+    t.date 'dead_line_on', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['status'], name: 'index_issues_on_status'
+    t.index ['title'], name: 'index_issues_on_title'
+  end
+
   create_table 'tasks', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.bigint 'user_id', comment: 'タスクを投稿したユーザーのidと紐づけられる。投稿したユーザーが削除された場合、そのユーザーが投稿したタスクも削除される'
     t.string 'title', null: false, comment: 'タスク名'
