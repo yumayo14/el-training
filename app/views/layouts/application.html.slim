@@ -8,7 +8,5 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application'
   body
-    = render partial: "layouts/header"
-    .spring
-      = render partial: "layouts/flash", locals: { flash: flash } if flash.present?
+    .dark_theme
       = yield

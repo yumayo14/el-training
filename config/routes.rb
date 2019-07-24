@@ -10,6 +10,7 @@
 #                      task GET    /tasks/:id(.:format)                                                                     tasks#show
 #                           PATCH  /tasks/:id(.:format)                                                                     tasks#update
 #                           PUT    /tasks/:id(.:format)                                                                     tasks#update
+#                    issues GET    /issues(.:format)                                                                        issues#index
 #                     login GET    /login(.:format)                                                                         sessions#new
 #                           POST   /login(.:format)                                                                         sessions#create
 #                    logout DELETE /logout(.:format)                                                                        sessions#destroy
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
 
   root to: 'tasks#index'
   resources :tasks, except: %i(create destroy)
+  resources :issues, only: :index
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
