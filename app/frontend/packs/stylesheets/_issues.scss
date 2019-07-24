@@ -1,9 +1,10 @@
 .box {
   align-items: center;
-  padding-top: 70px;
+  padding-top: 20px;
 }
 .new_issue_box {
   margin: auto;
+  padding-top: 50px;
   .new_issue {
     align-items: center;
     display: flex;
@@ -17,6 +18,9 @@
       color: #ffffff;
     }
   }
+}
+.status_filter_box {
+  padding-top: 50px;
 }
 
 .status_select {
