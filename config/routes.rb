@@ -11,6 +11,7 @@
 #                           PATCH  /tasks/:id(.:format)                                                                     tasks#update
 #                           PUT    /tasks/:id(.:format)                                                                     tasks#update
 #                    issues GET    /issues(.:format)                                                                        issues#index
+#                     issue GET    /issues/:id(.:format)                                                                    issues#show
 #                     login GET    /login(.:format)                                                                         sessions#new
 #                           POST   /login(.:format)                                                                         sessions#create
 #                    logout DELETE /logout(.:format)                                                                        sessions#destroy

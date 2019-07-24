@@ -4,15 +4,25 @@
 #
 # Table name: tasks
 #
-#  id           :bigint           not null, primary key
-#  user_id      :bigint
-#  title        :string(255)      not null
-#  importance   :integer          default("low")
-#  dead_line_on :date
-#  status       :integer          default("not_started")
-#  detail       :text(65535)
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id                                                                                                                              :bigint           not null, primary key
+#  dead_line_on(タスクの期限)                                                                                                      :date
+#  detail(タスクの詳細)                                                                                                            :text(65535)
+#  importance(タスクの優先度)                                                                                                      :integer          default("low")
+#  status(タスクの進捗)                                                                                                            :integer          default("not_started")
+#  title(タスク名)                                                                                                                 :string(255)      not null
+#  created_at                                                                                                                      :datetime         not null
+#  updated_at                                                                                                                      :datetime         not null
+#  user_id(タスクを投稿したユーザーのidと紐づけられる。投稿したユーザーが削除された場合、そのユーザーが投稿したタスクも削除される) :bigint
+#
+# Indexes
+#
+#  index_tasks_on_status   (status)
+#  index_tasks_on_title    (title)
+#  index_tasks_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 
 class Task < ApplicationRecord
