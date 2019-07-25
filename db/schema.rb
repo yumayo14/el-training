@@ -12,15 +12,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_24_075158) do
+ActiveRecord::Schema.define(version: 2019_07_25_081359) do
   create_table 'issues', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'title', null: false
     t.integer 'status', default: 0
     t.date 'dead_line_on', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'user_id', comment: '「問題」を投稿したユーザーのidと紐づけられる。投稿したユーザーが削除された場合、そのユーザーが投稿した「問題」も削除される'
     t.index ['status'], name: 'index_issues_on_status'
     t.index ['title'], name: 'index_issues_on_title'
+    t.index ['user_id'], name: 'index_issues_on_user_id'
   end
 
   create_table 'tasks', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
@@ -47,5 +49,6 @@ ActiveRecord::Schema.define(version: 2019_07_24_075158) do
     t.string 'salt', null: false, comment: 'パスワードハッシュ化の際に用いるデータ'
   end
 
+  add_foreign_key 'issues', 'users'
   add_foreign_key 'tasks', 'users'
 end

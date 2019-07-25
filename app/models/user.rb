@@ -17,6 +17,7 @@
 class User < ApplicationRecord
   attr_accessor :password, :cookie_token
   has_many :tasks, dependent: :destroy
+  has_many :issues, dependent: :destroy
 
   before_save :set_hashed_password
 

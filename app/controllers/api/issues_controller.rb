@@ -2,7 +2,7 @@
 
 class Api::IssuesController < ApplicationController # rubocop:disable Style/ClassAndModuleChildren
   def index
-    @issues = Issue.all
+    @issues = User.first.issues
     render json: @issues, status: 200
   end
 end
