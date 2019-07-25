@@ -4,7 +4,7 @@ import toastr from 'toastr'
 import {MdContent, MdRipple, MdTable, MdCard, MdLayout, MdButton} from 'vue-material/dist/components';
 import '../stylesheets/application.scss';
 import eachIssue from './components/each_issue_component';
-import newIssueForm from './modules/new_issue_form_component';
+import newIssueForm from './components/new_issue_form_component';
 
 Vue.use(MdRipple);
 Vue.use(MdContent);
