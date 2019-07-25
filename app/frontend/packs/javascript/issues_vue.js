@@ -32,7 +32,7 @@ window.issues = new Vue({
                                 // withCookieはログイン機能実装後、trueにする必要がある
                                 withCookie: false}
       ).then((response)=> {
-        this.issues = response.data.issues;
+        this.issues = response.data;
       }).catch(()=> {
         toastr.error('通信中にエラーが発生しました');
       });
