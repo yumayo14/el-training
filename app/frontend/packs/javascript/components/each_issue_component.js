@@ -18,5 +18,5 @@ export default {
                 </div>
               </md-card-actions>
             </md-card>
-             `
+             `,
 };

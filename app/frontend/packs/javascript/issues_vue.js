@@ -1,6 +1,6 @@
 import Vue from 'vue/dist/vue.esm.js';
 import requestByConfiguredAxios from './modules/request_by_configured_axios';
-import toastr from 'toastr'
+import toastr from 'toastr';
 import {MdContent, MdRipple, MdTable, MdCard, MdLayout, MdButton} from 'vue-material/dist/components';
 import '../stylesheets/application.scss';
 import eachIssue from './components/each_issue_component';
@@ -29,16 +29,16 @@ window.issues = new Vue({
       requestByConfiguredAxios({method: this.method,
                                 url: this.request_url,
                                 withCsrf: false,
-                                //withCookieはログイン機能実装後、trueにする必要がある
+                                // withCookieはログイン機能実装後、trueにする必要がある
                                 withCookie: false}
       ).then((response)=> {
         this.issues = response.data.issues;
       }).catch(()=> {
-        toastr.error('通信中にエラーが発生しました')
+        toastr.error('通信中にエラーが発生しました');
       });
-    }
+    },
   },
   created: function() {
     this.getIssues();
-  }
+  },
 });
