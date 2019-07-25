@@ -29,8 +29,7 @@ window.issues = new Vue({
       requestByConfiguredAxios({method: this.method,
                                 url: this.request_url,
                                 withCsrf: false,
-                                // withCookieはログイン機能実装後、trueにする必要がある
-                                withCookie: false}
+                                withCookie: true}
       ).then((response)=> {
         this.issues = response.data;
       }).catch(()=> {

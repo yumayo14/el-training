@@ -3,7 +3,7 @@
 # == Route Map
 #
 #                    Prefix Verb   URI Pattern                                                                              Controller#Action
-#                      root GET    /                                                                                        tasks#index
+#                      root GET    /                                                                                        issues#index
 #                     tasks GET    /tasks(.:format)                                                                         tasks#index
 #                  new_task GET    /tasks/new(.:format)                                                                     tasks#new
 #                 edit_task GET    /tasks/:id/edit(.:format)                                                                tasks#edit
@@ -31,7 +31,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root to: 'tasks#index'
+  root to: 'issues#index'
   resources :tasks, except: %i(create destroy)
   resources :issues, only: %i(index show)
 

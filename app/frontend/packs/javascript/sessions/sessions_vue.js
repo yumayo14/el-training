@@ -1,6 +1,5 @@
 import Vue from 'vue/dist/vue.esm.js';
 import requestByConfiguredAxios from '../modules/request_by_configured_axios';
-import currentTokyoWeatherReportable from '../modules/current_tokyo_weather_reportable';
 import toastr from 'toastr';
 import {MdButton, MdField} from 'vue-material/dist/components';
 import 'toastr/toastr.scss';
@@ -11,7 +10,6 @@ Vue.use(MdField);
 
 window.loginForm = new Vue({
   el: '#login_form',
-  mixins: [currentTokyoWeatherReportable],
   data: {
     method: 'post',
     request_url: '/login',
