@@ -5,18 +5,19 @@
 # Table name: users
 #
 #  id                  :bigint           not null, primary key
-#  name                :string(255)      not null
 #  accountid           :string(255)      default("0"), not null
+#  hashed_cookie_token :string(255)
+#  hashed_password     :string(255)      not null
+#  name                :string(255)      not null
+#  salt                :string(255)      not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  hashed_password     :string(255)      not null
-#  hashed_cookie_token :string(255)
-#  salt                :string(255)      not null
 #
 
 class User < ApplicationRecord
   attr_accessor :password, :cookie_token
   has_many :tasks, dependent: :destroy
+  has_many :issues, dependent: :destroy
 
   before_save :set_hashed_password
 

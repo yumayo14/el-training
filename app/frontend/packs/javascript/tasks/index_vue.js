@@ -2,7 +2,7 @@ import Vue from 'vue/dist/vue.esm.js';
 import axios from 'axios';
 import requestByConfiguredAxios from '../modules/request_by_configured_axios';
 import toastr from 'toastr';
-import updateTaskForm from '../modules/update_task_form_component.js';
+import updateTaskForm from '../components/update_task_form_component.js';
 import {MdContent, MdRipple, MdTable} from 'vue-material/dist/components';
 import VuePaginator from 'vuejs-paginator';
 import _ from 'lodash';

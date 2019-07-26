@@ -5,14 +5,24 @@
 # Table name: tasks
 #
 #  id           :bigint           not null, primary key
-#  user_id      :bigint
-#  title        :string(255)      not null
-#  importance   :integer          default("low")
 #  dead_line_on :date
-#  status       :integer          default("not_started")
 #  detail       :text(65535)
+#  importance   :integer          default("low")
+#  status       :integer          default("not_started")
+#  title        :string(255)      not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  user_id      :bigint
+#
+# Indexes
+#
+#  index_tasks_on_status   (status)
+#  index_tasks_on_title    (title)
+#  index_tasks_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 
 class Task < ApplicationRecord

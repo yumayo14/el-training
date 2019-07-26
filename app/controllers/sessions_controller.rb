@@ -2,7 +2,7 @@
 
 class SessionsController < ApplicationController
   include SessionsHelper
-  LOGIN_SUCCESS_URL = '/tasks'
+  LOGIN_SUCCESS_URL = '/issues'
   LOGOUT_SUCCESS_URL = '/login'
 
   def new; end

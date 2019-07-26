@@ -3,7 +3,7 @@
 # == Route Map
 #
 #                    Prefix Verb   URI Pattern                                                                              Controller#Action
-#                      root GET    /                                                                                        tasks#index
+#                      root GET    /                                                                                        issues#index
 #                     tasks GET    /tasks(.:format)                                                                         tasks#index
 #                  new_task GET    /tasks/new(.:format)                                                                     tasks#new
 #                 edit_task GET    /tasks/:id/edit(.:format)                                                                tasks#edit
@@ -11,6 +11,7 @@
 #                           PATCH  /tasks/:id(.:format)                                                                     tasks#update
 #                           PUT    /tasks/:id(.:format)                                                                     tasks#update
 #                    issues GET    /issues(.:format)                                                                        issues#index
+#                     issue GET    /issues/:id(.:format)                                                                    issues#show
 #                     login GET    /login(.:format)                                                                         sessions#new
 #                           POST   /login(.:format)                                                                         sessions#create
 #                    logout DELETE /logout(.:format)                                                                        sessions#destroy
@@ -19,6 +20,7 @@
 #                  api_task PATCH  /api/tasks/:id(.:format)                                                                 api/tasks#update {:format=>/json/}
 #                           PUT    /api/tasks/:id(.:format)                                                                 api/tasks#update {:format=>/json/}
 #                           DELETE /api/tasks/:id(.:format)                                                                 api/tasks#destroy {:format=>/json/}
+#                api_issues GET    /api/issues(.:format)                                                                    api/issues#index {:format=>/json/}
 #     api_open_weather_maps GET    /api/open_weather_maps(.:format)                                                         api/open_weather_maps#current_tokyo_weather {:format=>/json/}
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
@@ -29,7 +31,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root to: 'tasks#index'
+  root to: 'issues#index'
   resources :tasks, except: %i(create destroy)
   resources :issues, only: %i(index show)
 
@@ -39,6 +41,7 @@ Rails.application.routes.draw do
 
   namespace :api, format: 'json' do
     resources :tasks, only: %i(index create update destroy)
+    resources :issues, only: :index
     get 'open_weather_maps', to: 'open_weather_maps#current_tokyo_weather'
   end
 end

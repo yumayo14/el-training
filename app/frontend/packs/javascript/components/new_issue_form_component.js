@@ -1,4 +1,4 @@
-import taskFormRequestable from './task_form_requestable';
+import taskFormRequestable from '../modules/task_form_requestable';
 
 export default {
   mixins: [taskFormRequestable],

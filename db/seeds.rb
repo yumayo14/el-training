@@ -9,4 +9,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'factory_bot'
 
-FactoryBot.create(:user, name: '田中 宏和', accountid: 'tanahiro', password: 'Iamtestman')
+10.times { FactoryBot.create(:issue) }
