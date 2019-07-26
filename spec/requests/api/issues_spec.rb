@@ -22,4 +22,21 @@ RSpec.describe 'Api::Issues', type: :request do
       expect(response.status).to eq 200
     end
   end
+  describe '#create' do
+    let(:title) { 'test_title' }
+    let(:status) { '未着手' }
+    let(:dead_line_on) { '2019-09-21' }
+    let(:created_task) { JSON.parse(response.body) }
+    before do
+      post api_issues_path, params: {
+        title: title,
+        status: status,
+        dead_line_on: dead_line_on
+      }
+    end
+    it '投稿に成功する' do
+      expect(created_task['title']).to eq 'test_title'
+      expect(response.status).to eq 200
+    end
+  end
 end

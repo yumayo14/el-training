@@ -13,7 +13,7 @@ class Api::IssuesController < ApplicationController # rubocop:disable Style/Clas
     if @issue.save
       render json: @issue, status: 200
     else
-      render json: @issue.errors.full_messasges, status: 400
+      render json: @issue.errors.full_messages, status: 400
     end
   end
 
