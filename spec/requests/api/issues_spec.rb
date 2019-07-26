@@ -23,10 +23,6 @@ RSpec.describe 'Api::Issues', type: :request do
     end
   end
   describe '#create' do
-    let(:title) { 'test_title' }
-    let(:status) { '未着手' }
-    let(:dead_line_on) { '2019-09-21' }
-    let(:created_task) { JSON.parse(response.body) }
     before do
       post api_issues_path, params: {
         title: title,
@@ -34,9 +30,30 @@ RSpec.describe 'Api::Issues', type: :request do
         dead_line_on: dead_line_on
       }
     end
-    it '投稿に成功する' do
-      expect(created_task['title']).to eq 'test_title'
-      expect(response.status).to eq 200
+    context '全ての値が正常な場合' do
+      let(:created_task) { JSON.parse(response.body) }
+      let(:title) { 'test_title' }
+      let(:status) { '未着手' }
+      let(:dead_line_on) { Time.zone.tomorrow }
+      it '投稿に成功する' do
+        expect(created_task['title']).to eq 'test_title'
+      end
+      it '200のステータスを返す' do
+        expect(response.status).to eq 200
+      end
+    end
+    context '不正な値がある場合' do
+      let(:error_messages) { JSON.parse(response.body) }
+      let(:title) { '' }
+      let(:status) { '未着手' }
+      let(:dead_line_on) { Time.zone.yesterday }
+      it '該当するエラーメッセージを返す' do
+        expect(error_messages).to include 'タイトルを入力してください'
+        expect(error_messages).to include '期限は今日以降の日付を入力してください'
+      end
+      it '400のステータスを返す' do
+        expect(response.status).to eq 400
+      end
     end
   end
 end

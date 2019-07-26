@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       task: タスク
+      issue: イシュー
     attributes:
       task:
         title: タイトル
@@ -17,6 +18,10 @@ ja:
         not_started: "未着手"
         working: "着手"
         completed: "完了"
+      issue:
+        title: タイトル
+        dead_line_on: 期限
+        status: 状態
   actionview:
     task:
       index:
