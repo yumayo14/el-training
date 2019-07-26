@@ -27,4 +27,12 @@ class Issue < ApplicationRecord
   belongs_to :user
 
   enum status: { 未着手: 0, 着手: 1, 完了: 2 }
+
+  validates :title, presence: true
+  validates :status, presence: true, inclusion: { in: %w(未着手 着手 完了) }
+  validate :dead_line_on_cannot_be_in_the_past
+
+  def dead_line_on_cannot_be_in_the_past
+    errors.add(:dead_line_on, 'は今日以降の日付を入力してください') if dead_line_on.present? && dead_line_on < Time.zone.today
+  end
 end

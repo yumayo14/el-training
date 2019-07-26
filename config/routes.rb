@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
   namespace :api, format: 'json' do
     resources :tasks, only: %i(index create update destroy)
-    resources :issues, only: :index
+    resources :issues, only: %i(index create)
     get 'open_weather_maps', to: 'open_weather_maps#current_tokyo_weather'
   end
 end
