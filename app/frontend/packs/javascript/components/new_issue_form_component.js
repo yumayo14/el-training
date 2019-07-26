@@ -66,7 +66,7 @@ export default {
       }).catch((error)=> {
         error.response.data.forEach((message)=> {
           toastr.error(message);
-        })
+        });
       }).finally(()=> {
         this.reloadForm(1000);
       });

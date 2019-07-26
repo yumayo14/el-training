@@ -29,7 +29,7 @@ class Issue < ApplicationRecord
   enum status: { 未着手: 0, 着手: 1, 完了: 2 }
 
   validates :title, presence: true
-  validates :status, presence: true, inclusion: { in: %w(未着手 着手 完了) }
+  validates :status, inclusion: { in: %w(未着手 着手 完了) }
   validate :dead_line_on_cannot_be_in_the_past
 
   def dead_line_on_cannot_be_in_the_past
