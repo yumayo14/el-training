@@ -2,7 +2,7 @@ ja:
   activerecord:
     models:
       task: タスク
-      issue: イシュー
+      issue: 問題
     attributes:
       task:
         title: タイトル

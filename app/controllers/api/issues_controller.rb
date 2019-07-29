@@ -9,7 +9,7 @@ class Api::IssuesController < ApplicationController # rubocop:disable Style/Clas
   end
 
   def create
-    @issue = current_user.issues.new(issue_params)
+    @issue = current_user.issues.build(issue_params)
     if @issue.save
       render json: @issue, status: 200
     else
@@ -20,6 +20,6 @@ class Api::IssuesController < ApplicationController # rubocop:disable Style/Clas
   private
 
   def issue_params
-    params.permit(:title, :status, :dead_line_on, :user_id)
+    params.permit(:title, :status, :dead_line_on)
   end
 end
