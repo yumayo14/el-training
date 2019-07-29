@@ -15,14 +15,11 @@ export default {
         cutoutPercentage: 75,
         legend: {
           labels: {
-            // このフォントプロパティ指定は、グローバルプロパティを上書きします
             fontColor: 'white',
           },
         },
       },
     };
-  },
-  methods: {
   },
   mounted: function() {
     this.renderChart(this.graphData, this.option);
