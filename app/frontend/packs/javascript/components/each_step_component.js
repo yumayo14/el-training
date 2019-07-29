@@ -1,13 +1,13 @@
+import stepGraphComponent from './each_step_graph_component';
+
 export default {
   data: function() {
     return {
-      width: 350,
-      height: 350,
-      r: 125,
-      fill: '#1A1A26',
-      stroke: '#4CAF50',
       renderingTasks: false,
     };
+  },
+  components: {
+    stepGraph: stepGraphComponent,
   },
   template: `
                <div v-if="renderingTasks">       
@@ -38,14 +38,7 @@ export default {
                </div>
                <div v-else>
                  <button type="button" v-on:click="showTasks">
-                   <svg :width="width" :height="height">
-                     <circle :cx="175"
-                             :cy="175"
-                             :r="r"
-                             :fill="fill"
-                             :stroke="stroke">
-                     </circle>
-                   </svg>
+                   <step-graph></step-graph>
                  </button>
                </div>`,
   methods: {
