@@ -3,11 +3,6 @@ import graphComponent from './steps_graph_component';
 export default {
   data: function() {
     return {
-      width: 350,
-      height: 350,
-      r: 125,
-      fill: '#1A1A26',
-      stroke: '#4CAF50',
       renderingTasks: false,
     };
   },
