@@ -1,13 +1,13 @@
 import Vue from 'vue/dist/vue.esm.js';
 import '../stylesheets/application.scss';
 import {MdButton} from 'vue-material/dist/components';
-import stepCircleComponent from './components/step_circle_component';
+import eachStepComponent from './components/each_step_component';
 
 Vue.use(MdButton);
 
 window.issues = new Vue({
   el: '#steps',
   components: {
-    stepCircle: stepCircleComponent,
+    eachStep: eachStepComponent,
   },
 });

@@ -1,4 +1,4 @@
-import graphComponent from './steps_graph_component';
+import stepGraphComponent from './each_step_graph_component';
 
 export default {
   data: function() {
@@ -7,7 +7,7 @@ export default {
     };
   },
   components: {
-    graphChart: graphComponent,
+    stepGraph: stepGraphComponent,
   },
   template: `
                <div v-if="renderingTasks">       
@@ -38,7 +38,7 @@ export default {
                </div>
                <div v-else>
                  <button type="button" v-on:click="showTasks">
-                   <graph-chart></graph-chart>
+                   <step-graph></step-graph>
                  </button>
                </div>`,
   methods: {
