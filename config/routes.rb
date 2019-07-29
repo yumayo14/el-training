@@ -21,6 +21,7 @@
 #                           PUT    /api/tasks/:id(.:format)                                                                 api/tasks#update {:format=>/json/}
 #                           DELETE /api/tasks/:id(.:format)                                                                 api/tasks#destroy {:format=>/json/}
 #                api_issues GET    /api/issues(.:format)                                                                    api/issues#index {:format=>/json/}
+#                           POST   /api/issues(.:format)                                                                    api/issues#create {:format=>/json/}
 #     api_open_weather_maps GET    /api/open_weather_maps(.:format)                                                         api/open_weather_maps#current_tokyo_weather {:format=>/json/}
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
@@ -41,7 +42,7 @@ Rails.application.routes.draw do
 
   namespace :api, format: 'json' do
     resources :tasks, only: %i(index create update destroy)
-    resources :issues, only: :index
+    resources :issues, only: %i(index create)
     get 'open_weather_maps', to: 'open_weather_maps#current_tokyo_weather'
   end
 end
