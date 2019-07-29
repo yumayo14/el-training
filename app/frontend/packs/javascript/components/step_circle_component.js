@@ -1,3 +1,5 @@
+import graphComponent from './steps_graph_component';
+
 export default {
   data: function() {
     return {
@@ -8,6 +10,9 @@ export default {
       stroke: '#4CAF50',
       renderingTasks: false,
     };
+  },
+  components: {
+    graphChart: graphComponent,
   },
   template: `
                <div v-if="renderingTasks">       
@@ -38,14 +43,7 @@ export default {
                </div>
                <div v-else>
                  <button type="button" v-on:click="showTasks">
-                   <svg :width="width" :height="height">
-                     <circle :cx="175"
-                             :cy="175"
-                             :r="r"
-                             :fill="fill"
-                             :stroke="stroke">
-                     </circle>
-                   </svg>
+                   <graph-chart></graph-chart>
                  </button>
                </div>`,
   methods: {
