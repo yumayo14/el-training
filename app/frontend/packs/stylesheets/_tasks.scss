@@ -25,7 +25,13 @@
   padding-top: 20px;
 }
 .each_task {
+  display: flex;
   padding-top: 10px;
   padding-left: 10px;
+  max-width: 280px;
+  margin: 0 auto;
   color: #F7F7F7;
+  .delete_task {
+    padding-left: 15px;
+  }
 }
