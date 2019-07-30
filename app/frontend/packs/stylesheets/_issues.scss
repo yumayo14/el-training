@@ -38,4 +38,8 @@
 .each_issue {
   margin-top: 48px;
   margin-bottom: 24px;
+  .link_to_issue_detail_page {
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
 }
