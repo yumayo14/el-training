@@ -1,6 +1,6 @@
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimes  } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 
 library.add(faTimes);
 
@@ -8,7 +8,7 @@ export default {
   data: function() {
     return {
       finished: false,
-      mouseOver: false
+      mouseOver: false,
     };
   },
   components: {
@@ -20,13 +20,13 @@ export default {
                    <input type="checkbox" id="checkbox" v-model="finished">
                  </div>
                  <div class="task_title">
-                   <p v-bind:class="{ finished_task: finished }">
+                   <p v-bind:class="{finished_task: finished}">
                      <slot></slot>
                    </p>
                  </div>
                  <div class="delete_task">
                    <button>
-                     <font-awesome-icon icon="times" size="lg" :style="{ color: '#ef5350' }"></font-awesome-icon>
+                     <font-awesome-icon icon="times" size="lg" :style="{color: '#ef5350'}"></font-awesome-icon>
                    </button>
                  </div>
                </div>
@@ -35,7 +35,7 @@ export default {
                    <input type="checkbox" id="checkbox" v-model="finished">
                  </div>
                  <div class="task_title">
-                   <p v-bind:class="{ finished_task: finished }">
+                   <p v-bind:class="{finished_task: finished}">
                      <slot></slot>
                    </p>
                  </div>
@@ -48,6 +48,6 @@ export default {
     },
     hideTaskDeleteButton: function() {
       this.mouseOver = false;
-    }
-  }
-}
+    },
+  },
+};

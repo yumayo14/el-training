@@ -9,7 +9,7 @@ export default {
   },
   components: {
     stepGraph: stepGraphComponent,
-    task: taskComponent
+    task: taskComponent,
   },
   template: `
                <div v-if="renderingTasks">       
