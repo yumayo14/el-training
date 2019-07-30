@@ -17,27 +17,32 @@ export default {
   template: `<div>
                <div v-if="newFormRendering">
                  <form v-on:submit.prevent="createNewTask">
-                   <div class="title_block">
-                     <label for="title_input">タイトル：</label>
-                     <input id="title_input" type="text" v-model="title">
-                   </div>
-                   <div class="dead_line_on_block">
-                     <label for="dead_line_on_input">期限：</label>
-                     <input id="dead_line_on_input" type="date" min="2019-07-20" v-model="dead_line_on">
-                   </div>
-                   <div class="status_block">
-                     <label for="status_select">状態：</label>
-                     <select id="status_select" v-model="status">
-                       <option value="未着手">未着手</option>
-                       <option value="着手">着手</option>
-                       <option value="完了">完了</option>
-                     </select>
-                   </div>
-                   <div class="submit_block">
-                     <input type="submit">
-                   </div>
-                   <div class="cancel_block">
-                     <input type="reset" v-on:click="switchNewFormRendering">
+                   <md-field>
+                     <label>解決したい問題</label>
+                     <md-input v-model="title"></md-input>
+                   </md-field>
+                   <div class="md-layout md-gutter md-alignment-center-right">
+                     <div class="md-layout-item md-size-50 md-small-size-100">
+                       <md-field>
+                         <label for="movie">着手状態</label>
+                         <md-select v-model="status">
+                           <md-option value="未着手">未着手</md-option>
+                           <md-option value="着手">着手</md-option>
+                           <md-option value="完了">完了</md-option>
+                         </md-select>
+                       </md-field>
+                     </div>
+                     <div class="md-layout-item md-size-50 md-small-size-100">
+                       <md-datepicker v-model="dead_line_on">
+                         <label>期限</label>
+                       </md-datepicker>
+                     </div>
+                     <div class="md-layout-item md-size-25">
+                       <md-button type="reset" class="md-raised form_button" v-on:click="switchNewFormRendering">キャンセル</md-button>
+                     </div>
+                     <div class="md-layout-item md-size-25">
+                       <md-button type="submit" class="md-primary md-raised form_button">問題を追加</md-button>
+                     </div>
                    </div>
                  </form>
                </div>
