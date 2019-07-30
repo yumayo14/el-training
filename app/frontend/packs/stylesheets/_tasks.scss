@@ -36,4 +36,8 @@
   .delete_task {
     padding-left: 15px;
   }
+  .finished_task {
+    opacity: 0.5;
+    text-decoration: line-through;
+  }
 }

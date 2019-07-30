@@ -17,10 +17,10 @@ export default {
   template: `<div v-on:mouseover="showTaskDeleteButton" v-on:mouseleave="hideTaskDeleteButton">
                <div class="each_task" v-if="mouseOver">
                  <div class="task_status">
-                   <input type="checkbox" id="checkbox" v-model="checked">
+                   <input type="checkbox" id="checkbox" v-model="finished">
                  </div>
                  <div class="task_title">
-                   <p>
+                   <p v-bind:class="{ finished_task: finished }">
                      <slot></slot>
                    </p>
                  </div>
@@ -32,10 +32,10 @@ export default {
                </div>
                <div class="each_task" v-else>
                  <div class="task_status"> 
-                   <input type="checkbox" id="checkbox" v-model="checked">
+                   <input type="checkbox" id="checkbox" v-model="finished">
                  </div>
                  <div class="task_title">
-                   <p>
+                   <p v-bind:class="{ finished_task: finished }">
                      <slot></slot>
                    </p>
                  </div>
