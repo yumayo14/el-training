@@ -15,5 +15,5 @@ plugins:
   - vue
 rules: {
   indent: ["error", 2, {CallExpression: {arguments: "first"}, "ObjectExpression": "first"}],
-  max-len: ["error", { "code": 120,  "ignoreTemplateLiterals": true }]
+  max-len: ["error", { "code": 120, "ignoreTemplateLiterals": true, "ignorePattern": "import" }]
 }
