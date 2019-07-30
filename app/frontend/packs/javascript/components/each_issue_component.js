@@ -2,7 +2,7 @@ export default {
   props: ['issue'],
   template: `
             <md-card class="each_issue">
-              <a class="issue_link" href="/issues/{{issue.id}}">
+              <a class="link_to_issue_detail_page" href="/issues/{{issue.id}}">
                 <md-card-content>
                   <h4 class="issue_title">
                     {{issue.title}}
