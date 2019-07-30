@@ -1,4 +1,5 @@
 import stepGraphComponent from './each_step_graph_component';
+import taskComponent from './task_component';
 
 export default {
   data: function() {
@@ -8,6 +9,7 @@ export default {
   },
   components: {
     stepGraph: stepGraphComponent,
+    task: taskComponent,
   },
   template: `
                <div v-if="renderingTasks">       
@@ -20,18 +22,18 @@ export default {
                         </button>
                      </div>
                      <div class="all_tasks_in_step">
-                       <div class="each_task">
-                         <p>アプリ用のSqlユーザーを作成</p>
-                       </div>
-                       <div class="each_task">
-                         <p>テスト環境用のDBを作成</p>
-                       </div>
-                       <div class="each_task">
-                         <p>開発環境用のDBを作成</p>
-                       </div>
-                       <div class="each_task">
-                         <p>詳細を作成する</p>
-                       </div>
+                       <task>
+                         アプリ用のSqlユーザーを作成
+                       </task>
+                       <task>
+                         テスト環境用のDBを作成
+                       </task>
+                       <task>
+                         開発環境用のDBを作成
+                       </task>
+                       <task>
+                         詳細を作成する
+                       </task>
                      </div>
                    </div>
                  </div>
