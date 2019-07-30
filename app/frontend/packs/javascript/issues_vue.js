@@ -1,7 +1,7 @@
 import Vue from 'vue/dist/vue.esm.js';
 import requestByConfiguredAxios from './modules/request_by_configured_axios';
 import toastr from 'toastr';
-import {MdContent, MdRipple, MdCard, MdLayout, MdButton} from 'vue-material/dist/components';
+import {MdContent, MdRipple, MdCard, MdLayout, MdButton, MdField, MdMenu, MdList, MdDatepicker, MdDialog} from 'vue-material/dist/components';
 import '../stylesheets/application.scss';
 import eachIssue from './components/each_issue_component';
 import newIssueForm from './components/new_issue_form_component';
@@ -11,6 +11,11 @@ Vue.use(MdContent);
 Vue.use(MdCard);
 Vue.use(MdLayout);
 Vue.use(MdButton);
+Vue.use(MdField);
+Vue.use(MdMenu);
+Vue.use(MdList);
+Vue.use(MdDatepicker);
+Vue.use(MdDialog);
 
 window.issues = new Vue({
   el: '#issues',
