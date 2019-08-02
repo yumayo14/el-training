@@ -68,4 +68,12 @@ RSpec.describe Issue, type: :model do
       end
     end
   end
+  describe 'Issueのコールバック' do
+    describe '#create_associated_three_steps' do
+      let(:issue) { create(:issue) }
+      it '投稿したIssueに紐づくステップが3つ作成される' do
+        expect(issue.steps.count).to eq 3
+      end
+    end
+  end
 end
