@@ -41,6 +41,6 @@ class Issue < ApplicationRecord
   private
 
   def create_associated_three_steps
-    Step.import [self.steps.new(title: 'ステップ'), self.steps.new(title: 'ステップ'), self.steps.new(title: 'ステップ')], validate: true
+    Step.import [steps.new(title: 'ステップ'), steps.new(title: 'ステップ'), steps.new(title: 'ステップ')], validate: true
   end
 end
