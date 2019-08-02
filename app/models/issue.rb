@@ -24,6 +24,7 @@
 #
 
 class Issue < ApplicationRecord
+  has_many :steps
   belongs_to :user
 
   enum status: { 未着手: 0, 着手: 1, 完了: 2 }
