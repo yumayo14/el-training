@@ -22,7 +22,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_4d2a9e4d7e  (user_id => users.id) ON DELETE => cascade
 #
 
 require 'rails_helper'

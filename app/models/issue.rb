@@ -20,10 +20,11 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_f8f1052133  (user_id => users.id) ON DELETE => cascade
 #
 
 class Issue < ApplicationRecord
+  has_many :steps, dependent: :destroy
   belongs_to :user
 
   enum status: { 未着手: 0, 着手: 1, 完了: 2 }
@@ -31,8 +32,15 @@ class Issue < ApplicationRecord
   validates :title, presence: true
   validates :status, inclusion: { in: %w(未着手 着手 完了) }
   validate :dead_line_on_cannot_be_in_the_past
+  after_create :create_three_steps
 
   def dead_line_on_cannot_be_in_the_past
     errors.add(:dead_line_on, 'は今日以降の日付を入力してください') if dead_line_on.present? && dead_line_on < Time.zone.today
+  end
+
+  private
+
+  def create_three_steps
+    Step.import [steps.new(title: 'ステップ'), steps.new(title: 'ステップ'), steps.new(title: 'ステップ')], validate: true
   end
 end

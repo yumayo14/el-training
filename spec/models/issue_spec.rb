@@ -20,7 +20,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_f8f1052133  (user_id => users.id) ON DELETE => cascade
 #
 
 require 'rails_helper'
@@ -65,6 +65,14 @@ RSpec.describe Issue, type: :model do
       context 'dead_line_onが3年後の日付の場合' do
         let(:dead_line_on) { Time.zone.today.since(3.years) }
         it { is_expected.to eq true }
+      end
+    end
+  end
+  describe 'Issueのコールバック' do
+    describe '#create_three_steps' do
+      let(:issue) { create(:issue) }
+      it '投稿したIssueに紐づくステップが3つ作成される' do
+        expect(issue.steps.count).to eq 3
       end
     end
   end

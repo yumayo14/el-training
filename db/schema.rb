@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_081359) do
+ActiveRecord::Schema.define(version: 2019_08_02_085649) do
   create_table 'issues', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'title', null: false
     t.integer 'status', default: 0
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 2019_07_25_081359) do
     t.index ['status'], name: 'index_issues_on_status'
     t.index ['title'], name: 'index_issues_on_title'
     t.index ['user_id'], name: 'index_issues_on_user_id'
+  end
+
+  create_table 'steps', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.string 'title', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.bigint 'issue_id', comment: '「問題」のidと紐づけられる。「問題」が削除された場合、その「問題」に投稿された「ステップ」も削除される'
+    t.index ['issue_id'], name: 'index_steps_on_issue_id'
   end
 
   create_table 'tasks', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
@@ -49,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_081359) do
     t.string 'salt', null: false, comment: 'パスワードハッシュ化の際に用いるデータ'
   end
 
-  add_foreign_key 'issues', 'users'
-  add_foreign_key 'tasks', 'users'
+  add_foreign_key 'issues', 'users', on_delete: :cascade
+  add_foreign_key 'steps', 'issues', on_delete: :cascade
+  add_foreign_key 'tasks', 'users', on_delete: :cascade
 end
