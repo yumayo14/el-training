@@ -32,7 +32,7 @@ class Issue < ApplicationRecord
   validates :title, presence: true
   validates :status, inclusion: { in: %w(未着手 着手 完了) }
   validate :dead_line_on_cannot_be_in_the_past
-  after_create :create_associated_three_steps
+  after_create :create_three_steps
 
   def dead_line_on_cannot_be_in_the_past
     errors.add(:dead_line_on, 'は今日以降の日付を入力してください') if dead_line_on.present? && dead_line_on < Time.zone.today
@@ -40,7 +40,7 @@ class Issue < ApplicationRecord
 
   private
 
-  def create_associated_three_steps
+  def create_three_steps
     Step.import [steps.new(title: 'ステップ'), steps.new(title: 'ステップ'), steps.new(title: 'ステップ')], validate: true
   end
 end
