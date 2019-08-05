@@ -16,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (issue_id => issues.id)
+#  fk_rails_720ad5f20e  (issue_id => issues.id) ON DELETE => cascade
 #
 
 FactoryBot.define do

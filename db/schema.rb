@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_02_022711) do
+ActiveRecord::Schema.define(version: 2019_08_02_085649) do
   create_table 'issues', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'title', null: false
     t.integer 'status', default: 0
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2019_08_02_022711) do
     t.string 'salt', null: false, comment: 'パスワードハッシュ化の際に用いるデータ'
   end
 
-  add_foreign_key 'issues', 'users'
-  add_foreign_key 'steps', 'issues'
-  add_foreign_key 'tasks', 'users'
+  add_foreign_key 'issues', 'users', on_delete: :cascade
+  add_foreign_key 'steps', 'issues', on_delete: :cascade
+  add_foreign_key 'tasks', 'users', on_delete: :cascade
 end
