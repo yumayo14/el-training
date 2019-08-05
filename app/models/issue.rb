@@ -24,7 +24,7 @@
 #
 
 class Issue < ApplicationRecord
-  has_many :steps
+  has_many :steps, dependent: :destroy
   belongs_to :user
 
   enum status: { 未着手: 0, 着手: 1, 完了: 2 }
